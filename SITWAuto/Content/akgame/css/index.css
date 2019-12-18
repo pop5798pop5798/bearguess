@@ -1,0 +1,1155 @@
+/*
+* @Author: Administrator
+* @Date:   2017-01-11 15:33:23
+* @Last Modified by:   Administrator
+* @Last Modified time: 2017-01-11 16:32:03
+*/
+
+
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html, body {
+    font-family: 'Noto Sans TC','Open Sans', sans-serif,Arial, Helvetica, 黑體-繁, "Heiti TC", 微軟正黑, "Microsoft JhengHei", "Tei TC", sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color:#fff;
+}
+
+#projects .grid {
+	background: url(/Content/akgame/table_bakckground.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+	height: 850px;
+}
+#projects {
+    background-color: #000000;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    height: 100%;
+}
+
+.project {
+    position: absolute;
+    /*right: 120px;*/
+	left:75%;
+    bottom: 80px;
+    margin: 0 0 15px 15px;
+}
+.project {
+    float: left;
+    width: 100px;
+    height: 140px;
+}
+.grid {
+    width: 1170px;
+    margin: 0 auto;
+    position: relative;
+}
+div.projects {
+    height: 850px;
+}
+div.projects {
+    float: left;
+    /*width: 100%;*/
+	width:1170px;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+div.projects .controls {
+    position: absolute;
+    /*right: 120px;*/
+	left:76%;
+    bottom: 100px;
+}
+div.projects .controls {
+    float: left;
+    width: 100px;
+    height: 140px;
+}
+.controls .mask {
+    float: left;
+    position: relative;
+    background: url(/Content/akgame/project_card_bg.png) no-repeat;
+    width: 100px;
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    text-align: center;
+    font-size: 32px;
+}
+div.projects .controls .bottom{
+      -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    transition: all .3s ease;
+}
+div.projects .controls .bottom {
+    background: url(/Content/akgame/project_card_bot_bg.png) no-repeat;
+    position: absolute;
+    bottom: -9px;
+    right: 0;
+    width: 100px;
+    height: 66px;
+}
+
+div.projects .controls .bottom+.bottom+.bottom {
+    bottom: -3px;
+}
+div.projects .controls .bottom+.bottom {
+    bottom: -6px;
+}
+
+div.projects .controls:hover .bottom+.bottom+.bottom {
+    bottom: -8px;
+}
+div.projects .controls:hover .bottom+.bottom {
+    bottom: -14px;
+}
+div.projects .controls:hover .bottom {
+    bottom: -20px;
+}
+
+
+.project.ani0 {
+	left:175px;
+    bottom: 550px;
+}
+.project.ani1 {
+    left: 295px;
+    bottom: 550px;
+}
+.project.ani2 {
+    left: 415px;
+    bottom: 550px;
+}
+.project.ani3 {
+    left: 535px;
+    bottom: 550px;
+}
+.project.ani4 {
+    left: 655px;
+    bottom: 550px;
+}
+.project.ani5 {
+    left: 775px;
+    bottom: 550px;
+}
+
+.project.ani6 {
+    left: 175px;
+    bottom: 350px;
+}
+.project.ani7 {
+	left: 295px;
+    bottom: 350px;
+}
+.project.ani8 {
+    left: 415px;
+    bottom: 350px;
+}
+.project.ani9 {
+    left: 535px;
+    bottom: 350px;
+}
+.project.ani10 {
+	left: 655px;
+    bottom: 350px;
+}
+.project.ani11 {
+    left: 775px;
+    bottom: 350px;
+}
+.project.ani12 {
+    left: 175px;
+    bottom: 150px;
+}
+
+.project span{display: inline-block;border-radius: 50%;width: 160px;height: 160px;margin-top: 75px;}
+.project.ani0 span{background: #ef4036;}
+.project.ani1 span{background: #ff6c00;}
+.project.ani2 span{background: #ffde00;}
+.project.ani3 span{background: #0ce501;}
+.project.ani4 span{background: #05e7df;}
+.project.ani5 span{background: #007df1;}
+.project.ani6 span{background: #8e00f1;}
+.project.ani7 span{background: #000000;}
+
+.aniwz {
+    width: 222px;
+    height: 311px;
+    position: absolute;
+    right: 0;
+    bottom: 326px;
+    margin: 0 0 15px 15px;
+    text-align: center;
+    font-size: 32px;
+}
+.text{padding-top: 110px;}
+.start{padding-top: 130px;}
+.project .front {
+    background: url(/Content/akgame/project_front_bg.png) no-repeat;
+    background-size: contain;
+    display: table;
+}
+.project .back, .project .front {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.projects .exit {
+    background: url(/Content/akgame/exit.png);
+    width: 250px;
+    height: 85px;
+    position: absolute;
+    background-repeat: no-repeat;
+    /* top: 0; */
+    bottom: 0;
+    left: 50%;
+    margin-left: -350px;
+    background-size: contain;
+    color: #fff;
+    text-decoration: none;
+}
+.projects .time_down {
+    background: url(/Content/akgame/time_down.png);
+    width: 400px;
+    height: 240px;
+    position: absolute;
+    background-repeat: no-repeat;
+    /* top: 0; */
+    bottom: 0;
+    left: 50%;
+    margin-left: -240px;
+    background-size: contain;
+    z-index: 99;
+}
+.projects .history {
+    background: url(/Content/akgame/history.png);
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    background-repeat: no-repeat;
+    /* top: 0; */
+    bottom: -3px;
+    left: 50%;
+    margin-left: 75px;
+    background-size: contain;
+}
+
+.projects .prompt {
+    background: url(/Content/akgame/prompt.png);
+    width: 380px;
+    height: 200px;
+    position: absolute;
+    background-repeat: no-repeat;
+    /* top: 0; */
+    top: 0;
+    left: 50%;
+    margin-left: -150px;
+    background-size: contain;
+    z-index:999;
+}
+.projects .bingo {
+    background: url(/Content/akgame/bingo.png);
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    background-repeat: no-repeat;
+    /* top: 0; */
+    top: 0;
+    left: 25%;
+    margin-left: -50px;
+    background-size: contain;
+}
+
+.bingo .b_number {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 195px;
+    height:110px;
+    font-weight: bold;
+}
+.bingo img {
+    width: 30px;
+    margin-right: 0px;
+    position: absolute;
+    left: 33%;
+    top: 25px;
+}
+.prompt span {
+    /*position: absolute;
+    top: 30px;
+    left: 30%;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;*/
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 10%;
+    margin-top: 9%;
+}
+
+
+.time_down span {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 450px;
+    height: 420px;
+    font-weight: bold;
+}
+.time_down #time {
+    position: absolute;
+    font-size: 45px;
+    color: #1fa818;
+    top:33%;
+    left:5%;
+    font-weight: bold;
+}
+
+.openhistory {
+    position: absolute;
+    font-size: 18px;
+    font-weight: bold;
+    left: 35px;
+    top: 23px;
+}
+
+.exit.hover {
+    background: url(/Content/akgame/exithover.png);
+    width: 250px;
+    height: 85px;
+    position: absolute;
+    background-repeat: no-repeat;
+    bottom: 0;
+    left: 50%;
+    margin-left: -350px;
+    background-size: contain;
+    color: #ffde00;
+}
+.history.hover {
+    background: url(/Content/akgame/historyhover.png);
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    background-repeat: no-repeat;
+    /* top: 0; */
+    bottom: -3px;
+    left: 50%;
+    margin-left: 75px;
+    background-size: contain;
+    color: #ffde00;
+}
+
+.exit span, .exithover span {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 190px;
+    height: 95px;
+    font-weight: bold;
+}
+
+.buttonmask {
+    position: absolute;
+    width: 250px;
+    height: 85px;
+    top: 0;
+    z-index: 999;
+    cursor: pointer;
+}
+
+
+
+.history span {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 195px;
+    height: 120px;
+    font-weight: bold;
+}
+
+
+.project .back1 {
+    background: url(/Content/akgame/brand/SquareA.png) no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 42px;
+    background-size: contain;
+    width: 100px;
+    height: 150px;
+}
+
+.project .back1:hover,.back2:hover,.back3:hover,.back4:hover,.back5:hover,.back6:hover,.back7:hover
+,.back8:hover,.back9:hover,.back10:hover,.back11:hover,.back12:hover,.back13:hover {
+    opacity:0.8;
+}
+.project .back2 {
+    background: url(/Content/akgame//brand/Square2.png) no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 42px;
+    background-size: contain;
+    width: 100px;
+    height: 150px;
+}
+.project .back3 {
+    background: url(/Content/akgame/brand/Square3.png) no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 42px;
+	background-size: contain;
+	width: 100px;
+    height: 150px;
+}
+.project .back4 {
+    background: url(/Content/akgame/brand/Square4.png) no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 42px;
+	background-size: contain;
+	width: 100px;
+    height: 150px;
+}
+.project .back5 {
+    background: url(/Content/akgame/brand/Square5.png) no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 42px;
+	background-size: contain;
+	width: 100px;
+    height: 150px;
+}
+.project .back6 {
+    background: url(/Content/akgame/brand/Square6.png) no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 42px;
+	background-size: contain;
+	width: 100px;
+    height: 150px;
+}
+.project .back7 {
+    background: url(/Content/akgame/brand/Square7.png) no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 42px;
+	background-size: contain;
+	width: 100px;
+    height: 150px;
+}
+.project .back8 {
+    background: url(/Content/akgame/brand/Square8.png) no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 42px;
+	background-size: contain;
+	width: 100px;
+    height: 150px;
+}
+.project .back9 {
+    background: url(/Content/akgame/brand/Square9.png) no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 42px;
+	background-size: contain;
+	width: 100px;
+    height: 150px;
+}
+.project .back10 {
+    background: url(/Content/akgame/brand/Square10.png) no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 42px;
+	background-size: contain;
+	width: 100px;
+    height: 150px;
+}
+.project .back11 {
+    background: url(/Content/akgame/brand/SquareJ.png) no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 42px;
+	background-size: contain;
+	width: 100px;
+    height: 150px;
+}
+.project .back12 {
+    background: url(/Content/akgame/brand/SquareQ.png) no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 42px;
+	background-size: contain;
+	width: 100px;
+    height: 150px;
+}
+.project .back13 {
+    background: url(/Content/akgame/brand/SquareK.png) no-repeat;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fff;
+    font-size: 42px;
+	background-size: contain;
+	width: 100px;
+    height: 150px;
+}
+.project .back, .project .front {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100px;
+    height: 311px;
+    padding: 0 16px;
+    text-align: center;
+}
+
+.project, .project .back, .project .front, .socials a, .transform_holder .back, .transform_holder .front, .transform_holder .transform {
+    -webkit-transition: all 1s cubic-bezier(0.68,-.55,.265,1.55);
+    -moz-transition: all 1s cubic-bezier(0.68,-.55,.265,1.55);
+    -o-transition: all 1s cubic-bezier(0.68,-.55,.265,1.55);
+    -ms-transition: all 1s cubic-bezier(0.68,-.55,.265,1.55);
+    transition: all 1s cubic-bezier(0.68,-.55,.265,1.55);
+}
+.project {
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+    -ms-transform: perspective(1000px);
+    -moz-transform: perspective(1000px);
+    -ms-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+}
+.project .back, .project .front {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.project .front {
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+}
+ .project .back {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+.project.hover .front, .project.showli .front {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+.project.hover .back, .project.showli .back {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+}
+.bg_bg, .bg_main{
+    display: none;
+    position: fixed;
+}
+.bg_bg{background: rgba(0,0,0,.8);left: 0;top: 0;width: 100%;height: 100%;z-index: 99;}
+.bg_main {
+    top: 20%;
+    left: 50%;
+    width: 800px;
+    height: 500px;
+    margin-top: -50px;
+    margin-left: -400px;
+    background: url(/Content/akgame/Log/background.png) no-repeat;
+    border-radius: 3px;
+    padding: 0;
+    box-shadow: 1px 1px 5px rgba(0,0,0,.5);
+    z-index: 999;
+}
+.bg_main_bet {
+    top: 20%;
+    left: 50%;
+    width: 800px;
+    height: 500px;
+    margin-top: -50px;
+    margin-left: -400px;
+    background: url(/Content/akgame/bet/bet_background.png) no-repeat;
+    border-radius: 3px;
+    padding: 0;
+
+    z-index: 999;
+    background-size: contain;
+    position: fixed;
+}
+    .bg_main .enter {
+        background: url(/Content/akgame/Log/input.png) no-repeat;
+        width: 500px;
+        height: 400px;
+        margin-left: 15%;
+    }
+    .bg_main input {
+        background-color:rgba(0,0,0,0);
+        border: 0px;
+        width: 43%;
+        height: 70px;
+        /*margin: 27% 15%;*/
+        font-size:29px;
+        position:absolute;
+        top:44%;
+        left:30%;
+    }
+.bg_main .info{padding: 10px;text-align: center;line-height: 42px;}
+.bg_main .btn span{display: inline-block;width: 50%;text-align: center;border-top: solid 1px #e8e8e8;padding: 10px 0;}
+.bg_main .btn span.qrxz{border-right: solid 1px #e8e8e8;color: #ef4036}
+
+.enter #cancel {
+    position: absolute;
+    left: 10%;
+    bottom: 10%;
+}
+.enter #confirm {
+    position: absolute;
+    left: 56%;
+    bottom: 10%;
+}
+
+.bg_main_bet .answer {
+    /*! width: 30px; */ margin-right: 0px;
+    position: absolute;
+    left: 13%;
+    top: 58px;
+   
+}
+
+.bg_main_bet img {
+    width: 30px;
+   
+}
+.bg_main_bet .select {
+    position: absolute;
+    left: 100px;
+    top: 15px;
+    
+}
+.bg_main_bet .money {
+    position: absolute;
+    left: 100px;
+    top: 35px;
+    
+}
+.bg_main_bet .obtain {
+    position: absolute;
+    left: 100px;
+    top: 55px;
+    
+}
+
+.bg_main_bet .bet_time {
+    position: absolute;
+    left: 120px;
+    top: -5px;
+    
+}
+
+#record-1 {
+    background: url(/Content/akgame/bet/bet_content.png) no-repeat;
+    width: 280px;
+    height: 100px;
+    background-size: contain;
+    position: absolute;
+    left: 10%;
+    top: 21%;
+    color: #000;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px #fff;
+}
+#record-2 {
+    background: url(/Content/akgame/bet/bet_content.png) no-repeat;
+    width: 280px;
+    height: 100px;
+    background-size: contain;
+    position: absolute;
+    left: 10%;
+    top: 40%;
+    color: #000;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px #fff;
+}
+#record-3 {
+    background: url(/Content/akgame/bet/bet_content.png) no-repeat;
+    width: 280px;
+    height: 100px;
+    background-size: contain;
+    position: absolute;
+    left: 50%;
+    top: 21%;
+    color: #000;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px #fff;
+}
+
+#record-4 {
+    background: url(/Content/akgame/bet/bet_content.png) no-repeat;
+    width: 280px;
+    height: 100px;
+    background-size: contain;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    color: #000;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px #fff;
+}
+#record-5 {
+    background: url(/Content/akgame/bet/bet_content.png) no-repeat;
+    width: 280px;
+    height: 100px;
+    background-size: contain;
+    position: absolute;
+    left: 50%;
+    top: 59%;
+    color: #000;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px #fff;
+}
+
+.bg_main_bet .Brand {
+    margin-right: 0px;
+    position: absolute;
+    left: 13%;
+    top: 13px;
+}
+
+
+[data-title] {
+    outline: red dotted 1px; /*optional styling*/
+    font-size: 0px; /*optional styling*/
+    position: relative;
+    cursor: help;
+}
+
+    [data-title]:hover::before {
+        content: attr(data-title);
+        position: absolute;
+        bottom: -26px;
+        display: inline-block;
+        padding: 3px 6px;
+        border-radius: 2px;
+        background: #000;
+        color: #fff;
+        font-size: 12px;
+        font-family: sans-serif;
+        white-space: nowrap;
+        text-shadow: 2px 2px 2px #000;
+    }
+
+    [data-title]:hover::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 8px;
+        display: inline-block;
+        color: #fff;
+        border: 8px solid transparent;
+        border-bottom: 8px solid #000;
+    }
+
+
+#pgloading {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    background: #222;
+    z-index: 10000000000;
+}
+
+    #pgloading:after {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: -webkit-radial-gradient(center center, circle cover, rgba(0,0,0,0), rgba(0,0,0,0.75));
+        background: radial-gradient(center center, circle cover, rgba(0,0,0,0), rgba(0,0,0,0.75));
+    }
+
+    #pgloading .loadingwrap {
+        position: fixed;
+        top: 45%;
+        bottom: 45%;
+        left: 25%;
+        right: 25%;
+    }
+
+    #pgloading .bokeh {
+        font-size: 100px;
+        width: 1em;
+        height: 1em;
+        position: relative;
+        margin: 0 auto;
+        border-radius: 50%;
+        border: .01em solid rgba(150,150,150,0.1);
+        list-style: none;
+        padding: 0;
+    }
+
+        #pgloading .bokeh li {
+            position: absolute;
+            width: .2em;
+            height: .2em;
+            border-radius: 50%;
+        }
+
+            #pgloading .bokeh li:nth-child(1) {
+                left: 50%;
+                top: 0;
+                margin: 0 0 0 -.1em;
+                background: #00C176;
+                -webkit-transform-origin: 50% 250%;
+                transform-origin: 50% 250%;
+                -webkit-animation: rota 1.13s linear infinite, opa 3.67s ease-in-out infinite alternate;
+                animation: rota 1.13s linear infinite, opa 3.67s ease-in-out infinite alternate;
+            }
+
+            #pgloading .bokeh li:nth-child(2) {
+                top: 50%;
+                right: 0;
+                margin: -.1em 0 0 0;
+                background: #FF003C;
+                -webkit-transform-origin: -150% 50%;
+                transform-origin: -150% 50%;
+                -webkit-animation: rota 1.86s linear infinite, opa 4.29s ease-in-out infinite alternate;
+                animation: rota 1.86s linear infinite, opa 4.29s ease-in-out infinite alternate;
+            }
+
+            #pgloading .bokeh li:nth-child(3) {
+                left: 50%;
+                bottom: 0;
+                margin: 0 0 0 -.1em;
+                background: #FABE28;
+                -webkit-transform-origin: 50% -150%;
+                transform-origin: 50% -150%;
+                -webkit-animation: rota 1.45s linear infinite, opa 5.12s ease-in-out infinite alternate;
+                animation: rota 1.45s linear infinite, opa 5.12s ease-in-out infinite alternate;
+            }
+
+            #pgloading .bokeh li:nth-child(4) {
+                top: 50%;
+                left: 0;
+                margin: -.1em 0 0 0;
+                background: #88C100;
+                -webkit-transform-origin: 250% 50%;
+                transform-origin: 250% 50%;
+                -webkit-animation: rota 1.72s linear infinite, opa 5.25s ease-in-out infinite alternate;
+                animation: rota 1.72s linear infinite, opa 5.25s ease-in-out infinite alternate;
+            }
+
+@-webkit-keyframes rota {
+    from {
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes rota {
+    from {
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes opa {
+    0% {
+    }
+
+    12.0% {
+        opacity: 0.80;
+    }
+
+    19.5% {
+        opacity: 0.88;
+    }
+
+    37.2% {
+        opacity: 0.64;
+    }
+
+    40.5% {
+        opacity: 0.52;
+    }
+
+    52.7% {
+        opacity: 0.69;
+    }
+
+    60.2% {
+        opacity: 0.60;
+    }
+
+    66.6% {
+        opacity: 0.52;
+    }
+
+    70.0% {
+        opacity: 0.63;
+    }
+
+    79.9% {
+        opacity: 0.60;
+    }
+
+    84.2% {
+        opacity: 0.75;
+    }
+
+    91.0% {
+        opacity: 0.87;
+    }
+}
+
+@keyframes opa {
+    0% {
+    }
+
+    12.0% {
+        opacity: 0.80;
+    }
+
+    19.5% {
+        opacity: 0.88;
+    }
+
+    37.2% {
+        opacity: 0.64;
+    }
+
+    40.5% {
+        opacity: 0.52;
+    }
+
+    52.7% {
+        opacity: 0.69;
+    }
+
+    60.2% {
+        opacity: 0.60;
+    }
+
+    66.6% {
+        opacity: 0.52;
+    }
+
+    70.0% {
+        opacity: 0.63;
+    }
+
+    79.9% {
+        opacity: 0.60;
+    }
+
+    84.2% {
+        opacity: 0.75;
+    }
+
+    91.0% {
+        opacity: 0.87;
+    }
+}
+
+#load {
+    position: absolute;
+    z-index: 9999;
+}

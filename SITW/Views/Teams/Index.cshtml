@@ -1,0 +1,114 @@
+﻿@model  IEnumerable<SITW.Models.ViewModel.TeamsViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<style>
+    #example {
+        text-align: center;
+    }
+
+        #example th, #example td {
+            text-align: center;
+        }
+</style>
+
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> 隊伍管理</h3>
+        <div class="row mt">
+            <div class="col-md-12">
+                <div class=" add-task-row">
+                    <a class="btn btn-success btn-sm pull-left" href="@Url.Action("Create")">新增隊伍</a>
+                </div>
+                <div class="content-panel">
+
+                    <hr>
+                    <table id="example" class="table table-bordered table-striped table-condensed cf" >
+                        <thead id="cf">
+                            <tr>
+                                <th >&nbsp; 隊伍名稱</th>
+                                <th  >&nbsp; 隊伍簡稱 </th>
+                                <th >&nbsp; 隊伍圖片 </th>
+                                <th class="hidden-phone">&nbsp; 聯賽類別 </th>
+                                <th class="hidden-phone" >&nbsp; 遊戲類別 </th>
+                                <th ></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td>@Html.DisplayFor(modelItem => item.teamspost.name) </td>
+                                    <td  >@Html.DisplayFor(modelItem => item.teamspost.shortName) </td>
+                                    <td><img src="@Html.DisplayFor(modelItem => item.teamspost.imageURL)" width="50" height="50" /> </td>
+                                    <td class="hidden-phone">
+                                        @Html.DisplayFor(modelItem => item.leagues.shortName)
+                                    </td>
+                                    <td class="hidden-phone">
+                                        @Html.DisplayFor(modelItem => item.cfplaygame.cName)
+                                    </td>
+
+                                    <td>
+
+                                        <button class="btn btn-primary btn-xs" onclick="location.href='@Url.Action("Edit", new { id = item.teamspost.sn })'"><i class="fa fa-pencil"></i></button>
+                                        <button class="btn btn-danger btn-xs" onclick="location.href='@Url.Action("Delete", new {  id = item.teamspost.sn  })'"><i class="fa fa-trash-o "></i></button>
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr><th></th><th ></th><th></th><th class="hidden-phone"></th><th class="hidden-phone"></th><th></th></tr>
+                        </tfoot>
+                    </table>
+                </div><!-- /content-panel -->
+            </div><!-- /col-md-12 -->
+        </div><!-- /row -->
+    </section>
+</section>
+
+@section Scripts {
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#example').DataTable({
+                "ordering": true, "paging": true, "info": true, "searching": true,
+                "language": {
+                    "lengthMenu": "顯示隊伍_MENU_ ",
+                    "info": "目前 _START_ to _END_ 共 _TOTAL_ 隊", "paginate": {
+                        "next": "", "previous": ""
+                    }
+                }, "initComplete": function () {
+                    this.api().columns([3, 4]).every(function () {
+                        var column = this;
+                        var select = $('<select><option value="">全部</option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                }
+            });
+
+
+        });
+    </script>
+}

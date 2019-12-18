@@ -1,0 +1,463 @@
+﻿@model SITW.Models.IndexViewModel
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "娛樂中心";
+}
+
+
+<style>
+   
+    a {
+        color: #5293c6;
+    }
+
+    li {
+        color: #ffffff
+    }
+
+    #labelstyle {
+        font-size: 15px;
+        color: #e5b22a;
+    }
+
+    .depositcss a {
+        float: right;
+        border: 1px solid #5d5d5d;
+        background-color: #ff0000;
+        color: #fff;
+        padding: 0px 5px 0px 5px;
+        margin: 0px 50% 0px 0px;
+    }
+
+        .depositcss a:hover {
+            border: 1px solid #fff;
+        }
+
+    onesignal-customlink-explanation {
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+        background-color: rgba(51, 122, 183, 0.5019607843137255);
+        cursor:pointer;
+    }
+
+
+    .onesignal-customlink-subscribe.button.state-subscribed {
+        font-weight: 600;
+    }
+
+    .onesignal-customlink-subscribe.button {
+        box-shadow: none;
+    }
+
+    @@media(max-width: 767px) {
+        #newsmargin {
+            margin-top: 0;
+        }
+    }
+
+    .user-info-wrapper {
+        position: relative;
+        width: 100%;
+        margin-bottom: -1px;
+        padding-top: 90px;
+        padding-bottom: 30px;
+        border: 1px solid #215cb2;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0px 5px 10px rgba(0,0,0,0.5);
+        background: rgb(19, 25, 37);
+    }
+
+        .user-info-wrapper .info-label {
+            display: block;
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            height: 26px;
+            padding: 0 12px;
+            border-radius: 4px;
+            background-color: #000;
+            color: #ffffff;
+            font-size: 12px;
+            line-height: 26px;
+            box-shadow: 0 1px 5px 0 rgba(0,0,0,0.18);
+            cursor: pointer;
+        }
+
+        .user-info-wrapper .user-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background-position: center;
+            background-color: #f5f5f5;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .user-info-wrapper .user-info {
+            display: table;
+            position: relative;
+            width: 100%;
+            padding: 0 18px;
+            z-index: 5;
+        }
+
+            .user-info-wrapper .user-info .user-avatar {
+                position: relative;
+                width: 115px;
+            }
+
+            .user-info-wrapper .user-info .user-avatar, .user-info-wrapper .user-info .user-data {
+                display: table-cell;
+                vertical-align: top;
+            }
+
+            .user-info-wrapper .user-info .user-data {
+                padding-top: 20px;
+                padding-left: 0px;
+            }
+
+                .user-info-wrapper .user-info .user-data h4 {
+                    margin-bottom: 2px;
+                    color: #e5b22a;
+                }
+
+    .managelogo2 {
+        width: 80px;
+        height: 80px;
+        background: #a5a5a5 url(/Content/images/rwd/bear.png) no-repeat center center;
+        /* background: #a5a5a5 url(https://storage.googleapis.com/funbet-180608.appspot.com/Banners/Merry%20Christmas/20181205/bear.png) no-repeat center center; */
+        border-radius: 50%;
+        border: 3px ridge #e6b741;
+        background-size: 75px;
+        /* background-size: 73px; */
+        background-position: 54% 20px;
+        /* background-position: 54% 1px; */
+    }
+
+    a.list-group-item, button.list-group-item {
+        color: rgba(229, 178, 42, 0.9294117647058824);
+        cursor:pointer;
+    }
+
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: 10px 15px;
+        margin-bottom: -1px;
+        background-color: #131925;
+        border: 1px solid #215cb2;
+        box-shadow: 0px 5px 10px rgba(0,0,0,0.5);
+    }
+
+    .tab-content {
+        float: left;
+        height: 80%;
+        background-color: #215cb2;
+        background-image: url(/Content/extra-images/gamebackground.png?0514);
+        border: 1px solid #337ab7;
+        box-shadow: 0px 5px 10px rgba(0,0,0,0.5);
+        min-height: 450px;
+        width: 100%;
+    }
+
+    .sportsmagazine-account-tabs {
+        margin: 0px 0px 20px;
+    }
+
+    .sportsmagazine-account ul li {
+        margin: 0px 0px 80px;
+    }
+
+    .sportsmagazine-account-tabs {
+        background-image: url(/Content/images/vpattren.png?t=20171205);
+        border: 1px solid #39406f;
+    }
+
+    .user-info-wrapper .info-label #myadd {
+        color: #e5b22a;
+    }
+
+    .user-info-wrapper .info-label:hover #myadd {
+        color: #ffdc11;
+    }
+
+    
+
+   
+    .list-group-item:hover {
+        z-index: 2;
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #337ab7;
+    }
+
+
+</style>
+
+
+
+
+<div class="alert alert-success" id="success-alert" style="text-align:center;font-size:14px">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <input type="hidden" id="message" name="message" value="@ViewBag.StatusMessage" />
+</div>
+
+
+
+<div class="sportsmagazine-main-content" id="rankmagin">
+    <div class="sportsmagazine-main-section sportsmagazine-account-full">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="sportsmagazine-account-tabs">
+                        <ul class="nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">娛樂中心</a></li>
+                            @*<li role="presentation"><a href="#BetsByUserID" aria-controls="BetsByUserID" role="tab" data-toggle="tab">投注紀錄</a></li>*@
+                        </ul>
+
+                    </div>
+                </div>
+                <!-- Page Content-->
+                <div class="container padding-bottom-3x mb-2">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <aside class="user-info-wrapper">
+                                <div class="user-cover" style="background-image: url(/Content/images/user-cover-img.png);">
+                                    <div class="info-label"  title="魚骨幣，可用於官方競猜及遊戲等">
+                                        @foreach (var a in Model.Assets)
+                                        {
+                                            if (a.unitSn == 1)
+                                            {
+                                                <span>@a.unitName：</span> @a.Asset<img style="width:15px;margin-left: 5px;" title="魚骨幣，可用於官方競猜及遊戲等" src="~/Content/@a.iconURL" />
+                                                <span id="myadd" data-toggle="modal" data-target="#bearModal">
+                                                    [儲值]
+                                                </span>
+
+                                            }
+
+                                        }
+                                    </div>
+                                    <div class="info-label" style="top:50px;cursor:pointer;" title="鮭魚幣，可用於商城兌換獎品">
+
+                                        @foreach (var a in Model.Assets)
+                                        {
+                                            if (Model.Assets.Count == 2)
+                                            {
+                                                if (a.unitSn == 2)
+                                                {
+                                                   <span>@a.unitName：</span> @a.Asset<img style="width:15px;margin-left: 5px;cursor: pointer;" title="鮭魚幣，可用於商城兌換獎品" src="~/Content/@a.iconURL" />
+                                                    <br />
+                                                }
+
+
+
+                                            }
+                                            else
+                                            {
+                                                <span>鮭魚幣：0</span><img style="width:15px;margin-left: 5px;cursor: pointer;" title="鮭魚幣，可用於兌換商城獎品" src="~/Content/extra-images/fish_bone2.png" />
+                                                <br />
+
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="user-info">
+                                    <div class="user-avatar">
+                                        <div class="managelogo2"></div>
+                                    </div>
+                                    <div class="user-data">
+                                        <h4 class="h5">@User.Identity.GetUserName()</h4><span></span>
+                                    </div>
+                                </div>
+                            </aside>
+                            <nav class="list-group">
+                                <a class="list-group-item active"  data-href="@Url.Action("_GameMenu","Manage")"><i class="icon-shopping-bag"></i>遊戲選單<span class="badge badge-default badge-pill">5</span></a>
+                                <a class="list-group-item"  data-href="@Url.Action("Setting","Manage")">設定頁</a>
+                                <a class="list-group-item"  data-href="@Url.Action("Transform","Manage")">魚骨幣轉帳中心</a>
+                                <a class="list-group-item" data-href=""  href="@Url.Action("ProductRecord","Manage")">兌換&購買記錄</a>
+                                
+                            </nav>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="tab-content">
+                                @Html.Action("_GameMenu","Manage")
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+    function onManageWebPushSubscriptionButtonClicked(event) {
+        getSubscriptionState().then(function (state) {
+            if (state.isPushEnabled) {
+                /* Subscribed, opt them out */
+                OneSignal.setSubscription(false);
+            } else {
+                if (state.isOptedOut) {
+                    /* Opted out, opt them back in */
+                    OneSignal.setSubscription(true);
+                } else {
+                    /* Unsubscribed, subscribe them */
+                    OneSignal.registerForPushNotifications();
+                }
+            }
+        });
+        event.preventDefault();
+    }
+
+    function updateMangeWebPushSubscriptionButton(buttonSelector) {
+        var hideWhenSubscribed = false;
+        var subscribeText = "開啟熊報信";
+        var unsubscribeText = "關閉熊報信";
+
+        getSubscriptionState().then(function (state) {
+            var buttonText = !state.isPushEnabled || state.isOptedOut ? subscribeText : unsubscribeText;
+
+            var element = document.querySelector(buttonSelector);
+            if (element === null) {
+                return;
+            }
+
+            element.removeEventListener('click', onManageWebPushSubscriptionButtonClicked);
+            element.addEventListener('click', onManageWebPushSubscriptionButtonClicked);
+            element.textContent = buttonText;
+
+            if (state.hideWhenSubscribed && state.isPushEnabled) {
+                element.style.display = "none";
+            } else {
+                element.style.display = "";
+            }
+        });
+    }
+
+    function getSubscriptionState() {
+        return Promise.all([
+            OneSignal.isPushNotificationsEnabled(),
+            OneSignal.isOptedOut()
+        ]).then(function (result) {
+            var isPushEnabled = result[0];
+            var isOptedOut = result[1];
+
+            return {
+                isPushEnabled: isPushEnabled,
+                isOptedOut: isOptedOut
+            };
+        });
+    }
+
+    var OneSignal = OneSignal || [];
+    var buttonSelector = "#my-notification-button";
+
+    /* This example assumes you've already initialized OneSignal */
+    OneSignal.push(function () {
+        // If we're on an unsupported browser, do nothing
+        if (!OneSignal.isPushNotificationsSupported()) {
+            return;
+        }
+        updateMangeWebPushSubscriptionButton(buttonSelector);
+        OneSignal.on("subscriptionChange", function (isSubscribed) {
+            /* If the user's subscription state changes during the page's session, update the button text */
+            updateMangeWebPushSubscriptionButton(buttonSelector);
+        });
+    });
+</script>
+
+
+@section Scripts {
+   
+
+    <script type="text/javascript">
+        var m = 1;
+
+        $(document).ready(function () {
+
+            $('.betResult').tooltip();
+        });
+
+        $(document).ready(function () {
+           
+
+            var content = $('#message').val();
+
+            $('#success-alert').append(content);
+            $("#success-alert").hide();
+            if (content != "") {
+
+                $("#success-alert").fadeTo(5000, 500).slideUp(500, function () {
+                    $("#success-alert").slideUp(500);
+                });
+            }
+
+            $(".list-group-item").on('click', function () {
+                //alert($(this).attr("data-href"));
+                $(this).removeClass();
+                $(this).addClass("active list-group-item");
+                $(".tab-content").html(
+                    '<div id="pgloading" style="opacity: 0.5">' +
+                    '<div class="loadingwrap">' +
+                    '<ul class="bokeh">' +
+                    '<li></li>' +
+                    '<li></li>' +
+                    '<li></li>' +
+                    '<li></li>' +
+                    '</ul>' +
+                    '</div>' +
+                    ' </div>'); 
+                
+                $(".list-group-item").removeClass("active");
+                $(this).addClass("active");
+
+
+                if ($(this).attr("data-href") != "") {
+                    $.get($(this).attr("data-href"), function (data) {
+                        $(".tab-content").html(data);
+                        
+
+                    });
+
+                }
+                
+
+            });
+
+            
+
+
+
+
+
+        });
+
+
+
+
+
+
+
+    </script>
+
+
+}

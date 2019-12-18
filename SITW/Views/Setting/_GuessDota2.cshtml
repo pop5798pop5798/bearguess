@@ -1,0 +1,188 @@
+﻿@model SITDto.ViewModel.SettingListDto
+@{
+     Layout = null;
+    int index = Model.topicsettingList.Count();
+}
+
+<style>
+    #choiceshow {
+        display: block;
+    }
+
+    #choicehide {
+        display: none;
+    }
+
+    .form-control[readonly] {
+        background: #000;
+    }
+</style>
+
+
+
+@using SITW.Helper
+<div class="container">
+    <div class="row">
+
+        <div class="form-horizontal">
+            <h4>簡單猜猜猜</h4>
+            <hr />
+            <div class="form-group">
+                <div class="control-label col-md-2">
+                    題目
+                </div>
+                <div class="col-md-7">
+                    <!-- topics! -->
+                    <div id="topic-group-dota2">
+
+                    </div>
+                    @Ajax.ActionLink(linkText: "增加題目", actionName: "_GtopicCreate", controllerName: "Setting", routeValues: new { index = index, game = 4 }, ajaxOptions: new AjaxOptions
+                          {
+                              InsertionMode = InsertionMode.InsertAfter,
+                              UpdateTargetId = "topic-group-dota2",
+                              OnSuccess = "indexIterate"
+                          },
+                               htmlAttributes: new { id = "addTopic", @class = "btn btn-default", @name = "dota2guess" })
+
+                    @Html.ValidationMessageFor(model => model.topicsettingList, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <hr />
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "nabobForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                for (int i = 0; i < Model.topicsettingList.Count; i++)
+                {
+                    @Html.HiddenFor(model => model.topicsettingList[i].Model, new { @Value = "2" })
+                    <div id="topiclsit">
+                        @* @Html.HiddenFor(model => t.id)*@
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.topicsettingList[i].id, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-5">
+                                @Html.EditorFor(model => model.topicsettingList[i].id, new { htmlAttributes = new { @class = "form-control form_datetime", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.topicsettingList[i].id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.topicsettingList[i].topicsName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-5">
+                                @Html.EditorFor(model => model.topicsettingList[i].topicsName, new { htmlAttributes = new { @class = "form-control form_datetime", @style = "color:#ffdc11" } })
+                                @Html.ValidationMessageFor(model => model.topicsettingList[i].topicsName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.topicsettingList[i].choiceType, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-5">
+                                @{
+                                    string topicname = "topicsettingList[" + i + "].choiceType";
+                                }
+                                @Html.TopicSelect(topicname, Model.topicsettingList[i].choiceType)
+
+                                @Html.ValidationMessageFor(model => model.topicsettingList[i].choiceType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @if (Model.topicsettingList[i].choiceType == true)
+                        {
+                            <div class="form-group" name="choiceListGroup" id="choiceshow">
+                                <div class="control-label col-md-2">
+                                    選項
+                                </div>
+
+                                <div class="col-md-5">
+
+
+                                    @for (int j = 0; j < Model.topicsettingList[i].choicsettingList.Count; j++)
+                                    {
+                                        @Html.HiddenFor(model => model.topicsettingList[i].choicsettingList[j].id)
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.topicsettingList[i].choicsettingList[j].choiceName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-5">
+                                                @Html.EditorFor(model => model.topicsettingList[i].choicsettingList[j].choiceName, new { htmlAttributes = new { @class = "form-control form_datetime", @style = "color:#ffdc11" } })
+                                                @Html.ValidationMessageFor(model => model.topicsettingList[i].choicsettingList[j].choiceName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        @Html.HiddenFor(model => model.topicsettingList[i].choicsettingList[j].valid)
+                                        @Html.HiddenFor(model => model.topicsettingList[i].choicsettingList[j].topiceSetting)
+                                    }
+
+                                </div>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="form-group" name="choiceListGroup" id="choicehide">
+                                <div class="control-label col-md-2">
+                                    選項
+                                </div>
+
+                                <div class="col-md-5">
+
+
+                                    @for (int j = 0; j < Model.topicsettingList[i].choicsettingList.Count; j++)
+                                    {
+                                        @Html.HiddenFor(model => model.topicsettingList[i].choicsettingList[j].id)
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.topicsettingList[i].choicsettingList[j].choiceName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-5">
+                                                @Html.EditorFor(model => model.topicsettingList[i].choicsettingList[j].choiceName, new { htmlAttributes = new { @class = "form-control form_datetime", @style = "color:#ffdc11" } })
+                                                @Html.ValidationMessageFor(model => model.topicsettingList[i].choicsettingList[j].choiceName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        @Html.HiddenFor(model => model.topicsettingList[i].choicsettingList[j].valid)
+                                        @Html.HiddenFor(model => model.topicsettingList[i].choicsettingList[j].topiceSetting)
+                                    }
+
+                                </div>
+                            </div>
+
+                        }
+
+                        @Html.HiddenFor(model => model.topicsettingList[i].gametype)
+                        @Html.HiddenFor(model => model.topicsettingList[i].valid)
+                        <hr>
+                    </div>
+                }
+                <hr>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" id="dgongo" value="保存" class="btn btn-default" />
+                    </div>
+                </div>
+
+            }
+
+
+
+        </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,456 @@
+﻿@model SITW.Models.ViewModel.GamePostViewModel
+
+@{
+    ViewBag.Title = Model.game.title + "|熊i猜";
+    var poolall = ViewData["poolall"] as string[];
+}
+<script type="application/ld+json">
+    {
+    "@@context": "http://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [{
+    "@@type": "ListItem",
+    "position": 1,
+    "item": {
+    "@@id": "http://funbet.com.tw/",
+    "name": "首頁",
+    "image": "http://funbet.com.tw/Content/images/logo-1.png"
+    }
+    },{
+    "@@type": "ListItem",
+    "position": 2,
+    "item": {
+    "@@id": "http://funbet.com.tw/game/",
+    "name": "遊戲大廳"
+    }
+    },{
+    "@@type": "ListItem",
+    "position": 3,
+    "item": {
+    "@@id": "http://funbet.com.tw/game/Details/@Model.game.sn",
+    "name": "@Model.game.title"
+    }
+    }]
+    }
+</script>
+
+<link rel="stylesheet" href="~/Content/effects/led_style.css">
+
+<link rel="stylesheet" href="~/Content/css/dgon_style.css?v=20151004">
+
+<link rel="stylesheet" href="~/Content/effects/datouwang.css">
+<link rel="stylesheet" href="~/Content/effects/ball/style.css">
+<style>
+    .loading {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        background: #000;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .loading h2 {
+            color: #ccc;
+            margin: 0;
+            font: .8em verdana;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+        }
+
+        /*
+    * Loading Dots
+    * Can we use pseudo elements here instead :after?
+    */
+        .loading span {
+            display: inline-block;
+            vertical-align: middle;
+            width: .6em;
+            height: .6em;
+            margin: .19em;
+            background: #007DB6;
+            border-radius: .6em;
+            animation: loading 1s infinite alternate;
+        }
+
+            /*
+    * Dots Colors
+    * Smarter targeting vs nth-of-type?
+    */
+            .loading span:nth-of-type(2) {
+                background: #008FB2;
+                animation-delay: 0.2s;
+            }
+
+            .loading span:nth-of-type(3) {
+                background: #009B9E;
+                animation-delay: 0.4s;
+            }
+
+            .loading span:nth-of-type(4) {
+                background: #00A77D;
+                animation-delay: 0.6s;
+            }
+
+            .loading span:nth-of-type(5) {
+                background: #00B247;
+                animation-delay: 0.8s;
+            }
+
+            .loading span:nth-of-type(6) {
+                background: #5AB027;
+                animation-delay: 1.0s;
+            }
+
+            .loading span:nth-of-type(7) {
+                background: #A0B61E;
+                animation-delay: 1.2s;
+            }
+
+    /*
+    * Animation keyframes
+    * Use transition opacity instead of keyframes?
+    */
+    @@keyframes loading {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    </style>
+<div class="loading">
+
+    <h2><img style="width: 80px;" src="/Content/extra-images/dgon.png"><br>正在為您加載 @Model.game.betModelString</h2>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div class="sportsmagazine-main-section sportsmagazine-thumb sportsmagazine-shop-thumb">
+    <span class="gonthumb-transparent"></span>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div name="bear_ball">
+
+                </div>
+
+
+            </div>
+            <div class="col-md-8">
+                <div class="sportsmagazine-shop-summery">
+                    <div id="myBanner" data-toggle="modal" data-target="#loginModal">
+                        <i class="led led-rose"></i>
+                    </div>
+
+                    <ul class="sportsmagazine-summery-option">
+
+
+                        <li style="width:100%">
+                            <h5>競猜主題： <span style="margin:0 5px 0 5px" class="sportsmagazine-price-cartbox">@Html.DisplayFor(model => model.game.title)</span></h5>
+
+                        </li>
+                        <li style="width:100%">
+                            <h5>競猜說明： <span style="margin:0 5px 0 5px" class="sportsmagazine-price-cartbox">@Html.DisplayFor(model => model.game.topicList[0].title)</span></h5>
+                            @*<span class="sportsmagazine-price-cartbox">@Html.DisplayFor(model => model.game.comment)</span>*@
+
+                        </li>
+                        @if (Model.game.gamedate.HasValue)
+                        {
+                            <li>
+                                <h5>
+                                    比賽時間： <span style="margin:0 5px 0 5px" class="sportsmagazine-price-cartbox">
+                                        @Model.game.gamedate.Value.ToString("yyyy/MM/dd HH:mm")
+                                    </span>
+                                </h5>
+
+                            </li>
+                        }
+
+                        <li  style="height:25px">
+                            <h5 style="float:left;margin:2px 10px 2px 0">目前獎池：</h5>
+                            <div class="wrapper">
+                                <div class="letters" id="poolli">
+                                    @for (int pi = 0; pi < poolall.Length; pi++)
+                                    {
+                                        <span class="letter">@poolall[pi]</span>
+                                    }
+                                </div>
+                            </div>
+                        </li>
+
+                        @*
+                            <li>
+                                <h5>競猜規則：</h5>
+                                <span class="sportsmagazine-price-cartbox">無</span>
+                            </li>
+                        *@
+                    </ul>
+
+
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<main class="site-main" style="margin-bottom:100px">
+    <div class="container">
+        <div class="fontcolor">
+
+            <h1 class="entry-title" style="color:#19191b">
+                -
+            </h1>
+
+
+        </div>
+        <!-- Page Heading -->
+        <div name="ddTopic" class="masonry row">
+
+        </div>
+        <!--------------------------------------------------------------------------------------------------->
+
+    </div>
+
+</main>
+
+<!-- LoginModal -->
+<div class="loginmodal modal fade" id="loginModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <a style="line-height:0;" href="#" data-dismiss="modal" class="sportsmagazine-login-close sportsmagazine-color">X</a>
+        <div class="sportsmagazine-login-box">
+            <img style="width:1500px" src="~/Content/extra-images/dgon/game_description.png?v=20190905">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div name="submit">
+
+
+    </div>
+
+
+
+
+
+<!-- /.container -->
+@section Scripts {
+    @Scripts.Render("~/bundles/jquerysignalR")
+    @Scripts.Render("~/bundles/GameBetPoolDetail")
+    <script src="/Scripts/masonry.pkgd.min.js"></script>
+    <script src="/Scripts/imagesloaded.pkgd.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script type="text/javascript">
+            jQuery(document).ready(function () {
+                var topic = $.connection.topicHub;
+                topic.client.showTopic = function (topicData) {
+                    createTopic(topicData);
+                    ball(topicData);
+                };
+
+                topic.client.updateTopic = function (topicData) {
+                    updateTopic(topicData);
+                };
+
+                topic.client.updateBetMoney = function (betData) {
+                    updateBetMoney(betData);
+                    ball(betData);
+                };
+
+                $.connection.hub.start().done(function () {
+                    topic.server.joinGroup('@Model.md5GameSn','@Model.encryptedGameSn');
+                });
+            });
+    </script>
+    <!-- filmtop--->
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $(".led").hover(
+                function () {
+                    $(this).stop().animate({ top: "-20%" });
+                }, function () {
+                    $(this).stop().animate({ top: "-30%" });
+                }
+            );
+
+
+
+            $('.slide_toggle').append("隱藏");
+
+            $(window).scroll(function () {
+                var content = $(".sportsmagazine-main-wrapper").height();
+                var thisTop;
+                if (content > 1150) {
+                    thisTop = 0;
+                } else {
+                    thisTop = 200;
+                }
+
+                if ($(this).scrollTop() > thisTop) {
+
+                    $('#top-film').addClass("filmfixed");
+                    $('#top-film').stop().animate({ top: "0px" });
+                    $('#testgo').show();
+                    $("#div1").css("height", "20px");
+                }
+                else {
+                    $('#top-film').removeClass("filmfixed");
+                    $('#top-film').stop().animate({ top: "-10px" });
+                    $('#testgo').hide();
+                    $("#div1").css("height", "20px");
+
+                }
+
+            });
+            $('#testgo').hide();
+
+            $(".sportsmagazine-footer-one").css("position", "relative");
+
+            $(".slide_toggle").on('click', function () {
+                $(this).next().slideToggle();
+
+                if ($(this).text() == "隱藏") {
+                    $(this).text("顯示");
+                }
+                else {
+                    $(this).text("隱藏");
+                }
+            });
+
+            $('#indexgame').addClass("active");
+
+            var noisebool = $("canvas").attr("id");
+
+            if (noisebool == "noise") {
+                const noise = () => {
+                    let canvas, ctx;
+
+                    let wWidth, wHeight;
+
+                    let noiseData = [];
+                    let frame = 0;
+
+                    let loopTimeout;
+
+
+                    // Create Noise
+                    const createNoise = () => {
+                        const idata = ctx.createImageData(wWidth, wHeight);
+                        const buffer32 = new Uint32Array(idata.data.buffer);
+                        const len = buffer32.length;
+
+                        for (let i = 0; i < len; i++) {
+                            if (Math.random() < 0.5) {
+                                buffer32[i] = 0xff000000;
+                            }
+                        }
+
+                        noiseData.push(idata);
+                    };
+
+
+                    // Play Noise
+                    const paintNoise = () => {
+                        if (frame === 9) {
+                            frame = 0;
+                        } else {
+                            frame++;
+                        }
+
+                        ctx.putImageData(noiseData[frame], 0, 0);
+                    };
+
+
+                    // Loop
+                    const loop = () => {
+                        paintNoise(frame);
+
+                        loopTimeout = window.setTimeout(() => {
+                            window.requestAnimationFrame(loop);
+                        }, (1000 / 25));
+                    };
+
+
+                    // Setup
+                    const setup = () => {
+                        wWidth = window.innerWidth;
+                        wHeight = window.innerHeight;
+
+                        canvas.width = wWidth;
+                        canvas.height = wHeight;
+
+                        for (let i = 0; i < 10; i++) {
+                            createNoise();
+                        }
+
+                        loop();
+                    };
+
+
+                    // Reset
+                    let resizeThrottle;
+                    const reset = () => {
+                        window.addEventListener('resize', () => {
+                            window.clearTimeout(resizeThrottle);
+
+                            resizeThrottle = window.setTimeout(() => {
+                                window.clearTimeout(loopTimeout);
+                                setup();
+                            }, 200);
+                        }, false);
+                    };
+
+
+                    // Init
+                    const init = (() => {
+                        canvas = document.getElementById('noise');
+                        ctx = canvas.getContext('2d');
+
+                        setup();
+                    })();
+                };
+
+                noise();
+            }
+
+
+        });
+
+    </script>
+
+
+
+    <!-- filmtop-->
+
+}
+
+
+
+
+
+
+

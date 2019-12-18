@@ -1,0 +1,103 @@
+﻿/*myBanner*/
+
+.led {
+    cursor:pointer;
+    display: block;
+    position: absolute;
+    right: 16%;
+    top: 0;
+    height: 8em;
+    width: 2px;
+    background-color: #fec62d;
+    -webkit-transform-origin: 0 -1em;
+    -moz-transform-origin: 0 -1em;
+    -ms-transform-origin: 0 -1em;
+    -o-transform-origin: 0 -1em;
+    transform-origin: 0 -1em;
+    -webkit-animation: swing 5.5s ease-in-out forwards infinite;
+    -moz-animation: swing 5.5s ease-in-out forwards infinite;
+    -ms-animation: swing 5.5s ease-in-out forwards infinite;
+    -o-animation: swing 5.5s ease-in-out forwards infinite;
+    animation: swing 5.5s ease-in-out forwards infinite;
+}
+
+    .led:before {
+        content: '';
+        display: block;
+        width: 7em;
+        height: 7.2em;
+        background-image:url(/Content/extra-images/dgon/game_led.png);
+        position: absolute;
+        top: 8em;
+        left: -3.6em;
+        /*border-radius: 4em 4em 0 0;
+        box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.1), inset 3px 3px 3px hsla(0,0%,100%,.2), inset -3px -3px 3px hsla(0,0%,0%,.2), 1.5em -1em 3px hsla(0,0%,0%,.15);*/
+    }
+
+   /* .led:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 1.5em;
+        top: -1em;
+        width: 1px;
+        height: inherit;
+        background-color: hsla(0,0%,0%,.1);
+        box-shadow: 0 0 2px hsla(0,0%,0%,.15);
+    }*/
+
+    .led:after {
+        content: '';
+        display: block;
+        width: 3em;
+        height: 3em;
+        /*border: 4px ridge #fec62d;*/
+        /* border-radius: 50%;*/
+        position: absolute;
+        top: -2.5em;
+        left: -0.6em;
+        background-image: url(/Content/extra-images/pushpin.png);
+        background-size: contain;
+        /*border-radius: 4em 4em 0 0;
+        box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.1), inset 3px 3px 3px hsla(0,0%,100%,.2), inset -3px -3px 3px hsla(0,0%,0%,.2), 1.5em -1em 3px hsla(0,0%,0%,.15);*/
+    }
+
+
+.led-rose {
+    right: 10%;
+    top: -30%;
+    height: 8em;
+}
+
+    .led-rose:before {
+        top: 8em;
+    }
+
+
+@keyframes swing {
+    0% {
+        -webkit-transform: translateX(-50%) rotate(4deg);
+        -moz-transform: translateX(-50%) rotate(4deg);
+        -ms-transform: translateX(-50%) rotate(4deg);
+        -o-transform: translateX(-50%) rotate(4deg);
+        transform: translateX(-50%) rotate(4deg);
+    }
+
+    50% {
+        -webkit-transform: translateX(-50%) rotate(-4deg) skewX(5deg) skewY(-2deg);
+        -moz-transform: translateX(-50%) rotate(-4deg) skewX(5deg) skewY(-2deg);
+        -ms-transform: translateX(-50%) rotate(-4deg) skewX(5deg) skewY(-2deg);
+        -o-transform: translateX(-50%) rotate(-4deg) skewX(5deg) skewY(-2deg);
+        transform: translateX(-50%) rotate(-4deg) skewX(5deg) skewY(-2deg);
+    }
+
+    100% {
+        -webkit-transform: translateX(-50%) rotate(4deg);
+        -moz-transform: translateX(-50%) rotate(4deg);
+        -ms-transform: translateX(-50%) rotate(4deg);
+        -o-transform: translateX(-50%) rotate(4deg);
+        transform: translateX(-50%) rotate(4deg);
+    }
+}
+
+

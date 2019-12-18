@@ -1,0 +1,176 @@
+﻿@using Microsoft.AspNet.Identity
+
+<style>
+    .banner-btn i{
+        display:inline-block;
+        position:relative;
+        margin:0 5px;
+        height:17px;
+        width:5px;
+
+    }
+    #funbetbox a {
+
+        color: orange;
+
+    }
+
+
+
+</style>
+
+@if (Request.IsAuthenticated)
+{
+    List<SITW.Models.ViewModel.MissionNoteModel> mnmList = new List<SITW.Models.ViewModel.MissionNoteModel>();
+    if (Session["MissionCode"] != null)
+    {
+        mnmList = (List<SITW.Models.ViewModel.MissionNoteModel>)Session["MissionCode"];
+    }
+        <div class="ManagaMenua" id="ManagaMenu"><div class="managelogo" ></div>
+                                                 <div class="sportsmagazine-cart-box"  id="funbetbox" style="background:rgba(28, 35, 49, 0.89);border:2px solid rgb(228, 177, 42);">
+                                                     <div class="box-border"></div>
+
+                                                   
+                                                     @*Html.Action("_getAssetsString", "Assets")*@
+                                                    
+                                                     <div id="getAssets"></div>
+                                                     <h5>兌換/購買記錄 ：<a href="@Url.Action("ProductRecord","Manage")">點此</a></h5>
+                                                     <h5>小遊戲專區 ：<a href="@Url.Action("GameIndex","Manage")">點此</a></h5>
+
+                                                     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                                     {
+                                                         @Html.AntiForgeryToken()
+                                                         <a href="javascript:document.getElementById('logoutForm').submit()"><h5><span style="line-height:0px" class="sportsmagazine-color">登出</span></h5></a>
+                                                     }
+
+                                                 </div>
+    
+    
+    
+    </div>
+        <h5 class="menutitle">
+            <a href="#" class="sportsmagazine-open-cart">@Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = @User.Identity.GetUserName(), id = "username"})  </a> 
+        </h5>
+        
+
+
+        <h5 class="menumission" >
+            <a href="@Url.Action("Index", "Manage")" >
+                <span style="line-height:0px" class="sportsmagazine-color">會員中心</span>
+            </a>
+        </h5>
+        @*<div class="sportsmagazine-cart-box2">
+            <button type="button" class="close" id="buttonclose" style="color:#ffffff;">x</button>
+            <h2>任務</h2>
+            @Html.Action("MissionNote", "Mission")
+
+
+        </div>*@
+        <h5 class="menumannal" ><a href="@Url.Action("BetsByUserIDList", "bet")"><span style="line-height:0px" class="sportsmagazine-color">競猜歷史</span></a>  </h5>
+
+
+
+
+
+      
+
+
+}
+else
+{
+     
+       
+
+        <ul class="nav navbar-nav">
+            <li style="padding:20px 32px 18px 32px">
+                <a class="sportsmagazine-menu-btn"><div class="banner-btn">登入<i></i>註冊</div></a>
+
+            </li>
+        </ul>
+}
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".managelogo").click(function () {
+            window.open("@Url.Action("Index","Manage")","_self");
+
+
+        });
+        var content = $("#username").text();
+
+        if (content.length > 7)
+        {
+            content = content.substr(0, 7);
+            $("#username").html(content + '***');
+        }
+
+        var menucontent = $('#username_menu').text();
+        menucontent = menucontent.replace(/gmail.com/, '');
+        menucontent = menucontent.replace(/yahoo.com.tw/, '');
+        menucontent = menucontent.replace(/@@/, '');
+        $('#username_menu').html(menucontent);
+          $("#getAssets").load("@Url.Action("_getAssetsString", "Assets")");
+         /*$.get("Url.Action("_getAssetsString", "Assets")", function (data) {
+                    var message = $("#getAssets");
+                    message.html(data);
+                });*/
+ 
+        $('#ManagaMenu').on("mouseenter", function () {
+            $(this).find('.sportsmagazine-cart-box').show(300);
+            //jQuery('.sportsmagazine-cart-box').show(300);
+            $("#getAssets").load("@Url.Action("_getAssetsString", "Assets")");
+
+            /*$.get("Url.Action("_getAssetsString", "Assets")", function (data) {
+                var message = $("#getAssets");
+                message.html(data);
+                
+            });*/
+            //return false;
+        }).on("mouseleave", function () {
+
+            $(this).find('.sportsmagazine-cart-box').hide();
+
+        });
+         var boxlist;
+        /* jQuery(".sportsmagazine-cart-box").on("mouseover", function () {
+             boxlist = 0;
+         });
+
+         jQuery(".sportsmagazine-cart-box").on("mouseleave", function () {
+             boxlist = 1;
+         });*/
+
+         /*jQuery('html').on("mouseover", function () {
+             if (boxlist !== 0) {
+                 jQuery(".sportsmagazine-cart-box").fadeOut();
+
+             }
+
+
+         });*/
+
+                $(document).ready(function () {
+                    $(".sportsmagazine-menu-btn").attr("href", "@Url.Action("Login", "Account")");
+
+
+                  });          
+
+
+
+    });
+
+
+</script>
+
+
+
+<style>
+
+    .viewgo #imgview:hover {
+        opacity: 0.8;
+    }
+   
+
+</style>

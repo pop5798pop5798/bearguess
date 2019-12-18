@@ -1,0 +1,56 @@
+﻿@model SITW.Models.ViewModel.GamePostViewModel
+@{
+    Layout = null;
+    int i = ViewBag.index ?? 0;
+    int count = ViewBag.count?? 1;
+    int icount = i + count;
+    // int unitSn = Model.game.topicList[ti].choiceList[ci].betMoney[i].unitSn;
+}
+
+
+
+
+ @for (int j = 0; j < count; j++)
+ {
+<div name="bonusDiv" class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(model => model.game.bonusList[i + j].Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            <label class="control-label" style="text-align: left;">
+                @Html.EditorFor(model => model.game.bonusList[i + j].Quantity, new { htmlAttributes = new { @class = "form-control", @name = "topicList[0]" } })
+                @Html.ValidationMessageFor(model => model.game.bonusList[i + j].Quantity, "", new { @class = "text-danger" })
+
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @if ((i + j) < 4)
+        {
+            @Html.LabelFor(model => model.game.bonusList[i + j].BonusRatio, htmlAttributes: new { @class = "control-label col-md-2" })
+        }
+        else
+        {
+            <label class="control-label col-md-2" for="game_bonusList_@(i+j)__BonusRatio"><span style="color:#e5b22a">獎池(%)</span></label>
+        }
+
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.game.bonusList[i + j].BonusRatio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.game.bonusList[i + j].BonusRatio, "", new { @class = "text-danger" })
+        </div>
+
+        @Html.LabelFor(model => model.game.bonusList[i + j].bonus, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-5">       
+            @Html.CheckBoxFor(model => model.game.bonusList[i+j].bonus)
+            @Html.ValidationMessageFor(model => model.game.bonusList[i + j])
+        </div>
+
+    </div>
+    @Html.HiddenFor(model => model.game.bonusList[i+j].pool)
+    @Html.ValidationMessageFor(model => model.game.bonusList[i + j].pool, "", new { @class = "text-danger" })
+
+   
+
+</div>
+<hr>
+ }

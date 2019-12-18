@@ -1,0 +1,93 @@
+﻿<html>
+<head>
+    <title>水果機</title>
+    <link rel="stylesheet" href="css/reset.css?v=20190905" type="text/css">
+    <link rel="stylesheet" href="css/main.css?v=20190905" type="text/css">
+    <link rel="stylesheet" href="css/orientation_utils.css?v=20190905" type="text/css">
+    <link rel="stylesheet" href="css/ios_fullscreen.css?v=20190905" type="text/css">
+    <link rel='shortcut icon' type='image/x-icon' href='./favicon.ico?v2019' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js?v=20190905"></script>
+    <script type="text/javascript" src="js/createjs-2015.11.26.min.js?v=20190905"></script>
+    <script type="text/javascript" src="js/howler.min.js?v=20190905"></script>
+    <script type="text/javascript" src="js/screenfull.js?v=20190905"></script>
+    <script type="text/javascript" src="js/platform.js?v=20190905"></script>
+    <script type="text/javascript" src="js/ios_fullscreen.js?v=20190905"></script>
+    <script type="text/javascript" src="js/ctl_utils.js?v=20190905"></script>
+    <script type="text/javascript" src="js/sprite_lib.js?v=20190905"></script>
+    <script type="text/javascript" src="js/settings.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CSlotSettings.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CLang.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CPreloader.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CMain.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CTextButton.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CTextButtonS.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CTextButtonB.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CGfxButton.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CToggle.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CBetBut.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CMenu.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CGame.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CReelColumn.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CInterface.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CPayTablePanel.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CStaticSymbolCell.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CTweenController.js?v=20190905"></script>
+    <script type="text/javascript" src="js/CCreditsPanel.js?v=20190905"></script>
+    <!--熊i猜 - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121213657-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-121213657-2');
+    </script>
+
+</head>
+    <body ondragstart="return false;" ondrop="return false;" >
+	<div style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%"></div>
+    <script>
+        $(document).ready(function () {
+            var url = location.protocol+"//" + location.host + "/Html5/SlottoLogin";
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.loginUser == 4) {
+                        alert("尚未登入");
+                        location.href = location.protocol+"//" + location.host + "/account/Login";
+                    } else if (msg.loginUser == 1) {
+                        mainLoad(msg.usermoney, msg.slotm.baseCash, msg.slotm.id);
+                    }
+
+
+                }
+
+            });
+
+
+
+
+        });
+
+
+    </script>
+        
+        
+        <script type="text/javascript" src="js/CLogin.js"></script>             
+        
+        <div class="check-fonts">
+            <p class="check-font-1">test 1</p>
+        </div> 
+        
+        <canvas id="canvas" class='ani_hack' width="1500" height="640"> </canvas>
+        <div data-orientation="landscape" class="orientation-msg-container"><p class="orientation-msg-text">Please rotate your device</p></div>
+        <div id="block_game" style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%; display:none"></div>
+    </body>
+</html>

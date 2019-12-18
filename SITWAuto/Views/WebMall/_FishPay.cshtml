@@ -1,0 +1,71 @@
+﻿@model SITW.Models.ViewModel.ProductApiModel
+@{
+    Layout = null;
+}
+<style>
+    @@media (min-width: 768px) and (max-width: 990px) {
+
+        #bearModal .modal-dialog {
+            width:800px;
+        }
+    }
+    @@media (max-width: 768px)  {
+        #bearModal .sportsmagazine-shop-list-text {
+           font-size:10px;
+           padding:0px 0px 0 10px;
+        }
+        #bearModal figure {
+            width:50%;
+        }
+
+    }
+    
+
+</style>
+
+
+<div style="float:left;">
+    <div class="col-md-12">
+        <div class="sportsmagazine-shop sportsmagazine-shop-list">
+            <ul class="row">
+                <li class="col-md-12" style="border:5px #8c8c8c ridge;background: #020304;">
+                    <figure>
+                        <a href="shop-detail.html"><img src="~/Content/extra-images/bear-money-293_341.jpg" alt=""></a>
+
+                    </figure>
+                    <div class="sportsmagazine-shop-list-text">
+                        <h4 id="Pname">@Model.product.ProductName</h4>
+                        <span class="sportsmagazine-price-cartbox" id="PPrice">
+                            @* <del>$39.99</del>*@
+                            $@Model.product.Price @Model.unit.showStr
+                        </span>
+                        <p id="Pcontent">@Model.product.ProductContent </p>
+                        <ul class="sportsmagazine-summery-option">
+
+                            <li>
+                                <label>價格</label>
+                                @foreach (var item in Model.producList)
+                                {
+                                    <input type="radio" name="price" value="@item.id">@item.Price <span>NTD</span>
+                                }
+
+                            </li>
+                            @*喬睿金流
+                                <li>
+                                    <label>付款方式</label>
+                                    <input type="radio" name="pay" value="1" checked>GooglePay
+                                </li>*@
+                        </ul>
+                        <button class="cart-checkout-btn" name="gopay">前往付款<img src="http://i.stack.imgur.com/FhHRx.gif"></button>
+    
+
+                        <button class="cart-checkout-btn" id="goback">返回</button>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,297 @@
+﻿@model IEnumerable<SITW.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    var unit = ViewData["cfgUnit"] as IEnumerable<SITW.Models.cfgUnit>;
+}
+@using SITW.Helper
+<style>
+    .cover {
+        /*width: 180px;*/
+        height: 325px;
+    }
+
+        .cover:after {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            box-shadow: 0 0 50px 10px #000000 inset;
+        }
+    @@media (min-width: 768px) and (max-width: 990px) {
+
+        #MallModal .modal-dialog {
+            width: 800px;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        #MallModal .sportsmagazine-shop-list-text {
+            font-size: 14px;
+            padding: 0px 0px 0 10px;
+        }
+
+        #MallModal figure {
+            width: 50%;
+        }
+
+        .sportsmagazine-main-content {
+            margin: 100px 0;
+        }
+
+        .search-form {
+            display: none;
+        }
+    }
+</style>
+
+
+<div class="sportsmagazine-main-content">
+
+    <!--// Main Section \\-->
+    <div class="sportsmagazine-main-section sportsmagazine-shop-gridfull">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.ProductSelect("type", 0)
+                </div>
+                <div class="col-md-9">
+                    <div class="search-form" style="float:right">
+                        <input id="search-input" style="border:1px solid #e5b22a;background-color:rgba(255, 255, 255, 0.00);vertical-align:top;" type="text" placeholder="搜尋商品"><button style="border:1px solid #e4b12a;background-color:#000;margin:0px 10px 0px 10px;vertical-align:top;"><i style="padding:3px 5px 3px 5px" class="fa fa-search" aria-hidden="true"></i></button>
+                        <style id="m-search"></style>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="sportsmagazine-shop sportsmagazine-shop-grid" style="margin-top:30px;">
+                        <ul class="row">
+                            <li class="col-md-3" name="search">
+                                <input type="hidden" id="item_type" value="3">
+                                <figure>
+                                    <a href="#" id="malladd" data-toggle="modal" data-target="#bearModal"><img src="~/Content/extra-images/bear-money-263_290.jpg" alt=""><i class="fa fa-shopping-cart"></i></a>
+                                    @*<div class="star-rating"><span class="star-rating-box" style="width:69%"></span></div>*@
+                                </figure>
+                                <section>
+                                    <h5><a href="#" id="malladd" data-toggle="modal" data-target="#bearModal">魚骨幣</a></h5>
+                                    <span class="price-cart">
+                                        @*<del>$ 30.00</del>*@
+                                        $@Model.Where(x => x.unitSn == 3 && x.type == 3).FirstOrDefault().Price.00 ~ @Model.Where(x => x.unitSn == 3 && x.type == 3).LastOrDefault().Price.00 NTD
+                                    </span>
+                                    <span></span>
+                                </section>
+                            </li>
+                            <li class="col-md-3" name="search">
+                                <input type="hidden" id="item_type" value="3">
+                                <input type="hidden" id="item_id" value="@Model.Where(x => x.unitSn == 2 && x.type == 3).FirstOrDefault().id">
+                                <figure>
+                                    <a href="#" id="bearchange" data-toggle="modal" data-target="#ChangeModal">
+                                    <img src="~/Content/extra-images/bear-change.png" alt=""><i class="fa fa-shopping-cart"></i>
+                                    </a>
+                                    @*<div class="star-rating"><span class="star-rating-box" style="width:69%"></span></div>*@
+                                </figure>
+                                <section>
+                                    <h5><a href="#" id="bearchange" data-toggle="modal" data-target="#ChangeModal">鮭魚幣轉魚骨幣 1：@Model.Where(x => x.unitSn == 2 && x.type == 3).FirstOrDefault().Price </a></h5>
+                                    <span class="price-cart">
+                                        @*<del>$ 30.00</del>*@
+                                        @unit.Where(x => x.sn == 2).FirstOrDefault().name
+                                    </span>
+                                    <span></span>
+                                </section>
+                            </li>
+
+                            @foreach (var item in Model.Where(x => x.unitSn != 3 && x.type != 3))
+                            {
+
+                                <li class="col-md-3" name="search">
+                                    @Html.HiddenFor(model => item.id)
+                                    @Html.HiddenFor(model => item.type)
+                                    <figure>
+                                        <a href="#" id="mall" data-toggle="modal" data-target="#MallModal">
+                                        <img src="~/Content/extra-images/shop-grid-img1.jpg" alt=""><i class="fa fa-shopping-cart"></i></a>
+                                        @*<div class="star-rating"><span class="star-rating-box" style="width:69%"></span></div>*@
+                                    </figure>
+                                    <section>
+                                        <h5>
+                                            <a href="#" id="mall" data-toggle="modal" data-target="#MallModal">
+                                                @item.ProductName
+                                                @if (item.unitSn == 2 && item.type == 3)
+                                                {
+                                                    <span>1：</span> @item.Price
+                                                }
+                                            </a>
+                                        </h5>
+                                        <span class="price-cart">
+                                            @*<del>$ 30.00</del>*@
+                                            @if (item.unitSn == 2 && item.type == 3)
+                                            {
+                                                @unit.Where(x => x.sn == item.unitSn).FirstOrDefault().name
+                                            }
+                                            else
+                                            {
+                                                @item.Price @unit.Where(x => x.sn == item.unitSn).FirstOrDefault().name
+                                            }
+                                        </span>
+                                        <span></span>
+                                    </section>
+                                </li>
+                            }
+
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*鮭魚幣換魚骨幣*@
+<div class="loginmodal modal fade" id="ChangeModal" tabindex="-1" role="dialog" style="background: #020304;">
+
+    <div class="modal-dialog" id="modal-width" role="document">
+
+        <div class="sportsmagazine-login-box">
+            <div id="cModel">
+                <div id="pgloading">
+                    <div class="loadingwrap">
+                        <ul class="bokeh">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@*兌換獎品*@
+<div class="loginmodal modal fade" id="MallModal" tabindex="-1" role="dialog" style="background: #020304;">
+
+    <div class="modal-dialog" id="modal-width" role="document">
+
+        <div class="sportsmagazine-login-box">
+            <div id="mModel">
+                <div id="pgloading">
+                    <div class="loadingwrap">
+                        <ul class="bokeh">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(document).on('click','#changeclose',function () {
+                $("#MallModal").modal('toggle');
+
+            });
+
+            $(document).on('click', '#goldclose', function () {
+                $("#ChangeModal").modal('toggle');
+
+            });
+
+            $(document).on('click', "#mall", function () {
+
+            var itemid = $(this).parents("li").find("#item_id").val();
+                $.ajax({
+                    type: "Get",
+                    url: '@Url.Action("_MallChange", "WebMall")',
+                    data: { id: itemid },
+                    success: function (data) {                        
+                        $('#mModel').html(data);
+                        $("button[name='changepay']").on('click', function () {
+                            change_P();
+
+                        });
+
+
+                    }, error: function () {
+                         $("#MallModal").modal('toggle');
+                        Swal.fire({
+                            title: '未登入!',
+                            text: '登入後才可兌換獎品',
+                            type: 'error',
+                            confirmButtonText: '確定!'
+                        }).then((conf) => {
+                            window.location.href = '@Url.Action("Login", "Account")';
+                        });
+
+                    }
+
+                });
+
+            });
+
+            $(document).on('click', "#bearchange", function () {
+
+            var itemid = $(this).parents("li").find("#item_id").val();
+                $.ajax({
+                    type: "Get",
+                    url: '@Url.Action("_MoneyChange", "WebMall")',
+                    data: { id: itemid },
+                    success: function (data) {                        
+                        $('#cModel').html(data);
+                        $("button[name='changepay']").on('click', function () {
+                            change_C();
+
+                        });
+
+
+                    }, error: function () {
+                         $("#MallModal").modal('toggle');
+                        Swal.fire({
+                            title: '未登入!',
+                            text: '登入後才可兌換獎品',
+                            type: 'error',
+                            confirmButtonText: '確定!'
+                        }).then((conf) => {
+                            window.location.href = '@Url.Action("Login", "Account")';
+                        });
+
+                    }
+
+                });
+
+            });
+
+
+
+            $("#type").on('click', function () {
+                var c = $(this).val();
+                        $("[name=search]").each(
+                            function (i, obj) {
+                                if ($(obj).find("#item_type").val() != c && c != "")
+                                    $(obj).css("display", "none");
+                                else
+                                    $(obj).css("display", "block");
+                            });
+
+
+
+            });
+
+
+
+        });
+
+
+    </script>
+}

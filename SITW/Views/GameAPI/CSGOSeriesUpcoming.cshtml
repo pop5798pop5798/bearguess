@@ -1,0 +1,125 @@
+﻿@model IEnumerable<SITW.Models.GameAPIModels.CSGOSeriesUpcoming.RootObject>
+
+@{
+    /**/
+
+    //Layout = "~/Views/Shared/_Layout_admin_Game.cshtml";
+    Layout = null;
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="bs-example">
+
+            <h5>當前系列賽</h5>
+            <table id="csgoList" class="table table-bordered table-sm" style="width:100%">
+                <thead>
+                    <tr>
+
+                        <th style="width:10%;">系列圖</th>
+
+                        <th style="width:10%">系列賽名</th>
+                        <th style="width:10%">時間</th>
+                        <th style="width:10%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                    <tr>
+
+                        <td><img style="width:50px" src="@item.league.image_url"></td>
+                        <td>@item.league.name @item.full_name</td>
+                        <td>
+                            @item.begin_at ~ @item.end_at
+                        </td>
+      
+                        <td>
+                            <input type="hidden" id="leaueId" value=" @item.id">
+                            <a style="color: #0082c1;" id="search" href="#">  查詢</a>
+                        </td>
+
+
+
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+</section>
+
+
+@ViewData["dota2"]
+
+
+
+<!-- Modal -->
+
+
+
+
+<script src="/Scripts/jquery.dataTables.min.js"></script>
+<script src="/Scripts/dataTables.bootstrap.min.js"></script>
+<script src="//cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+<Script type="text/javascript">
+
+    
+
+    $(document).ready(function () {
+       /* $(".form_datetime").datetimepicker(
+            {
+                timepicker: false,
+                format: 'Y/m/d'
+            });*/
+
+        $('#csgoList').DataTable({
+            "order": [[0, "desc"]], "ordering": false, "paging": true, "info": true, "searching": true,
+            "language": {
+                "lengthMenu": "顯示賽局_MENU_ ",
+                "info": "目前 _START_ to _END_ 共 _TOTAL_ 局", "paginate": {
+                    "next": "", "previous": ""
+                }
+            }
+        });
+
+
+    });
+</Script>
+
+
+
+
+
+
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" href="//cdn.datatables.net/select/1.2.5/css/select.bootstrap.min.css" />
+
+
+<style>
+
+
+    .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+        background-color: #96c8f9;
+    }
+</style>
+
+
+
+@*@foreach (var item in Model)
+    {
+        <span>leaguename：</span> @item.leaguename.name <br>
+        foreach (var match in item.d2match)
+        {
+            <span>match_id：</span> @match.match_id<br>
+            <span>dire_team(勝利)：</span> @match.dire_team<br>
+            <span>dire_team(敗者)：</span> @match.radiant_team<br>
+        }
+
+
+
+    }*@
+
+

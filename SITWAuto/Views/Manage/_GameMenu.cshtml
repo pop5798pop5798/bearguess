@@ -1,0 +1,107 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    Layout = null;
+}
+
+<style>
+    #gamemenu ul li {
+        text-align: center
+    }
+
+    #gamemenu a {
+        color: #FF9800;
+    }
+        #gamemenu a:hover {
+            color: #FFC107;
+        } 
+
+    </style>
+
+<div role="tabpanel" class="tab-pane active" id="gamemenu">
+    <br>
+    <div class="sportsmagazine-account">
+
+        <ul>
+
+            <li>
+               <a target="_blank" href="/AllGame/Fruitgame/"> 
+                <div>
+                <img src="~/Content/extra-images/SlotMachine.jpg">
+                    </div>
+                <span>水果機</span></a>
+            </li>
+
+            <li>
+                <a href="#"  id="gameclick" data-href="AllGame/Rat/">
+                    <div>
+                        <img src="~/Content/extra-images/rat.png">
+                    </div>
+                    <span>打老鼠 @ViewBag.Rat</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#"  id="gameclick"  data-href="AllGame/brick-out/">
+                    <div>
+                        <img src="~/Content/extra-images/brickout.jpg">
+                    </div>
+                    <span>敲磚塊 @ViewBag.brick</span>
+                </a>
+            </li>
+            <li>
+                <a target="_blank" href="/AllGame/Lotto/">
+                    <div>
+                        <img src="~/Content/extra-images/Lotto.jpg" >
+                    </div>
+                    <span>樂透</span>
+                </a>
+            </li>
+
+            <li>
+                <a target="_blank" href="@Url.Action("AkGame","Html5")">
+                    <div>
+                        <img src="~/Content/extra-images/A-K.jpg" style="width:200px">
+                    </div>
+                    <span>預測A~K</span>
+                </a>
+
+            </li>
+            <li>
+
+
+            </li>
+            <li>
+
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("li #gameclick").on('click', function () {
+            
+            Swal.fire({
+                title: '請確認?',
+                text: "此遊戲每日限定遊玩1次,最高可獲得$300",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '確認開始 -$200!'
+            }).then((result) => {
+                if (result.value) {
+                    //window.location = $(this).attr("data-href");
+                    window.open($(this).attr("data-href"));
+
+                }
+            });
+
+
+
+        });
+       
+
+
+    });
+
+    </script>

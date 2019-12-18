@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sandbox for the CreateJS Text Input</title>
+  <script type="text/javascript" src="../node_modules/easeljs/lib/easeljs-0.8.2.min.js"></script>
+  <script type="text/javascript" src="TextInput.js"></script>
+
+  <script>
+    window.onload = function () {
+      // Grab our canvas and setup the stage
+      const canvas = document.getElementById('canvasId');
+      const stage = new createjs.Stage(canvas);
+
+      // Create and place our text field on the canvas
+      const textField = new TextInput();
+      textField.y = textField.x = 100;
+      textField.placeHolder = "Input Field";
+      stage.addChild(textField);
+
+      // Updates the text field to the new internal data (ie. placeholder)
+      textField.update();
+
+      // Standard auto refresh
+      createjs.Ticker.on('tick', function () {
+        stage.update();
+      });
+    };
+  </script>
+  <style>
+    body {
+      text-align: center;
+    }
+    canvas {
+      border: 1px solid #ddd;
+      box-shadow: 1px 1px 5px #ccc;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="canvasId" width="600" height="400"></canvas>
+
+</body>
+</html>

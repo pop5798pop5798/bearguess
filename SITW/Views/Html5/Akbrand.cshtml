@@ -1,0 +1,113 @@
+﻿@model SITW.Models.ViewModel.AkGameVewModel
+@{
+     Layout = null;
+}
+@if (Model.Bets.Count != 0)
+{
+    if (Model.Bets.Count > 0)
+    {
+        <div id="record-1">
+
+            @if (Model.Bets[0].tureNuber != 0)
+            {
+                <span class="answer">
+                    正解
+                </span>
+                <span class="Brand" data-title="方塊 @Model.Bets[0].tureNuber">
+                    <img src="/Content/akgame/brand/@Model.Bets[0].Brand" data-title="方塊 @Model.Bets[0].tureNuber">
+                </span>
+            }
+
+
+        <span class="select">@Model.Bets[0].dt  </span>
+        <span class="money">正解牌名：方塊 @Model.Bets[0].tureNuber </span>
+           
+        </div>
+
+
+    }
+
+    if (Model.Bets.Count > 1)
+    {
+<div id="record-2">
+
+    @if (Model.Bets[1].tureNuber != 0)
+    {
+        <span class="answer">
+            正解
+        </span>
+        <span class="Brand" data-title="方塊 @Model.Bets[1].tureNuber">
+            <img src="/Content/akgame/brand/@Model.Bets[1].Brand" data-title="方塊 @Model.Bets[1].tureNuber">
+        </span>
+    }
+
+
+    <span class="select">@Model.Bets[1].dt   </span>
+    <span class="money">正解牌名：方塊 @Model.Bets[1].tureNuber </span>
+</div>
+    }
+
+    if (Model.Bets.Count > 2)
+    {
+<div id="record-3">
+
+    @if (Model.Bets[2].tureNuber != 0)
+    {
+        <span class="answer">
+            正解
+        </span>
+        <span class="Brand" data-title="方塊 @Model.Bets[2].tureNuber">
+            <img src="/Content/akgame/brand/@Model.Bets[2].Brand" data-title="方塊 @Model.Bets[2].tureNuber">
+        </span>
+    }
+
+
+    <span class="select">@Model.Bets[2].dt  </span>
+    <span class="money">正解牌名：方塊 @Model.Bets[2].tureNuber </span>
+
+</div>
+    }
+    if (Model.Bets.Count > 3)
+    {
+<div id="record-4">
+
+    @if (Model.Bets[3].tureNuber != 0)
+    {
+        <span class="answer">
+            正解
+        </span>
+        <span class="Brand" data-title="方塊 @Model.Bets[3].tureNuber">
+            <img src="/Content/akgame/brand/@Model.Bets[3].Brand" data-title="方塊 @Model.Bets[3].tureNuber">
+        </span>
+    }
+
+    <span class="select">@Model.Bets[3].dt   </span>
+    <span class="money">正解牌名：方塊 @Model.Bets[3].tureNuber </span>
+</div>
+    }
+
+    if(Model.Bets.Count > 4)
+    {
+<div id="record-5">
+
+    @if (Model.Bets[4].tureNuber != 0)
+    {
+        <span class="answer">
+            正解
+        </span>
+        <span class="Brand" data-title="方塊 @Model.Bets[4].tureNuber">
+            <img src="/Content/akgame/brand/@Model.Bets[4].Brand" data-title="方塊 @Model.Bets[4].tureNuber">
+        </span>
+    }
+
+
+
+    <span class="select">@Model.Bets[4].dt   </span>
+    <span class="money">正解牌名：方塊 @Model.Bets[4].tureNuber </span>
+</div>
+    }
+
+}
+
+
+

@@ -1,0 +1,133 @@
+﻿@model IEnumerable<SITW.Models.Product>
+@{
+    ViewBag.Title = "Mall";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+    var unit = ViewData["cfgUnit"] as IEnumerable<SITW.Models.cfgUnit>;
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> 商城管理</h3>
+        <div class="row mt">
+            <div class="col-md-12">
+                <div class=" add-task-row">
+                    <a class="btn btn-success btn-sm pull-left" href="@Url.Action("Create")">新增商品</a>
+                </div>
+                <div class=" add-task-row">
+                    <a class="btn btn-success btn-sm pull-left" href="@Url.Action("Index")">前往商城</a>
+                </div>
+                <div class="content-panel">
+
+                    <hr>
+                    <table id="example" class="table table-striped table-advance table-hover">
+
+                        <thead>
+                            <tr>
+
+                                <th><i class="fa fa-bullhorn"></i> 商品名稱</th>
+                                <th><i class="fa fa-bullhorn"></i> 商品價格</th>
+                                <th>發佈時間</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+
+
+                                    <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                                    <td>
+                                        @if (item.unitSn != 2 && item.type != 3)
+                                        {
+                                           @item.Price @unit.Where(x => x.sn == item.unitSn).FirstOrDefault().name
+                                        }
+                                        else
+                                        {
+                                           @item.Price <span>魚骨幣 : 1 </span> @unit.Where(x => x.sn == item.unitSn).FirstOrDefault().name
+                                        }
+
+                                    </td>
+                                    <td>@item.createDate</td>
+                                    <td>
+
+                                        <button class="btn btn-primary btn-xs" onclick="location.href='@Url.Action("Edit", new { id = item.id })'"><i class="fa fa-pencil"></i></button>
+                                        @if (item.unitSn != 1 && item.type != 3)
+                                        {
+                                            <button class="btn btn-danger btn-xs" onclick="location.href='@Url.Action("Delete", new { id = item.id })'"><i class="fa fa-trash-o "></i></button>
+                                        }
+
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div><!-- /content-panel -->
+            </div><!-- /col-md-12 -->
+        </div><!-- /row -->
+        <!-- COMPLEX TO DO LIST -->
+        @* <div class="row mt">
+                <div class="col-md-8">
+                    <section class="task-panel tasks-widget">
+                        <div class="panel-heading">
+                            <div class="pull-left"><h5><i class="fa fa-tasks"></i> 全部公告</h5></div>
+                            <br>
+                        </div>
+                        <div class="panel-body">
+                            <div class="task-content">
+
+                                <ul id="sortable" class="task-list">
+                                    @foreach (var item in Model)
+                                    {
+                                        <li>
+                                            <div class="task-checkbox">
+                                                <span class="task-title-sp">@Html.DisplayFor(modelItem => item.title)</span>
+                                            </div>
+                                            <div class="task-title">
+                                                <span class="task-title-sp" style="font-size:12px;font-weight:300">@Html.DisplayFor(modelItem => item.real_time)</span>
+
+                                                <div class="pull-right hidden-phone">
+                                                    <button class="btn btn-success btn-xs fa fa-eye" onclick="location.href='@Url.Action("Details",new { id = item.Id })'"></button>
+                                                    <button class="btn btn-primary btn-xs fa fa-pencil" onclick="location.href='@Url.Action("Edit",new { id = item.Id })'"></button>
+                                                    <button class="btn btn-danger btn-xs fa fa-trash-o" onclick="location.href='@Url.Action("Delete",new { id = item.Id })'"></button>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+
+                            <div class=" add-task-row">
+                                <a class="btn btn-success btn-sm pull-left" href="@Url.Action("Create")">新增公告</a>
+                                <a class="btn btn-success btn-sm pull-right" href="@Url.Action("Index")">查看首頁公告</a>
+                            </div>
+                        </div>
+                    </section>
+                </div><!-- /col-md-12-->
+            </div><!-- /row -->*@
+    </section>
+</section>
+@section Scripts {
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#example').DataTable({
+                "ordering": false, "paging": true, "info": true, "searching": true,
+                "language": {
+                    "lengthMenu": "顯示公告_MENU_ ",
+                    "info": "目前 _START_ to _END_ 共 _TOTAL_ 篇", "paginate": {
+                        "next": "", "previous": ""
+                    }
+                }
+            });
+
+
+        });
+    </script>
+}
+

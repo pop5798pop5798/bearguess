@@ -1,0 +1,77 @@
+﻿@model IList<SITDto.ViewModel.BetListDto>
+@{
+    /**/
+
+    ViewBag.Title = "BetReportDetails";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<style>
+    #example {
+        text-align: center;
+    }
+
+        #example th, #example td {
+            text-align: center;
+        }
+
+</style>
+
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> 下注表單</h3>
+        <div class="row mt">
+            <div class="col-lg-12">
+                <div class="content-panel">
+                    <section id="unseen">
+                        <table id="example" class="table table-bordered table-striped table-condensed cf">
+                            @if (Model != null && Model.Count > 0)
+                            {
+                                <thead class="cf">
+                                    <tr>
+                                        <th class="numeric">帳號</th>
+                                        <th class="numeric">金額</th>
+                                        <th class="numeric">下注選項</th>
+                                        <th class="numeric">下注時間</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="font-weight:100">
+                                    @foreach (var item in Model)
+                                    {
+
+                                    <tr>
+                                        <td class="numeric" data-title="帳號">@Html.DisplayFor(modelItem => item.username)</td>
+                                        <td class="numeric" data-title="金額">@Html.DisplayFor(modelItem => item.money)</td>
+                                        <td class="numeric" data-title="下注選項">@Html.DisplayFor(modelItem => item.choice)</td>
+                                        <td class="numeric" data-title="下注時間">@Html.DisplayFor(modelItem => item.betDatetime) </td>
+                                    </tr>
+
+                                    }
+                                </tbody>
+                            }
+                        </table>
+                    </section>
+                </div><!-- /content-panel -->
+            </div><!-- /col-lg-4 -->
+        </div><!-- /row -->
+    </section><! --/wrapper -->
+</section><!-- /MAIN CONTENT -->
+@section Scripts {
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#example').DataTable({
+                "ordering": false, "paging": true, "info": true, "searching": true,
+                "language": {
+                    "lengthMenu": "顯示玩家_MENU_ ",
+                    "info": "目前 _START_ to _END_ 共 _TOTAL_ 人", "paginate": {
+                        "next": "", "previous": ""
+                    }
+                }
+            });
+
+
+        });
+    </script>
+}

@@ -1,0 +1,194 @@
+﻿@model SITDto.ViewModel.SettingListDto
+@{
+    // Layout = null;
+    ViewBag.Title = "預設資料新增";
+}
+
+<style>
+    a {
+        color: #5293c6;
+    }
+
+    li {
+        color: #ffffff
+    }
+
+    #labelstyle {
+        font-size: 15px;
+        color: #e5b22a;
+    }
+
+    .depositcss a {
+        float: right;
+        border: 1px solid #5d5d5d;
+        background-color: #ff0000;
+        color: #fff;
+        padding: 0px 5px 0px 5px;
+        margin: 0px 50% 0px 0px;
+    }
+
+        .depositcss a:hover {
+            border: 1px solid #fff;
+        }
+
+    .table-striped > tbody > tr {
+        background-color: initial
+    }
+
+    @@media(max-width: 767px) {
+        #newsmargin {
+            margin-top: 0;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .sportsmagazine-account-tabs .nav-tabs li {
+            width: 100%;
+        }
+    }
+</style>
+
+
+<div class="alert alert-success" id="success-alert" style="text-align:center;font-size:14px">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <input type="hidden" id="message" name="message" value="@ViewBag.StatusMessage" />
+</div>
+
+
+
+<div class="sportsmagazine-main-content" id="rankmagin">
+    <div class="sportsmagazine-main-section sportsmagazine-account-full">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="sportsmagazine-account-tabs">
+                        <ul class="nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">LOL預設題目</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="account">
+                                @Html.Action("_nabobLol", new { stting = ViewData["lolList"] })
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+
+    <script type="text/javascript">
+
+         $(document).ready(function () {
+         $("select[name$='.choiceType']").on("change", function () {
+
+                if ($(this).val() == 'true') {
+                    $(this).parents("#topiclsit").find("div[name=choiceListGroup]").attr("id", "choiceshow");
+                } else {
+                    $(this).parents("#topiclsit").find("div[name=choiceListGroup]").attr("id", "choicehide");
+                }
+
+            });
+          
+
+
+
+          $(document).on('submit', '#nabobForm', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("_nabobLolPost", "Setting")",
+                data: $("#nabobForm").serialize(),
+                success: function (data) {
+                    alert('保存成功');
+                }
+
+            });
+            
+
+        });
+        
+
+
+
+
+
+    });
+
+
+
+        function indexIterate() {
+            $("#addTopic").hide();
+            $("select[name$='.choiceType']").on("change", function () {
+
+                if ($(this).val() == 'true') {
+                    $(this).parents("#topiclsit").find("div[name=choiceListGroup]").attr("id", "choiceshow");
+                } else {
+                    $(this).parents("#topiclsit").find("div[name=choiceListGroup]").attr("id", "choicehide");
+                }
+
+            });
+
+            $("#topicForm").submit(function (e) {
+                e.preventDefault();
+                var data = new FormData($(this)[0]);
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("_topicCreate", "Setting")",
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        alert("新增成功");
+                        location.reload();
+                        $("select[name$='.choiceType']").on("change", function () {                          
+                            if ($(this).val() == 'true') {
+                                $(this).parents("#topiclsit").find("div[name=choiceListGroup]").attr("id", "choiceshow");
+                            } else {
+                                $(this).parents("#topiclsit").find("div[name=choiceListGroup]").attr("id", "choicehide");
+                            }
+
+                        });
+                        
+                    }
+                });
+                
+            });
+
+            
+
+
+
+
+        }
+
+        </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

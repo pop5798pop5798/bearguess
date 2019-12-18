@@ -1,0 +1,169 @@
+﻿@model SITW.Models.ViewModel.ProductApiModel
+@{
+    Layout = null;
+}
+<style>
+   .sportsmagazine-shop-list-text {
+        padding: 22px 0px 47px 30px;
+    }
+    /*  .loginmodal .modal-dialog {
+        width: fit-content;
+        width: -moz-fit-content;
+    }*/
+      @@media(max-width:768px)
+    {
+        .cover {
+            height:100%;
+        }
+
+        .sportsmagazine-shop-list figure ~ .sportsmagazine-shop-list-text {
+            padding: 0px 0px 0 10px;
+            font-size: 14px;
+        
+        }
+        #goldm {
+
+            width:50%;
+        }
+   
+    }
+
+</style>
+
+
+
+<div style="float:left;">
+    <div class="col-md-12">
+        <div class="sportsmagazine-shop sportsmagazine-shop-list">
+            <ul class="row">
+                <li class="col-md-12" style="border:5px #8c8c8c ridge;background: #020304;padding: 10px 10px;">
+   
+                    <figure style="padding:25px 0">
+                       
+                            <div class="cover">
+                                <img src="~/Content/extra-images/bear-change.png" alt="">
+                            </div>
+                   
+
+
+</figure>
+                    <div class="sportsmagazine-shop-list-text">
+                        <h4>@Model.product.ProductName</h4>
+                        <span class="sportsmagazine-price-cartbox">
+                            @* <del>$39.99</del>*@
+                            1 @Model.unit.showStr ： @Model.product.Price 魚骨幣
+                        </span>
+                        <p>@Model.product.ProductContent </p>
+                        <ul class="sportsmagazine-summery-option">
+
+                            <li>
+                                <label>目前鮭魚積分：</label>
+                                @ViewBag.gold
+
+                            </li>
+                            <li>
+                                <label>魚骨兌換量：</label>
+                                <input id="goldm" style="border:1px solid #e5b22a;background-color:rgba(255, 255, 255, 0.00);vertical-align:top;" type="text" placeholder="輸入鮭魚積分">
+                                <span id="goldchange"></span>
+
+                            </li>
+
+                        </ul>
+                        @if (ViewBag.change != 0)
+                        {
+                            <button class="cart-checkout-btn" name="changepay">兌換</button>
+                        }
+                        else
+                        {
+                            <button class="cart-checkout-btn" style="color:#333;cursor:unset;">無法兌換</button>
+                        }
+                        <button class="cart-checkout-btn" id="goldclose">返回</button>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+    $(document).ready(function () {
+        $('#goldm').on('keyup', function () {
+            var m = $("#goldm").val();
+            var bone = m * parseFloat(@Model.product.Price);
+            $("#goldchange").html("將換成" + bone +"魚骨幣");
+
+        });
+
+    });
+
+
+    function change_C() {
+        
+
+        var m = $("#goldm").val();
+        var bone = m * parseFloat(@Model.product.Price);
+        if (parseFloat(@ViewBag.gold) > m) {
+            Swal.fire({
+                title: '確認資訊',
+                html: '兌換商品：' + bone + ' 魚骨幣<br>' +
+                    '金額：' + m + '@Model.unit.showStr<br>',
+                type: 'info',
+                confirmButtonText: '確定兌換!',
+                showCancelButton: true
+            }).then((conf) => {
+                if (conf.value) {
+
+                    var pid = parseFloat(@Model.product.id);
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("MallChange", "WebMall")',
+                        data: { id: pid, money: m},
+                        success: function (data) {
+                            $("#ChangeModal").modal('toggle');
+                            if (data == 1) {
+                                Swal.fire({
+                                    title: '完成!',
+                                    text: '兌換成功',
+                                    type: 'success',
+                                    confirmButtonText: '完成!'
+                                });
+
+
+                            } else {
+                                Swal.fire({
+                                    title: '兌換失敗!',
+                                    text: '請重新操作',
+                                    type: 'error',
+                                    confirmButtonText: '確定!'
+                                });
+                            }
+
+
+                        }
+
+                    });
+                }
+
+
+            });
+
+        } else {
+            Swal.fire({
+                title: '金額不足!',
+                text: '請重新操作',
+                type: 'error',
+                confirmButtonText: '確定!'
+            });
+
+
+        }
+         
+
+    }
+
+
+
+</script>

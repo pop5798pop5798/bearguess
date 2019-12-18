@@ -1,0 +1,485 @@
+﻿.menu-admin {
+    top: 0px;
+}
+
+input[type="tel"], input[type="number"] {
+    background-color: #0f0f10;
+    border: 1px solid #e5b22a;
+}
+
+.main-content {
+    height: 192px;
+    background: #1b1b1b;
+}
+
+.noise {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: .1;
+}
+
+div[name="ddTopic"] {
+    position: relative;
+    width: 100%;
+    /*background-color: rgb(51, 122, 183);*/
+    background-image: url(/Content/extra-images/Nabob/nabobbody.png);
+    /*border: 3px #337ab7 ridge;*/
+    box-shadow: 2px 3px 30px 12px rgba(0, 0, 0, 0.5);
+    background-size: contain;
+    height: 600px;
+    padding: 10px 50px 10px 50px;
+    font-weight:400;
+}
+
+.sportsmagazine-fancy-title4 {
+    border: 0px solid #000;
+    height: 20px;
+    background-color: rgba(19, 25, 37, 0);
+}
+
+.card-title {
+    color: #e5b22a;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.betin {
+    background: rgba(51, 51, 51, 0);
+    box-shadow: none;
+}
+
+.sportsmagazine-fancy-title4 h2 {
+    text-align: center;
+    padding: 16px 28px 28px 50px;
+    font-size: 18px;
+}
+
+#internal {
+    background: rgba(51, 51, 51, 0);
+    box-shadow: none;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+    .checkbox > input {
+        display: none;
+    }
+
+.input-helper {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    /*padding: 5px 0;*/
+    position: relative;
+}
+
+    .input-helper:after {
+        position: absolute;
+        content: "";
+        width: 20px;
+        height: 20px;
+        border: 2px #e5b22a ridge;
+        opacity: 1;
+        background: #000;
+    }
+
+.detailscolor {
+    color: #ebdec2;
+}
+
+.input-helper:before {
+    position: absolute;
+    content: "";
+    width: 25px;
+    height: 9px;
+    border-left: 2px solid #009A61;
+    border-bottom: 2px solid #009A61;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    transition: .3s ease;
+}
+
+.checkbox > input:checked + .input-helper:after {
+    opacity: 1;
+}
+
+.checkbox > input:checked + .input-helper:before {
+    transform: rotate(-50deg);
+    opacity: 1;
+    z-index: 50;
+}
+
+.sportsmagazine-fancy-title2 {
+    float: none;
+    margin-top: 0px;
+    text-align: center;
+    background: url(/Content/extra-images/Nabob/nabobhead.png);
+    background-size: cover;
+    height: 150px;
+}
+
+.sportsmagazine-fancy-title2 {
+    position: relative;
+    z-index: 70;
+    margin-bottom: 0px;
+    box-shadow: none;
+    height: 100px;
+}
+
+    .sportsmagazine-fancy-title2 h2 {
+        border: 0px;
+        font-size: 50px;
+        line-height: 1.5;
+    }
+
+.submitbet {
+    position: relative;
+    border: 0px ridge #e5b22a;
+    width: 150px;
+    height: 50px;
+    font-size: 18px;
+    color: #e5b22a;
+    opacity: 1;
+    z-index: 99;
+    left: 80%;
+    bottom: 130px;
+    background: url(https://storage.googleapis.com/funbet-180608.appspot.com/Topicsimg/button.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 55% 100%;
+    z-index: 0;
+    cursor: pointer;
+    text-align: center;
+}
+
+    .submitbet:hover {
+        opacity: 0.7;
+    }
+
+.libutton {
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #e9e9e9;
+    border-radius: 5px;
+   /* border: 2px solid #b7ae9a;*/
+   border:2px solid #337ab7;
+    background: linear-gradient(to right, #00274c 0%, rgba(51, 122, 183, 0.25) 50%, #337ab700 100%);
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+ul.choose-type-right > li.selected {
+    /*color: #e5b22a;*/
+    /*color: #ebdec2;*/
+    color:#fff;
+    /*border: 2px solid #e5b22a;*/
+    border: 2px groove #ebdec2;
+    /*background: #000;*/
+    /*box-shadow: 2px 3px 30px 12px rgba(78, 78, 78, 0.5);*/
+    box-shadow: 2px 3px 30px 12px rgba(229, 178, 42, 0.1803921568627451);
+    background: rgba(0, 0, 0, 0.6392156862745098) url("/Content/extra-images/Nabob/icon-selected.png") no-repeat right bottom;
+}
+
+.libutton:hover {
+    /*color: #e5b22a;*/
+    color: #fff;
+    border: 2px groove #ebdec2;
+    /*background: #000;*/
+    box-shadow: 2px 3px 30px 12px rgba(229, 178, 42, 0.1803921568627451);
+    /* background: transparent url("/Content/Nabob/icon-selected.png") no-repeat right bottom;*/
+}
+
+.bet_from {
+    box-shadow: inset -0.1em 0 2em 0.5em rgba(189, 189, 189, 0.15), inset -0.1em 0 0.5em 0 rgba(0,0,0,0.8);
+    width: 100%;
+    height: 700px;
+    background-image: url(/Content/extra-images/gamebackground.png);
+    border: 5px ridge #8c8c8c;
+    border-radius: 35px;
+    font-size: 16px;
+    color: #e5b22a;
+    font-weight: 500;
+}
+
+.bet_class {
+    width: 72%;
+    display: block;
+    margin-bottom: 15px;
+    padding: 10px 0 10px 0;
+    text-align: justify;
+    /* background: #0000008a; */
+    color: #fdfdfd;
+    /* border: 1px ridge #000; */
+    border-radius: 10px;
+    margin-left: 5.5em;
+    text-indent: -5.5em;
+}
+.bet_money {
+    width: 72%;
+    display: block;
+    margin-bottom: 15px;
+    padding: 10px 0 10px 0;
+    text-align: justify;
+    /* background: #0000008a; */
+    color: #fdfdfd;
+    /* border: 1px ridge #000; */
+    border-radius: 10px;
+    margin-left: 5.5em;
+    text-indent: 0em;
+}
+
+
+#bet_combination {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.Btn-inner {
+    border-radius: 10px;
+    border: 2px ridge rgba(170, 152, 247, 0.6);
+    text-shadow: 0 1px 4px rgba(0, 0, 51, 0.4);
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    -webkit-box-align: center;
+    align-items: center;
+    min-height: 47px;
+    padding: 0.72222em;
+    text-align: center;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(30, 32, 150)), to(rgba(3, 0, 153, 0.5803921568627451)));
+    background: linear-gradient(to bottom, rgb(30, 32, 150), rgba(3, 0, 153, 0.5803921568627451));
+    color: #fff;
+    font-size: 16px;
+    width: 150px;
+}
+
+.Btn--purple.Btn--primary {
+    background: linear-gradient(to bottom, #853bcf, #6c3dd6);
+}
+
+.Btn--shadow {
+    box-shadow: 1px 0 4px rgba(102, 48, 20, 0.24), 6px 0 24px rgba(0, 0, 0, 0.36);
+}
+
+
+.Container-gon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 200px;
+    height: 100px;
+    padding: 0px 15px;
+}
+
+.bet_margin {
+    width: 72%;
+    text-indent: 0;
+    margin-left: 120px;
+}
+
+.topicsimg {
+    width: 50px;
+}
+
+.bear_top {
+    background: url(/Content/extra-images/Nabob/nabobbear.png);
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    left: 25%;
+    top: 10%;
+}
+
+.bet_bodyfooter {
+    background: url(/Content/extra-images/Nabob/nabobfooter.png);
+    height: 150px;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 99;
+}
+
+.bet_footer {
+    background: url(/Content/extra-images/Nabob/nabobfooter.png);
+    height: 200px;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 0;
+}
+
+.bet_bodyhead {
+    background: url(/Content/extra-images/Nabob/nabobbodyhead.png);
+    height: 63px;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 5;
+}
+
+.bear_phone {
+    display: none;
+}
+
+#sportsmagazine-footer {
+    display: none;
+}
+
+.loginmodal .modal-dialog {
+    width:750px;
+}
+
+
+
+@media screen and (min-width: 991px) and (max-width: 1200px) {
+    .bet_bodyhead {
+        height: 52px;
+    }
+}
+
+@media(min-width:992px) {
+    .menu-admin {
+        top: 0;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 990px) {
+    div[name="ddTopic"] {
+        padding: 0;
+        height: 900px;
+    }
+
+    .bear_top {
+        display: none;
+    }
+
+    .sportsmagazine-summery-option {
+        margin: 4% 0px 10px;
+    }
+
+    .bet_bodyhead {
+        height: 40px;
+    }
+}
+
+@media (max-width: 767px) {
+    div[name="ddTopic"] {
+        padding: 0;
+        height: 400px;
+        overflow: auto;
+    }
+
+    .bear_top {
+        display: none;
+    }
+
+    .sportsmagazine-fancy-title2 {
+        background-size: contain;
+    }
+
+    .Container-gon {
+        height: 50px;
+    }
+
+    .bet_bodyhead {
+        height: 38px;
+    }
+
+    .sportsmagazine-fancy-title4 h2 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 682px) {
+}
+
+
+
+
+
+@media (max-width: 480px) {
+    .bet_money {
+        text-indent: -5.5em;
+    }
+
+    .sportsmagazine-fancy-title4 h2 {
+        font-size: 14px;
+    }
+
+    .sportsmagazine-fancy-title2 {
+        height: 20px;
+    }
+
+        .sportsmagazine-fancy-title2 h2 {
+            display: none;
+        }
+
+    .bear_phone {
+        display: block;
+        top: -29px;
+    }
+
+    .bet_footer {
+        height: 110px;
+    }
+
+
+    #modal-width {
+        width: 85%
+    }
+
+    .bet_margin {
+        width:100%;
+        margin-left: 0px;
+    }
+
+    .topicsimg {
+        width: 20px;
+    }
+
+    .bet_from {
+        font-size: 12px;
+        height:450px;
+    }
+
+    .Container-gon {
+        max-width: 100px;
+    }
+
+    .Btn-inner {
+        width: 100px;
+        font-size: 12px;
+    }
+}
+
+
+
+
+
+
+
+

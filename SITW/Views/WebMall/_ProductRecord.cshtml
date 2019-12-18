@@ -1,0 +1,62 @@
+﻿@model IEnumerable<SITW.Models.ViewModel.ProductApiModel>
+@{
+    Layout = null;
+    ViewBag.Title = "_ProductRecord";
+}
+
+
+<div role="tabpanel" class="tab-pane active" id="account">
+    <br>
+    <div class="sportsmagazine-account">
+        <div class="sportsmagazine-wishlist">
+
+            <div class="sportsmagazine-wishlist-graph" >
+                <div id="no-more-tables">
+                    <h4>兌換/購買記錄</h4>
+                    <table id="example" class="col-md-13 table-bordered table-striped table-condensed cf" cellspacing="0" style="width:100%;">
+                        <thead id="cf" style="border-bottom:1px solid #333">
+                            <tr>
+                                <th>兌換/購買商品</th>
+                                <th>金額</th>
+                                <th>貨幣</th>
+                                <th>兌換/購買日期</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (Model.Count() != 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+
+                                        <td data-title="兌換/購買商品">@item.product.ProductName</td>
+                                        <td data-title="金額">
+                                            @item.product.Price
+                                        </td>
+                                        <td data-title="貨幣">
+                                            @item.unit.name
+
+                                        </td>
+                                        <td data-title="兌換/購買日期">@item.productRecord.inpdate</td>
+
+
+
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                    <tr>
+                                        <td colspan="4">
+                                            暫無
+                                            </td>
+                                    </tr>
+                                    }
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

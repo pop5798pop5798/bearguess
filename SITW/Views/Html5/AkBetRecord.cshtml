@@ -1,0 +1,222 @@
+﻿@model SITW.Models.ViewModel.AkGameVewModel
+@{
+                /**/
+
+
+
+                Layout = null;
+}
+@if (Model.Bets.Count != 0)
+{
+    if (Model.Bets.Count > 0)
+    {
+        <div id="record-1">
+
+            @if (Model.Bets[0].tureNuber != 0)
+            {
+                <span class="answer">
+                    正解
+                </span>
+                <span class="Brand" data-title="方塊 @Model.Bets[0].tureNuber">
+                    <img src="/Content/akgame/brand/@Model.Bets[0].Brand" data-title="方塊 @Model.Bets[0].tureNuber">
+                </span>
+            }
+            else
+            {
+
+                <span class="answer">
+                    暫無
+                </span>
+                <span class="Brand" data-title="暫無">
+                    <img src="/Content/akgame/project_card_bg.png" data-title="暫無">
+                </span>
+            }
+
+
+            <span class="select">選擇牌：方塊 @Model.Bets[0].betBrand  </span>
+            <span class="money">下注額：@Model.Bets[0].gameBets.money  </span>
+            <span class="obtain">
+                獲利：@if (Model.Bets[0].gameBets.valid == 1)
+                {
+                    <span>暫無</span>
+                }
+                else
+                {
+                    @Model.Bets[0].readMoney}
+            </span>
+            <span class="bet_time">@Model.Bets[0].gameBets.createDate </span>
+        </div>
+
+
+    }
+
+    if (Model.Bets.Count > 1)
+    {
+        <div id="record-2">
+
+            @if (Model.Bets[1].tureNuber != 0)
+            {
+                <span class="answer">
+                    正解
+                </span>
+                <span class="Brand" data-title="方塊 @Model.Bets[1].tureNuber">
+                    <img src="/Content/akgame/brand/@Model.Bets[1].Brand" data-title="方塊 @Model.Bets[1].tureNuber">
+                </span>
+            }
+            else
+            {
+                <span class="answer">
+                    暫無
+                </span>
+                <span class="Brand" data-title="暫無">
+                    <img src="/Content/akgame/project_card_bg.png" data-title="暫無">
+                </span>
+            }
+
+            <span class="select">選擇牌：方塊 @Model.Bets[1].betBrand  </span>
+            <span class="money">下注額：@Model.Bets[1].gameBets.money  </span>
+            <span class="obtain">
+                獲利：
+                @if (Model.Bets[1].gameBets.valid == 1)
+                {
+                    <span>暫無</span>
+                }
+                else
+                {
+                   @Model.Bets[1].readMoney
+
+                }
+            </span>
+            <span class="bet_time">@Model.Bets[1].gameBets.createDate </span>
+        </div>
+    }
+
+    if (Model.Bets.Count > 2)
+    {
+        <div id="record-3">
+
+            @if (Model.Bets[2].tureNuber != 0)
+            {
+                <span class="answer">
+                    正解
+                </span>
+                <span class="Brand" data-title="方塊 @Model.Bets[2].tureNuber">
+                    <img src="/Content/akgame/brand/@Model.Bets[2].Brand" data-title="方塊 @Model.Bets[2].tureNuber">
+                </span>
+            }
+            else
+            {
+                <span class="answer">
+                    暫無
+                </span>
+                <span class="Brand" data-title="暫無">
+                    <img src="/Content/akgame/project_card_bg.png" data-title="暫無">
+                </span>
+            }
+
+
+            <span class="select">選擇牌：方塊 @Model.Bets[2].betBrand </span>
+            <span class="money">
+                下注額：@if (Model.Bets[2].gameBets.valid == 1)
+                {
+                    <span>暫無</span>
+                }
+                else
+                {
+                    @Model.Bets[2].readMoney}
+            </span>
+            <span class="obtain">
+                獲利：@if (Model.Bets[2].gameBets.valid == 1)
+                {
+                    <span>暫無</span>
+                }
+                else
+                {
+                    @Model.Bets[2].readMoney}
+            </span>
+            <span class="bet_time">@Model.Bets[2].gameBets.createDate </span>
+
+        </div>
+    }
+    if (Model.Bets.Count > 3)
+    {
+        <div id="record-4">
+
+            @if (Model.Bets[3].tureNuber != 0)
+            {
+                <span class="answer">
+                    正解
+                </span>
+                <span class="Brand" data-title="方塊 @Model.Bets[3].tureNuber">
+                    <img src="/Content/akgame/brand/@Model.Bets[3].Brand" data-title="方塊 @Model.Bets[3].tureNuber">
+                </span>
+            }
+            else
+            {
+                <span class="answer">
+                    暫無
+                </span>
+                <span class="Brand" data-title="暫無">
+                    <img src="/Content/akgame/project_card_bg.png" data-title="暫無">
+                </span>
+            }
+
+
+            <span class="select">選擇牌：方塊 @Model.Bets[3].betBrand </span>
+            <span class="money">下注額：@Model.Bets[3].gameBets.money  </span>
+            <span class="obtain">
+                獲利：@if (Model.Bets[3].gameBets.valid == 1)
+                {
+                    <span>暫無</span>
+                }
+                else
+                {
+                    @Model.Bets[3].readMoney}
+            </span>
+            <span class="bet_time">@Model.Bets[3].gameBets.createDate </span>
+        </div>
+    }
+
+    if(Model.Bets.Count > 4)
+    {
+        <div id="record-5">
+
+            @if (Model.Bets[4].tureNuber != 0)
+            {
+                <span class="answer">
+                    正解
+                </span>
+                <span class="Brand" data-title="方塊 @Model.Bets[4].tureNuber">
+                    <img src="/Content/akgame/brand/@Model.Bets[4].Brand" data-title="方塊 @Model.Bets[4].tureNuber">
+                </span>
+            }
+            else
+            {
+                <span class="answer">
+                    暫無
+                </span>
+                <span class="Brand" data-title="暫無">
+                    <img src="/Content/akgame/project_card_bg.png">
+                </span>
+            }
+
+
+            <span class="select">選擇牌：方塊 @Model.Bets[4].betBrand  </span>
+            <span class="money">下注額：@Model.Bets[4].gameBets.money  </span>
+            <span class="obtain">
+                獲利：@if (Model.Bets[4].gameBets.valid == 1)
+                {
+                    <span>暫無</span>
+                }
+                else
+                {
+                    @Model.Bets[4].readMoney}
+            </span>
+            <span class="bet_time">@Model.Bets[4].gameBets.createDate </span>
+        </div>
+    }
+
+}
+
+
+

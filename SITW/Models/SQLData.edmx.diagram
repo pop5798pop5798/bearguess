@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dc06199758a847ae934155bef04a286d" Name="Diagram1">
+        <EntityTypeShape EntityType="sitwModel.Assets" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sitwModel.AssetsRecord" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sitwModel.MissionEnd" Width="1.5" PointX="6.25" PointY="0.875" />
+        <EntityTypeShape EntityType="sitwModel.Missions" Width="1.5" PointX="8.25" PointY="0.875" />
+        <EntityTypeShape EntityType="sitwModel.MissionStart" Width="1.5" PointX="10.25" PointY="0.875" />
+        <EntityTypeShape EntityType="sitwModel.UserMissions" Width="1.5" PointX="4.5" PointY="0.875" />
+        <EntityTypeShape EntityType="sitwModel.cfgMissionEnd" Width="1.5" PointX="0.75" PointY="3.625" />
+        <EntityTypeShape EntityType="sitwModel.cfgMissionStart" Width="1.5" PointX="2.75" PointY="3.625" />
+        <EntityTypeShape EntityType="sitwModel.MissionAssets" Width="1.5" PointX="4.5" PointY="3.625" />
+        <EntityTypeShape EntityType="sitwModel.cfgUnit" Width="1.5" PointX="6.25" PointY="3.625" />
+        <EntityTypeShape EntityType="sitwModel.GlobalSetting" Width="1.5" PointX="8.25" PointY="3.625" />
+        <EntityTypeShape EntityType="sitwModel.cfgVedio" Width="1.5" PointX="10.25" PointY="3.625" />
+        <EntityTypeShape EntityType="sitwModel.VedioRecord" Width="1.5" PointX="12.25" PointY="3.625" />
+        <EntityTypeShape EntityType="sitwModel.Leagues" Width="1.5" PointX="2.625" PointY="6.75" />
+        <EntityTypeShape EntityType="sitwModel.Teams" Width="1.5" PointX="4.625" PointY="6.75" />
+        <EntityTypeShape EntityType="sitwModel.cfgLevelExp" Width="1.5" PointX="6.5" PointY="6.75" />
+        <EntityTypeShape EntityType="sitwModel.placard" Width="1.5" PointX="3.375" PointY="9.75" />
+        <EntityTypeShape EntityType="sitwModel.NewsMenu" Width="1.5" PointX="5.375" PointY="9.75" />
+        <EntityTypeShape EntityType="sitwModel.Seasons" Width="1.5" PointX="8.25" PointY="6.75" />
+        <EntityTypeShape EntityType="sitwModel.Ranking_content" Width="1.5" PointX="9.625" PointY="9.75" />
+        <EntityTypeShape EntityType="sitwModel.cfgPlayGame" Width="1.5" PointX="0.75" PointY="10.125" />
+        <EntityTypeShape EntityType="sitwModel.Ranking_title" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="sitwModel.Dota2League" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="sitwModel.WebPush" Width="1.5" PointX="5.375" PointY="12.75" />
+        <EntityTypeShape EntityType="sitwModel.Safety" Width="1.5" PointX="10.375" PointY="6.625" />
+        <EntityTypeShape EntityType="sitwModel.TransferRecords" Width="1.5" PointX="7.375" PointY="12.75" />
+        <EntityTypeShape EntityType="sitwModel.ProductRecord" Width="1.5" PointX="12.375" PointY="9.75" />
+        <EntityTypeShape EntityType="sitwModel.ProductMenu" Width="1.5" PointX="9.375" PointY="12.75" />
+        <EntityTypeShape EntityType="sitwModel.GameBets" Width="1.5" PointX="11.375" PointY="13.75" />
+        <EntityTypeShape EntityType="sitwModel.GameNumberRecord" Width="1.5" PointX="12.375" PointY="6.75" />
+        <EntityTypeShape EntityType="sitwModel.H5Games" Width="1.5" PointX="13.375" PointY="13.75" />
+        <EntityTypeShape EntityType="sitwModel.H5payouts" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="sitwModel.PlayerNumber" Width="1.5" PointX="14.375" PointY="5.75" />
+        <EntityTypeShape EntityType="sitwModel.User_CashReturn" Width="1.5" PointX="14.375" PointY="8.75" />
+        <EntityTypeShape EntityType="sitwModel.DailyGameCount" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="sitwModel.cfgSlotCash" Width="1.5" PointX="3.375" PointY="15.75" />
+        <EntityTypeShape EntityType="sitwModel.Avatar" Width="1.5" PointX="14.375" PointY="11.75" />
+        <EntityTypeShape EntityType="sitwModel.AvatarBag" Width="1.5" PointX="15.375" PointY="13.75" />
+        <EntityTypeShape EntityType="sitwModel.Items" Width="1.5" PointX="15.375" PointY="15.75" />
+        <EntityTypeShape EntityType="sitwModel.AddressRecord" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="sitwModel.InvoiceWait" Width="1.5" PointX="16.375" PointY="4.75" />
+        <EntityTypeShape EntityType="sitwModel.Preferential" Width="1.5" PointX="5.375" PointY="16.75" />
+        <EntityTypeShape EntityType="sitwModel.PreferentialModel" Width="1.5" PointX="7.375" PointY="16.75" />
+        <EntityTypeShape EntityType="sitwModel.PreferentialRecords" Width="1.5" PointX="16.375" PointY="8.75" />
+        <EntityTypeShape EntityType="sitwModel.GamePosts" Width="1.5" PointX="9.375" PointY="17.75" />
+        <EntityTypeShape EntityType="sitwModel.Live" Width="1.5" PointX="17.375" PointY="11.75" />
+        <EntityTypeShape EntityType="sitwModel.Recommend" Width="1.5" PointX="11.375" PointY="17.75" />
+        <EntityTypeShape EntityType="sitwModel.RecommendStart" Width="1.5" PointX="13.375" PointY="17.75" />
+        <EntityTypeShape EntityType="sitwModel.Problem" Width="1.5" PointX="17.375" PointY="14.75" />
+        <EntityTypeShape EntityType="sitwModel.IPRecord" Width="1.5" PointX="18.375" PointY="0.75" />
+        <EntityTypeShape EntityType="sitwModel.LiveApply" Width="1.5" PointX="0.75" PointY="18.75" />
+        <EntityTypeShape EntityType="sitwModel.Invoice" Width="1.5" PointX="18.375" PointY="3.75" />
+        <EntityTypeShape EntityType="sitwModel.Order" Width="1.5" PointX="15.375" PointY="18.75" />
+        <EntityTypeShape EntityType="sitwModel.guess" Width="1.5" PointX="18.375" PointY="7.75" />
+        <EntityTypeShape EntityType="sitwModel.GuessChoices" Width="1.5" PointX="17.375" PointY="18.75" />
+        <EntityTypeShape EntityType="sitwModel.GuessTopics" Width="1.5" PointX="19.375" PointY="10.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

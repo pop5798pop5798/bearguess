@@ -1,0 +1,178 @@
+﻿@model SITW.Models.ViewModel.ProductApiModel
+@{
+    Layout = null;
+}
+
+<style>
+    @@media (min-width: 768px) and (max-width: 990px) {
+
+        #bearModal .modal-dialog {
+            width: 800px;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        #bearModal .sportsmagazine-shop-list-text {
+            font-size: 10px;
+            padding: 0px 0px 10px 10px;
+        }
+
+        #bearModal figure {
+            width: 50%;
+        }
+    }
+</style>
+
+
+<div style="float:left;border:5px  #8c8c8c ridge;min-height:370px;background: #020304;">
+    <div class="col-md-12">
+        <div class="sportsmagazine-shop sportsmagazine-shop-list">
+            <ul class="row">
+                <li class="col-md-12">
+                    <figure>
+                        <a href="shop-detail.html"><img src="~/Content/extra-images/bear-money-293_341.jpg" alt=""></a>
+
+                    </figure>
+                    <div class="sportsmagazine-shop-list-text">
+                        <h4><a href="shop-detail.html">@Model.product.ProductName</a></h4>
+                        <span class="sportsmagazine-price-cartbox">
+                            @* <del>$39.99</del>*@
+                            $@Model.product.Price @Model.unit.showStr
+                        </span>
+                        <ul class="sportsmagazine-summery-option">
+
+                            <li>
+                                <label>輸入發票資訊</label>
+                                <input type="radio" name="location" value="1" checked>捐贈發票
+                                <input type="radio" name="location" value="2">二聯式電子發票(無統編)
+                                <input type="radio" name="location" value="3">三聯式紙本發票(有統編)
+                            </li>
+                        </ul>
+                        <div style="float:left;width:100%">
+                           @* 喬睿金流 <div id="googlepay" style="width:50%"></div>*@ 
+                             <button style="float:left" class="cart-checkout-btn" id="goback">返回</button>
+                            <form name='newebpay' method='post' action='https://ccore.newebpay.com/MPG/mpg_gateway' target="_blank">
+                                <input type='hidden' name='TradeInfo' value='@ViewData["TradeInfo"]'>
+                                <input type='hidden' name='TradeSha' value='@ViewData["TradeSha"]'>
+                                <input type='hidden' name='RespondType' value='JSON'>
+                                <input type='hidden' name='Version' value='1.5'>
+                                <input type='hidden' name='TimeStamp' value='@ViewBag.TimeStamp'>
+                                <input type='hidden' name='MerchantOrderNo' value='@ViewBag.MerchantOrderNo'>
+                                <input type='hidden' name='MerchantID' value='MS15822085'>
+                                <input type='hidden' name='Amt' value='@Model.product.Price'>
+                                <input type='hidden' name='ItemDesc' value='@Model.product.ProductName'>
+                                <input type='hidden' name='EmailModify' value='1'>
+                                <input type='hidden' name='Email' value='@ViewData["Email"]'>
+                                <input type='hidden' name='LoginType' value='0'>
+                                <input type='hidden' name='TradeLimit' value='180'>
+                                <button type='submit' class="cart-checkout-btn" id="endsumit">結帳去</button>
+                            </form>
+                           
+                        </div>
+
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<script>
+        TPDirect.setupSDK(13269, 'app_IuNqgANRFkfWv6x4C6u4Wr2pJPO4cQoJVBlpdv1laUHbsPlgMHQ1zlRHH01j', 'sandbox');
+
+        var googlePaySetting = {
+            googleMerchantId: "Come from google portal",
+            tappayGoogleMerchantId: "Come from tappay portal",
+            allowedCardAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+            merchantName: "Funbet Test!",
+            emailRequired: true, // optional
+            shippingAddressRequired: true, // optional,
+            billingAddressRequired: true, // optional
+            billingAddressFormat: "MIN", // FULL, MIN
+
+            allowPrepaidCards: true,
+            allowedCountryCodes: ['TW'],
+
+            phoneNumberRequired: true // optional
+        };
+        TPDirect.googlePay.setupGooglePay(googlePaySetting);
+
+
+
+        var paymentRequest = {
+            allowedNetworks: ["AMEX", "JCB", "MASTERCARD", "VISA"],
+            price: "@Model.product.Price", // optional
+            currency: "TWD" // optional
+        };
+
+
+        TPDirect.googlePay.setupPaymentRequest(paymentRequest, function (err, result) {
+
+            if (result.canUseGooglePay) {
+                TPDirect.googlePay.setupGooglePayButton({
+                    el: "#googlepay",
+                    color: "white",
+                    type: "long",
+                    getPrimeCallback: function (err, prime) {
+                       // console.log('paymentRequestApi.getPrime result', prime);
+                       // console.log('err:', TPDirect);
+                        handlePayByPrime(prime);
+                    }
+
+                });
+            }
+        });
+
+
+
+
+
+        function handlePayByPrime(result) {           
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("paymentRequest", "WebMall")',
+                data: { pm: parseInt(@Model.product.id), prime: result },
+                dataType: "json",
+                success: function (data) {
+                    var json = $.parseJSON(data);
+                    $("#bearModal").modal('toggle');
+                    if (json.status == 0) {
+                        swal("付款成功",
+                            "請確認是否收到魚骨幣",
+                            "success");
+                    } else {
+                        
+                        swal("付款失敗",
+                            "請重新操作",
+                            "error");
+
+                    }
+                   
+                    
+                }
+
+            });
+
+
+
+    }
+
+    //自訂預設值
+    swal.setDefaults({
+        confirmButtonText: "確定",
+        cancelButtonText: "取消"
+    });
+    //swal.resetDefaults();//清空自訂預設值
+
+
+</script>
+

@@ -1,0 +1,620 @@
+﻿@model IEnumerable<SITW.Models.ViewModel.PProductViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    var unit = ViewData["cfgUnit"] as IEnumerable<SITW.Models.cfgUnit>;
+}
+@using SITW.Helper
+<style>
+    .sportsmagazine-shop-grid section > span {
+        position: static;
+    }
+
+
+    .cover {
+        /*width: 180px;*/
+        height: 325px;
+    }
+
+        .cover:after {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            box-shadow: 0 0 50px 10px #000000 inset;
+        }
+        .sportsmagazine-shop-grid section h5 {
+            height:90px;
+
+
+            }
+
+        @@media(min-width:990px) and (max-width:1200px)
+        {
+            .sportsmagazine-shop-grid section h5 {
+            font-size:14px;
+            height:70px;
+
+            }
+            .sportsmagazine-shop-grid section > .price-cart {
+                 font-size:14px;
+            }
+            .sportsmagazine-shop-grid section > span {
+                 font-size:14px;
+            }
+
+        }
+
+    @@media (min-width: 768px) and (max-width: 990px) {
+        
+        #MallModal .modal-dialog {
+            width: 800px;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        #MallModal .sportsmagazine-shop-list-text {
+            font-size: 14px;
+            padding: 0px 0px 0 10px;
+        }
+             .sportsmagazine-main-content .col-md-4, .sportsmagazine-main-content .col-md-3 {
+            padding:10px 20px;
+
+
+        }
+
+        /*#MallModal figure {
+            width: 50%;
+        }*/
+        /*#ChangeModal figure {
+             width: 50%;
+        }*/
+
+        .sportsmagazine-main-content {
+            margin: 100px 0;
+        }
+
+        .search-form {
+            display: none;
+        }
+
+        .sportsmagazine-login-box {
+            padding: 0px 0px 0px 15px;
+        }
+    }
+
+    section a {
+        color: #FFC107;
+    }
+
+    .price-mall {
+        font-weight: bold;
+        line-height: 30px;
+        font-size: 16px;
+        color: #FFEB3B;
+    }
+
+        .price-mall del {
+            /*font-size: 12px;*/
+            color: #fff;
+        }
+
+    .activep {
+        color: #fff;
+        font-size: 10px;
+        border: 1px solid #ff1402;
+        border-radius: 10%;
+        background: #ff1402;
+        padding: 2px 2px;
+    }
+    .saleimg {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        top: 0;
+        transform: rotate(-10deg);
+        left: 0;
+    }
+    
+    
+
+    #modal-mall
+    {
+            width: 868px;
+    }
+
+    @@media(max-width:767px)
+    {
+        #modal-mall
+    {
+            width: 100%;
+    }
+    .sportsmagazine-shop-grid section
+    {
+        height:145px
+    }
+
+    }
+
+     @@media(min-width:992px ) and (max-width:1200px)
+    {
+
+        .sportsmagazine-shop-grid section
+        {
+            height:145px
+        }
+
+    }
+
+    @@media (max-width: 728px) {
+        .sportsmagazine-main-content .col-md-3 {
+            padding: 10px 10px;
+            width: 50%;
+            float: left;
+        }
+        .sportsmagazine-shop-grid section h5 {
+            font-size: 12px;
+            height: 60px;
+        }
+        .sportsmagazine-shop-grid section > .price-cart {
+            font-size:12px;
+        }
+
+        .price-mall span {
+            font-size:12px;
+        }
+
+
+    }
+
+</style>
+
+
+
+
+<div class="sportsmagazine-main-content">
+
+    <!--// Main Section \\-->
+    <div class="sportsmagazine-main-section sportsmagazine-shop-gridfull">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3" style="display:flex">
+                    <div style="width:50%">@Html.ProductSelect("type", 0)</div>
+                    <div style="width:50%">
+                        <select class="form-control" id="pricelevel" name="pricelevel">
+                            <option value="">價格</option>
+                            <option value="1">價格：從低到高</option>
+                            <option value="2">價格：從高到低</option>
+                        </select>
+                    </div>
+                    </div>
+                @*<div class="col-md-9">
+                    <div class="search-form" style="float:right">
+                        <input id="search-input" style="border:1px solid #e5b22a;background-color:rgba(255, 255, 255, 0.00);vertical-align:top;" type="text" placeholder="搜尋商品"><button style="border:1px solid #e4b12a;background-color:#000;margin:0px 10px 0px 10px;vertical-align:top;"><i style="padding:3px 5px 3px 5px" class="fa fa-search" aria-hidden="true"></i></button>
+                        <style id="m-search"></style>
+                    </div>
+                </div>*@
+
+
+                <div class="col-md-12">
+                    <div class="sportsmagazine-shop sportsmagazine-shop-grid" style="margin-top:30px;">
+                        <ul class="row" id="sort">
+                            <li class="col-md-3" name="search">
+                                <input type="hidden" id="item_type" value="3">
+                                <figure>
+                                    <a href="#" id="malladd" data-toggle="modal" data-target="#bearModal"><img src="~/Content/extra-images/bear-money-263_290.jpg" alt=""><i class="fa fa-shopping-cart"></i></a>
+                                   
+                                   
+                                </figure>
+                                <section>
+                                    <h5 ><a href="#" id="malladd" data-toggle="modal" data-target="#bearModal">魚骨幣</a></h5>
+                                    <span class="price-cart">
+                                        
+                                        $@Model.Where(x => x.unitSn == 3 && x.type == 3).FirstOrDefault().Price.00 ~ @Model.Where(x => x.unitSn == 3 && x.type == 3).LastOrDefault().Price.00 NTD
+                                    </span>
+                                    <span></span>
+                                </section>
+                            </li>
+                            <li class="col-md-3" name="search">
+                                <input type="hidden" id="item_type" value="3">
+                                <input type="hidden" id="item_id" value="@Model.Where(x => x.unitSn == 2 && x.type == 3).FirstOrDefault().id">
+                                <figure>
+                                    <a href="#" id="bearchange" data-toggle="modal" data-target="#ChangeModal">
+                                        <img src="~/Content/extra-images/bear-change.png" alt=""><i class="fa fa-shopping-cart"></i>
+                                    </a>
+                                    @*<div class="star-rating"><span class="star-rating-box" style="width:69%"></span></div>*@
+                                </figure>
+                                <section>
+                                    <h5 ><a href="#" id="bearchange" data-toggle="modal" data-target="#ChangeModal">鮭魚轉魚骨幣 1：@Model.Where(x => x.unitSn == 2 && x.type == 3).FirstOrDefault().Price </a></h5>
+                                    <span class="price-cart">
+                                        @*<del>$ 30.00</del>*@
+                                        @unit.Where(x => x.sn == 2).FirstOrDefault().name
+                                    </span>
+                                    <span></span>
+                                </section>
+                            </li>
+
+                            @foreach (var item in Model.Where(x => x.unitSn != 3 && x.type != 3))
+                            {
+
+                                <li class="col-md-3" name="search">
+
+                                    @Html.HiddenFor(model => item.id)
+                                    @Html.HiddenFor(model => item.type)
+                                    @Html.HiddenFor(model => item.Price)
+                                    <figure>
+                                        <a href="#" id="mall" data-toggle="modal" data-target="#MallModal">
+                                            @if (item.image != null)
+                                            {
+
+                                                <img src="@item.image" alt="">
+
+                                            }
+                                            else
+                                            {
+
+                                                <img src="~/Content/extra-images/shop-grid-img1.jpg" alt="">
+                                            }
+
+                                          @* 優惠圖
+                                              @if (item.offer != null)
+                                            {
+                                                <sapn class="saleimg"><img src="~/Content/extra-images/SALE-100_100.png"></sapn>
+                                            }/*@
+
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </a>
+                                       
+                                        @*<div class="star-rating"><span class="star-rating-box" style="width:69%"></span></div>*@
+                                    </figure>
+                                    <section>
+                                        <h5>
+                                            <a href="#" id="mall" data-toggle="modal" data-target="#MallModal">
+                                                @if (!String.IsNullOrEmpty(item.offer.ToString()))
+                                                {
+                                                    <span class="activep"> @item.Pname</span>
+                                                }
+                                                @item.ProductName
+                                                @if (item.unitSn == 2 && item.type == 3)
+                                                {
+                                                    <span>1：</span> @item.Price
+                                                }
+                                            </a>
+                                        </h5>
+                                        <span class="price-mall">
+
+                                            @if (item.unitSn == 2 && item.type == 3)
+                                            {
+                                                @unit.Where(x => x.sn == item.unitSn).FirstOrDefault().name
+                                            }
+                                            else if (!String.IsNullOrEmpty(item.offer.ToString()))
+                                            {
+                                                <img style="width:12%" src="/Content/@unit.Where(x => x.sn == item.unitSn).FirstOrDefault().iconURL" /><del>@item.Price </del><span >@(item.Price * item.offer / 100)</span>
+                                            }
+                                            else
+                                            {
+                                                <img style="width:12%" src="/Content/@unit.Where(x => x.sn == item.unitSn).FirstOrDefault().iconURL" /><span style="color:#fff;">@item.Price</span>
+                                            }
+                                        </span>
+                                        <span></span>
+                                    </section>
+                                </li>
+
+                            }
+
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*鮭魚幣換魚骨幣*@
+<div class="loginmodal modal fade" id="ChangeModal" tabindex="-1" role="dialog" style="background: #020304;">
+
+    <div class="modal-dialog" id="modal-width" role="document">
+
+        <div class="sportsmagazine-login-box">
+            <div id="cModel">
+                <div id="pgloading">
+                    <div class="loadingwrap">
+                        <ul class="bokeh">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@*兌換獎品*@
+<div class="loginmodal modal fade" id="MallModal" tabindex="-1" role="dialog" style="background: #020304;">
+
+    <div class="modal-dialog" id="modal-width" role="document">
+
+        <div class="sportsmagazine-login-box">
+            <div id="mModel">
+                <div id="pgloading">
+                    <div class="loadingwrap">
+                        <ul class="bokeh">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+
+
+    <script>
+        function toThousands(num) {
+                var result = [], counter = 0;
+                num = (num || 0).toString().split('');
+                for (var i = num.length - 1; i >= 0; i--) {
+                    counter++;
+                    result.unshift(num[i]);
+                    if (!(counter % 3) && i != 0) { result.unshift(','); }
+                }
+
+                var t = result.join('');
+                console.log(t.substr(0,1));
+                if(t.substr(0,1) == ',')
+                {
+                    t = t.substr(1,t.length - 1);
+                    
+                }
+                
+                    
+                return t;
+
+            }
+
+        function sortNumber(a,b)
+        {
+                return a - b
+        }
+
+        function sortNumberh(a, b) {
+            return b - a;
+            
+
+        }
+
+        $(document).ready(function () {
+
+
+           
+
+            $("#pricelevel").on('change', function () {
+               /* var n = 0;
+                $('li[name=search]').each(function (i, obj) {
+                    n += 1;
+                    if ($(obj).css("display") != "none") {
+                        n += 1;
+                    }
+
+
+                });*/
+                
+                //var arr = new Array(n);
+                 var arr = new Array(@Model.Where(x => x.unitSn != 3 && x.type != 3).Count());
+
+                $('li[name=search] #item_Price').each(function (i, obj) {
+                    //if ($(obj).parents('li').css("display") != "none")
+                        arr[i] = $(obj).val();
+
+
+                });
+
+                if ($(this).val() == 1)
+                    arr = arr.sort(sortNumber);
+                else if($(this).val() == 2)
+                    arr = arr.sort(sortNumberh);
+
+            var sortarry = new Array((arr.length));
+            var sorthtmlarry = new Array((arr.length));
+            var sort = '';
+            $('li[name=search]').each(function (i, obj) {
+                    if (i == 0 || i == 1) {
+                        sort += '<li class="col-md-3" name="search">'+$(obj).html()+'</li>';
+                        sortarry[i] = $(obj).find('#item_id').val();
+                    }                  
+
+            });
+
+
+            for (var j = 0; j < arr.length; j++) {
+                $('li[name=search]').each(function (i, obj) {
+                    if (i != 0 || i != 1) {
+                        if (arr[j] == $(obj).find('#item_Price').val()) {
+                            var b = true;
+                            for (var k = 0; k < sortarry.length; k++) {
+                                if (sortarry[k] == $(obj).find('#item_id').val()) {
+                                    b = false;
+
+                                }
+                            }
+                            if (b) {
+                                sortarry[j] = $(obj).find('#item_id').val();
+                                sorthtmlarry[j] = '<li class="col-md-3" name="search">' + $(obj).html() + '</li>';
+                            }
+
+                        }
+                    }
+
+                });
+            }
+
+                console.log(sorthtmlarry);
+            for (var i = 0; i < sortarry.length; i++) {
+                sort += sorthtmlarry[i];
+            }
+            
+            $('#sort').html(sort);
+
+            });
+
+
+            
+
+
+
+            $(".price-mall span").each(function (i, obj) {
+
+                $(obj).text(toThousands($(obj).text()));
+            })
+
+             $(".price-mall del").each(function (i, obj) {
+
+                $(obj).text(toThousands($(obj).text()));
+            })
+
+
+
+            
+            
+
+
+            $(document).on('click','#changeclose',function () {
+                $("#MallModal").modal('toggle');
+
+
+            });
+
+            $(document).on('click', '#goldclose', function () {
+                $("#ChangeModal").modal('toggle');
+
+            });
+
+            $(document).on('click', "#mall", function () {
+
+            var itemid = $(this).parents("li").find("#item_id").val();
+                $.ajax({
+                    type: "Get",
+                    url: '@Url.Action("_MallChange", "WebMall")',
+                    data: { id: itemid },
+                    contentType: 'application/json; charset=UTF-8',
+                    dataType: "json",
+                    success: function (data) {
+                        $("#MallModal").modal('toggle'); 
+                        if (!data.isTrue) { 
+                            Swal.fire({
+                                title: data.Title,
+                                text: data.ErrorMsg,
+                                type: 'error',
+                                showCancelButton: true,
+                                confirmButtonText: '前往驗證!'
+                            }).then((conf) => {
+                                if (conf.value) {
+                                    window.location.href = '@Url.Action("Index", "Manage")';
+                                }
+                            });
+
+                        } else {
+                                               
+                            Swal.fire({
+                                title: data.Title,
+                                text: data.ErrorMsg,
+                                type: 'error',
+                                showCancelButton: true,
+                                confirmButtonText: '前往登入!'
+                            }).then((conf) => {
+                                if (conf.value) {
+                                    window.location.href = '@Url.Action("Index", "Manage")';
+                                }
+                            });
+
+                        }
+
+
+                      
+
+
+                    }, error: function (data) {
+                        $('#mModel').html(data.responseText);
+                         var content = $('#product_ProductContent').val();
+                         $('#jshtml').html(content);
+                        $("button[name='changepay']").on('click', function () {
+                             $("#MallModal").modal('toggle');
+                            change_P();
+
+                        });
+
+                    }
+
+                });
+
+            });
+
+            $(document).on('click', "#bearchange", function () {
+
+            var itemid = $(this).parents("li").find("#item_id").val();
+                $.ajax({
+                    type: "Get",
+                    url: '@Url.Action("_MoneyChange", "WebMall")',
+                    data: { id: itemid },
+                    success: function (data) {
+                        $('#cModel').html(data);
+                        $("button[name='changepay']").on('click', function () {
+                            change_C();
+
+                        });
+
+
+                    }, error: function () {
+                         $("#MallModal").modal('toggle');
+                        Swal.fire({
+                            title: '未登入!',
+                            text: '登入後才可兌換獎品',
+                            type: 'error',
+                            confirmButtonText: '確定!'
+                        }).then((conf) => {
+                            window.location.href = '@Url.Action("Login", "Account")';
+                        });
+
+                    }
+
+                });
+
+            });
+
+
+
+            $("#type").on('change', function () {
+                var c = $(this).val();
+                        $("[name=search]").each(
+                            function (i, obj) {
+                                if ($(obj).find("#item_type").val() != c && c != "")
+                                    $(obj).css("display", "none");
+                                else
+                                    $(obj).css("display", "block");
+                            });
+
+
+
+            });
+
+
+
+        });
+
+
+    </script>
+}

@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <title>FishJoy</title>
+    <style>
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: #000;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #mycanvas {
+            margin: 30px auto;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    @*<script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/underscore-min.js"></script>*@
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/SimpleJavaScriptInheritance.js"></script>
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/game.js"></script>
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/Actor.js"></script>
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/Background.js"></script>
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/Sence.js"></script>
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/Fish.js"></script>
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/CannonBottom.js"></script>
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/Cannon.js"></script>
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/Bullet.js"></script>
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/Web.js"></script>
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/DieFish.js"></script>
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/Coin.js"></script>
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/Score.js"></script>
+    <script type="text/javascript" src="~/Scripts/coco2d/fishjoyjs/CoinText.js"></script>
+</head>
+<body>
+    <canvas id="mycanvas" width="800" height="600"></canvas>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquerysignalR")
+    <script type="text/javascript">
+        var g = new Game("mycanvas", "../FishJoy/R.txt", "@User.Identity.GetUserId()");
+
+        function userpost(user,score) {
+            $.post("@Url.Action("UserA", "Coco2D")", { user: user, score: score}, function (data) {
+                console.log(data);
+            });
+
+        }
+
+        $(document).on("mousemove", function (event) {
+
+            console.log(event.offsetX);
+            //记录鼠标点击的位置
+            var cx = event.offsetX - g.canvas.offsetLeft - g.cannon.x;
+            var cy = g.cannon.y - (event.offsetY + g.canvas.offsetTop);
+            //计算角度，tan为临边比对边
+            var d = 90 - Math.atan2(cy, cx) * 180 / Math.PI;
+            //设置炮的角度
+            g.cannon.rotate = d;
+           
+            new Bullet(g.cannon.type, g.cannon.x, g.cannon.y, g.cannon.rotate);
+        });
+    </script>
+</body>
+</html>

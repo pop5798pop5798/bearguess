@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Lottery Numbers</title>
+        
+        <meta name="Title" content="Lottery Numbers" />
+        <meta name="description" content="Lottery Numbers is a HTML5 game which player choosing the numbered tickets and giving prizes to the holders of numbers drawn at random.">
+		<meta name="keywords" content="lottery, win, gamle, card, ball, lucky, chance, match, number, ticket, prize">
+        
+        <!-- for Facebook -->
+        <meta property="og:title" content="Lottery Numbers"/>
+        <meta property="og:site_name" content="Lottery Numbers"/>
+        <meta property="og:image" content="http://demonisblack.com/code/lotterynumbers/game/share.jpg" />
+        <meta property="og:url" content="http://demonisblack.com/code/lotterynumbers/game/" />
+        <meta property="og:description" content="Lottery Numbers is a HTML5 game which player choosing the numbered tickets and giving prizes to the holders of numbers drawn at random.">
+        
+        <!-- for Twitter -->
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Lottery Numbers" />
+        <meta name="twitter:description" content="Lottery Numbers is a HTML5 game which player choosing the numbered tickets and giving prizes to the holders of numbers drawn at random." />
+        <meta name="twitter:image" content="http://demonisblack.com/code/lotterynumbers/game/share.jpg" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+            var msViewportStyle = document.createElement("style");
+            msViewportStyle.appendChild(
+                document.createTextNode(
+                    "@-ms-viewport{width:device-width}"
+                )
+            );
+            document.getElementsByTagName("head")[0].
+                appendChild(msViewportStyle);
+        }
+        </script>
+
+        <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+		<style>
+			#box { 
+				/*height: 80px;*/
+				z-index:1;
+				visibility:hidden;
+				border:4px ridge #8c8c8c;
+				width:250px;
+				height:40px;
+				border-radius:10px;	
+				background-color: #ebeceb;				
+			}
+			
+			#boxmain{
+				position: relative;
+				vertical-align: middle;
+			}
+            #time {
+                position: absolute;
+                z-index: 999;
+                color: #fff;
+                background: #000;
+                font-size: 30px;
+                border: 2px solid;
+                border-radius: 50px;
+                padding: 0px 20px;
+            }
+
+            #pgloading {
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                position: fixed;
+                background: rgba(34, 34, 34, 0.7);
+                z-index: 10000000000;
+                display:none;
+            }
+
+                #pgloading:after {
+                    content: "";
+                    z-index: -1;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background: -webkit-radial-gradient(center center, circle cover, rgba(0,0,0,0), rgba(0,0,0,0.75));
+                    background: radial-gradient(center center, circle cover, rgba(0,0,0,0), rgba(0,0,0,0.75));
+                }
+
+                #pgloading .loadingwrap {
+                    position: fixed;
+                    top: 45%;
+                    bottom: 45%;
+                    left: 25%;
+                    right: 25%;
+                }
+
+                #pgloading .bokeh {
+                    font-size: 100px;
+                    width: 1em;
+                    height: 1em;
+                    position: relative;
+                    margin: 0 auto;
+                    border-radius: 50%;
+                    border: .01em solid rgba(150,150,150,0.1);
+                    list-style: none;
+                    padding: 0;
+                }
+
+                    #pgloading .bokeh li {
+                        position: absolute;
+                        width: .2em;
+                        height: .2em;
+                        border-radius: 50%;
+                    }
+
+                        #pgloading .bokeh li:nth-child(1) {
+                            left: 50%;
+                            top: 0;
+                            margin: 0 0 0 -.1em;
+                            background: #00C176;
+                            -webkit-transform-origin: 50% 250%;
+                            transform-origin: 50% 250%;
+                            -webkit-animation: rota 1.13s linear infinite, opa 3.67s ease-in-out infinite alternate;
+                            animation: rota 1.13s linear infinite, opa 3.67s ease-in-out infinite alternate;
+                        }
+
+                        #pgloading .bokeh li:nth-child(2) {
+                            top: 50%;
+                            right: 0;
+                            margin: -.1em 0 0 0;
+                            background: #FF003C;
+                            -webkit-transform-origin: -150% 50%;
+                            transform-origin: -150% 50%;
+                            -webkit-animation: rota 1.86s linear infinite, opa 4.29s ease-in-out infinite alternate;
+                            animation: rota 1.86s linear infinite, opa 4.29s ease-in-out infinite alternate;
+                        }
+
+                        #pgloading .bokeh li:nth-child(3) {
+                            left: 50%;
+                            bottom: 0;
+                            margin: 0 0 0 -.1em;
+                            background: #FABE28;
+                            -webkit-transform-origin: 50% -150%;
+                            transform-origin: 50% -150%;
+                            -webkit-animation: rota 1.45s linear infinite, opa 5.12s ease-in-out infinite alternate;
+                            animation: rota 1.45s linear infinite, opa 5.12s ease-in-out infinite alternate;
+                        }
+
+                        #pgloading .bokeh li:nth-child(4) {
+                            top: 50%;
+                            left: 0;
+                            margin: -.1em 0 0 0;
+                            background: #88C100;
+                            -webkit-transform-origin: 250% 50%;
+                            transform-origin: 250% 50%;
+                            -webkit-animation: rota 1.72s linear infinite, opa 5.25s ease-in-out infinite alternate;
+                            animation: rota 1.72s linear infinite, opa 5.25s ease-in-out infinite alternate;
+                        }
+
+
+            /* Media 420Px Start */
+            @media (max-width: 767px) {
+                #time {
+                    font-size: 18px;
+                }
+                
+
+            }
+
+            /* Media 300Px Start */
+            @media (max-width: 480px) {
+                #time {
+                    font-size: 14px;
+                }
+            }
+
+                @-webkit-keyframes rota {
+                    from {
+                    }
+
+                    to {
+                        -webkit-transform: rotate(360deg);
+                    }
+                }
+
+                @keyframes rota {
+                    from {
+                    }
+
+                    to {
+                        -webkit-transform: rotate(360deg);
+                        transform: rotate(360deg);
+                    }
+                }
+
+                @-webkit-keyframes opa {
+                    0% {
+                    }
+
+                    12.0% {
+                        opacity: 0.80;
+                    }
+
+                    19.5% {
+                        opacity: 0.88;
+                    }
+
+                    37.2% {
+                        opacity: 0.64;
+                    }
+
+                    40.5% {
+                        opacity: 0.52;
+                    }
+
+                    52.7% {
+                        opacity: 0.69;
+                    }
+
+                    60.2% {
+                        opacity: 0.60;
+                    }
+
+                    66.6% {
+                        opacity: 0.52;
+                    }
+
+                    70.0% {
+                        opacity: 0.63;
+                    }
+
+                    79.9% {
+                        opacity: 0.60;
+                    }
+
+                    84.2% {
+                        opacity: 0.75;
+                    }
+
+                    91.0% {
+                        opacity: 0.87;
+                    }
+                }
+
+                @keyframes opa {
+                    0% {
+                    }
+
+                    12.0% {
+                        opacity: 0.80;
+                    }
+
+                    19.5% {
+                        opacity: 0.88;
+                    }
+
+                    37.2% {
+                        opacity: 0.64;
+                    }
+
+                    40.5% {
+                        opacity: 0.52;
+                    }
+
+                    52.7% {
+                        opacity: 0.69;
+                    }
+
+                    60.2% {
+                        opacity: 0.60;
+                    }
+
+                    66.6% {
+                        opacity: 0.52;
+                    }
+
+                    70.0% {
+                        opacity: 0.63;
+                    }
+
+                    79.9% {
+                        opacity: 0.60;
+                    }
+
+                    84.2% {
+                        opacity: 0.75;
+                    }
+
+                    91.0% {
+                        opacity: 0.87;
+                    }
+                }
+
+		</style>
+    </head>
+    <body>
+        <!-- PERCENT LOADER START-->
+        <div id="mainLoader"><img src="assets/loader.png" /><br><span>0</span></div>
+        <div id="pgloading">
+            <div class="loadingwrap">
+                <ul class="bokeh">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+        <!-- PERCENT LOADER END-->
+        <!-- CONTENT START-->
+        <div id="mainHolder">
+
+            <!-- BROWSER NOT SUPPORT START-->
+            <div id="notSupportHolder">
+                <div class="notSupport">YOUR BROWSER ISN'T SUPPORTED.<br />PLEASE UPDATE YOUR BROWSER IN ORDER TO RUN THE GAME</div>
+            </div>
+            <!-- BROWSER NOT SUPPORT END-->
+            <!-- ROTATE INSTRUCTION START-->
+            <div id="rotateHolder">
+                <div class="mobileRotate">
+                    <div class="rotateDesc">
+                        <div class="rotateImg"><img src="assets/rotate.png" /></div>
+                        請翻轉你的設備 <br />成橫向
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROTATE INSTRUCTION END-->
+            <!-- CANVAS START-->
+
+            <div id="canvasHolder">
+                <div id="time"></div>
+                <!--<input  id="box" type="text">-->
+
+
+                <canvas id="gameCanvas" width="1280" height="768"></canvas>
+
+
+            </div>
+            <!-- CANVAS END-->
+
+        </div>
+        <!-- CONTENT END-->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://code.createjs.com/1.0.0/easeljs.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.4.min.js"><\/script>')</script>
+
+        <script src="js/vendor/detectmobilebrowser.js"></script>
+        <script src="js/vendor/createjs-2015.11.26.min.js"></script>
+        <script src="js/vendor/TweenMax.min.js"></script>
+        <script src="js/vendor/p2.min.js"></script>
+        <script src="js/vendor/TextInput.js"></script>
+        <script src="js/vendor/CanvasInput.min.js"></script>
+
+
+        <script src="js/plugins.js"></script>
+        <script src="js/sound.js"></script>
+        <script src="js/canvas.js"></script>
+        <script src="js/p2.js"></script>
+        <script src="js/game.js"></script>
+        <script src="js/mobile.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/loader.js"></script>
+        <script src="js/init.js"></script>
+        <script src='js/jquery.countdown.min.js' type='text/javascript'></script>
+
+
+    </body>
+    
+    
+</html>

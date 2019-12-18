@@ -1,0 +1,1109 @@
+﻿input[type="tel"], input[type="number"] {
+    background-color: #0f0f10;
+    border: 2px solid #e5b22a;
+}
+
+.main-content {
+    height: 192px;
+    background: #1b1b1b;
+}
+
+#mask_css {
+    width:100%;
+    height:700px;
+    z-index:99999;
+    position:absolute;
+    display:none;
+
+}
+
+#bettitle {
+    position: relative;
+    left: 80px;
+}
+
+#betman {
+    position: relative;
+    left: -60px;
+}
+
+.noise {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: .1;
+}
+
+.bet_margin {
+    margin-left:120px;
+
+}
+
+#sportsmagazine-footer {
+    display:none;
+}
+
+.dgon__portrait {
+    padding: 10px 10px 10px 10px;
+    margin-right: 35px;
+    max-width: 100px;
+    position: relative;
+    border-radius: 50%;
+    background-color: rgba(30, 39, 142, 0.34901960784313724);
+    cursor: pointer;
+}
+
+.hover_dgon__portrait {
+    padding: 0px 0px 0px 0px;
+    margin-right: 35px;
+    max-width: 100px;
+    position: relative;
+    border-radius: 50%;
+    /* background-color: rgba(136, 142, 30, 0.34901960784313724);*/
+    animation: effect_hover_dgon_img 0.8s forwards;
+    cursor:pointer;
+}
+
+#modal-width {
+    width:700px;
+
+}
+
+
+
+@keyframes effect_hover_dgon_img {
+    0% {
+            transform:rotate(15deg);
+            padding: 0px 0px 0px 0px;
+        }
+    100% {
+        transform: rotate(0deg);
+        padding: 10px 10px 10px 10px;
+    }
+}
+
+
+.dgon_number__portrait {
+    padding: 10px 10px 10px 10px;
+    margin-right: 25px;
+    max-width: 100px;
+    position: relative;
+    border-radius: 50%;
+    background-color: rgba(30, 39, 142, 0.34901960784313724);
+    margin-top: 35%
+}
+
+.hover_dgon_number__portrait {
+    padding: 10px 10px 10px 10px;
+    margin-right: 25px;
+    max-width: 100px;
+    position: relative;
+    border-radius: 50%;
+    background-color: rgba(136, 142, 30, 0.34901960784313724);
+    margin-top: 35%
+}
+
+.dgon_number__portrait:before {
+    opacity: 0;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(66.667%, transparent), color-stop(90%, rgba(102, 179, 255, 0.5)));
+    background-image: linear-gradient(transparent, transparent 66.667%, rgba(102, 179, 255, 0.5) 90%);
+    display: block;
+}
+
+.dgon_number__portrait:after {
+    -webkit-box-shadow: inset 0 0 6px rgba(51, 187, 255, 0.6), inset 0 0 40px rgba(51, 187, 255, 0.4), 0 0 6px rgba(51, 187, 255, 0.6), 0 0 40px rgba(51, 187, 255, 0.4);
+    box-shadow: inset 0 0 6px rgba(51, 187, 255, 0.6), inset 0 0 40px rgba(51, 187, 255, 0.4), 0 0 6px rgba(51, 187, 255, 0.6), 0 0 40px rgba(51, 187, 255, 0.4);
+}
+
+.dgon_number__portrait:after {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #4590ff;
+    -webkit-box-shadow: 0 0 10px rgba(51, 153, 255, 0.5);
+    box-shadow: 0 0 10px rgba(249, 249, 249, 0.5);
+}
+
+
+
+.dgon_number__portrait:after, .dgon_number__portrait:before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+
+.dgon_big__portrait {
+    padding: 10px 10px 10px 10px;
+    margin-right: 25px;
+    max-width: 100px;
+    position: relative;
+    border-radius: 50%;
+    background-color: rgba(30, 39, 142, 0.34901960784313724);
+}
+
+    .dgon_big__portrait:before {
+        opacity: 0;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(66.667%, transparent), color-stop(90%, rgba(102, 179, 255, 0.5)));
+        background-image: linear-gradient(transparent, transparent 66.667%, rgba(102, 179, 255, 0.5) 90%);
+        display: block;
+    }
+
+    .dgon_big__portrait:after {
+        -webkit-box-shadow: inset 0 0 6px rgba(51, 187, 255, 0.6), inset 0 0 40px rgba(51, 187, 255, 0.4), 0 0 6px rgba(51, 187, 255, 0.6), 0 0 40px rgba(51, 187, 255, 0.4);
+        box-shadow: inset 0 0 6px rgba(51, 187, 255, 0.6), inset 0 0 40px rgba(51, 187, 255, 0.4), 0 0 6px rgba(51, 187, 255, 0.6), 0 0 40px rgba(51, 187, 255, 0.4);
+    }
+
+    .dgon_big__portrait:after {
+        border-width: 1px;
+        border-style: solid;
+        border-color: #4590ff;
+        -webkit-box-shadow: 0 0 10px rgba(51, 153, 255, 0.5);
+        box-shadow: 0 0 10px rgba(249, 249, 249, 0.5);
+    }
+
+
+
+    .dgon_big__portrait:after, .dgon_big__portrait:before {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+        z-index: 1;
+    }
+
+/*@@keyframes effect_dylan {
+          50% {
+            transform: scale(1.5, 1.5);
+            opacity: 0;
+          }
+          99% {
+            transform: scale(0.001, 0.001);
+            opacity: 0;
+          }
+          100% {
+            transform: scale(0.001, 0.001);
+            opacity: 1;
+          }
+        }*/
+
+
+
+
+/*.dgon:before {
+        content: '';
+        background-color: aliceblue;
+        border-radius: 50%;
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: scale(0.001, 0.001);
+        /* animation: effect_dylan 0.8s ease-out;
+    }*/
+.sportsmagazine-header-one {
+    position: relative;
+}
+
+
+
+.dgon-list {
+    display: flex;
+    max-width: 810px;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    box-sizing: inherit;
+}
+
+.dgon__portrait:before {
+    opacity: 0;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(66.667%, transparent), color-stop(90%, rgba(102, 179, 255, 0.5)));
+    background-image: linear-gradient(transparent, transparent 66.667%, rgba(102, 179, 255, 0.5) 90%);
+    display: block;
+}
+
+.dgon__portrait:hover:before {
+    opacity: 1;
+}
+
+.dgon__portrait:hover:after {
+    border-color: #45c0ff;
+}
+
+.dgon__portrait:hover {
+    background-color: rgba(66, 82, 255, 0.34901960784313724);
+}
+
+.dgon_number__portrait:hover:before {
+    opacity: 1;
+}
+
+.dgon_number__portrait:hover:after {
+    border-color: #45c0ff;
+}
+
+.dgon_number__portrait:hover {
+    background-color: rgba(66, 82, 255, 0.34901960784313724);
+}
+
+
+.dgon__portrait:after, .dgon__portrait:before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+.dgon__portrait:after {
+    -webkit-box-shadow: inset 0 0 6px rgba(51, 187, 255, 0.6), inset 0 0 40px rgba(51, 187, 255, 0.4), 0 0 6px rgba(51, 187, 255, 0.6), 0 0 40px rgba(51, 187, 255, 0.4);
+    box-shadow: inset 0 0 6px rgba(51, 187, 255, 0.6), inset 0 0 40px rgba(51, 187, 255, 0.4), 0 0 6px rgba(51, 187, 255, 0.6), 0 0 40px rgba(51, 187, 255, 0.4);
+}
+
+.dgon__portrait:after {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #4590ff;
+    -webkit-box-shadow: 0 0 10px rgba(51, 153, 255, 0.5);
+    box-shadow: 0 0 10px rgba(249, 249, 249, 0.5);
+}
+
+
+
+
+.hover_dgon__portrait:after, .hover_dgon__portrait:before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+.hover_dgon__portrait:before {
+    opacity: 0;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(66.667%, transparent), color-stop(90%, rgba(255, 246, 102, 0.5)));
+    background-image: linear-gradient(transparent, transparent 66.667%, rgba(255, 246, 102, 0.5) 90%);
+    display: block;
+    animation: effect_hover_dgon 0.8s forwards;
+}
+
+@keyframes effect_hover_dgon {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.hover_dgon__portrait:after {
+    -webkit-box-shadow: inset 0 0 6px rgba(51, 187, 255, 0.6), inset 0 0 40px rgba(51, 187, 255, 0.4), 0 0 6px rgba(51, 187, 255, 0.6), 0 0 40px rgba(51, 187, 255, 0.4);
+    box-shadow: inset 0 0 6px rgba(51, 187, 255, 0.6), inset 0 0 40px rgba(51, 187, 255, 0.4), 0 0 6px rgba(51, 187, 255, 0.6), 0 0 40px rgba(51, 187, 255, 0.4);
+}
+
+.hover_dgon__portrait:after {
+    border-width: 0px;
+    border-style: solid;
+    border-color: #ffeb45;
+    -webkit-box-shadow: 0 0 10px rgba(249, 249, 249, 0.5);
+    box-shadow: 0 0 10px rgba(249, 249, 249, 0.5);
+    animation: effect_hover_dgon_after 0.4s forwards;
+}
+
+@keyframes effect_hover_dgon_after {
+    0% {
+        border-width: 0px;
+        border-style: groove;
+    }
+
+
+
+   100% {
+        border-width: 5px;
+        border-style: ridge;
+    }
+}
+
+
+.hover_dgon__portrait:hover:before {
+    opacity: 0;
+}
+
+.hover_dgon__portrait:hover:after {
+    border-color: #ff1000;
+}
+
+
+
+.hover_dgon__portrait:hover {
+    background-color: rgba(66, 82, 255, 0.34901960784313724);
+}
+
+.hover_dgon__portrait:before {
+    opacity: 1;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(66.667%, transparent), color-stop(90%, rgba(255, 246, 102, 0.5)));
+    background-image: linear-gradient(transparent, transparent 66.667%, rgba(255, 246, 102, 0.5) 90%);
+    display: block;
+}
+
+.hover_dgon__portrait:after {
+    -webkit-box-shadow: inset 0 0 6px rgba(51, 187, 255, 0.6), inset 0 0 40px rgba(51, 187, 255, 0.4), 0 0 6px rgba(51, 187, 255, 0.6), 0 0 40px rgba(51, 187, 255, 0.4);
+    box-shadow: inset 0 0 6px rgba(51, 187, 255, 0.6), inset 0 0 40px rgba(51, 187, 255, 0.4), 0 0 6px rgba(51, 187, 255, 0.6), 0 0 40px rgba(51, 187, 255, 0.4);
+}
+
+.hover_dgon__portrait:after {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ffeb45;
+    -webkit-box-shadow: 0 0 10px rgba(249, 249, 249, 0.5);
+    box-shadow: 0 0 10px rgba(249, 249, 249, 0.5);
+}
+
+.hover_dgon__portrait:hover:before {
+    opacity: 0;
+}
+
+.hover_dgon__portrait:hover:after {
+    border-color: #ff1000;
+}
+
+.hover_dgon__portrait:hover {
+    background-color: rgba(66, 82, 255, 0.34901960784313724);
+}
+
+
+.hover_dgon_number__portrait:after, .hover_dgon_number__portrait:before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+.hover_dgon_number__portrait:before {
+    opacity: 1;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(66.667%, transparent), color-stop(90%, rgba(255, 246, 102, 0.5)));
+    background-image: linear-gradient(transparent, transparent 66.667%, rgba(255, 246, 102, 0.5) 90%);
+    display: block;
+}
+
+.hover_dgon_number__portrait:after {
+    -webkit-box-shadow: inset 0 0 6px rgba(51, 187, 255, 0.6), inset 0 0 40px rgba(51, 187, 255, 0.4), 0 0 6px rgba(51, 187, 255, 0.6), 0 0 40px rgba(51, 187, 255, 0.4);
+    box-shadow: inset 0 0 6px rgba(51, 187, 255, 0.6), inset 0 0 40px rgba(51, 187, 255, 0.4), 0 0 6px rgba(51, 187, 255, 0.6), 0 0 40px rgba(51, 187, 255, 0.4);
+}
+
+.hover_dgon_number__portrait:after {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ffeb45;
+    -webkit-box-shadow: 0 0 10px rgba(249, 249, 249, 0.5);
+    box-shadow: 0 0 10px rgba(249, 249, 249, 0.5);
+}
+
+.hover_dgon_number__portrait:hover:before {
+    opacity: 0;
+}
+
+.hover_dgon_number__portrait:hover:after {
+    border-color: #ff1000;
+}
+
+.hover_dgon_number__portrait:hover {
+    background-color: rgba(66, 82, 255, 0.34901960784313724);
+}
+
+
+
+.dgon {
+    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+    /*width:25%;*/
+}
+
+.dgon-text {
+    color: #fff;
+    font-size: 16px;
+    position: absolute;
+    left: 0;
+    z-index: 99;
+}
+
+.dgon_big {
+    max-width: 100%;
+    width: 25px;
+    height: 25px
+}
+
+    .dgon_big span {
+        position: absolute;
+        top: 10px;
+        left: 17px;
+        font-size: 18px;
+        /*vertical-align: middle;*/
+        color: #ffdc11
+    }
+
+    .dgon_big h7 {
+        position: absolute;
+        top: 12px;
+        left: 7px;
+        font-size: 14px;
+        /*vertical-align: middle;*/
+        color: #ffdc11
+    }
+
+.dgon_from {
+    margin-left: 22%;
+}
+
+#poolli {
+    display:none;
+}
+
+
+.Btn-inner {
+    border-radius: 10px;
+    border: 2px ridge rgba(170, 152, 247, 0.6);
+    text-shadow: 0 1px 4px rgba(0, 0, 51, 0.4);
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    -webkit-box-align: center;
+    align-items: center;
+    min-height: 47px;
+    padding: 0.72222em;
+    text-align: center;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(30, 32, 150)), to(rgba(3, 0, 153, 0.5803921568627451)));
+    background: linear-gradient(to bottom, rgb(30, 32, 150), rgba(3, 0, 153, 0.5803921568627451));
+    color: #fff;
+    font-size: 16px;
+    width: 150px;
+}
+
+.Btn--purple.Btn--primary {
+    background: linear-gradient(to bottom, #853bcf, #6c3dd6);
+}
+
+.Btn--shadow {
+    box-shadow: 1px 0 4px rgba(102, 48, 20, 0.24), 6px 0 24px rgba(0, 0, 0, 0.36);
+}
+
+
+.Container-gon {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 200px;
+    padding: 0px 15px;
+}
+
+.gon-bettext {
+    width: 100%;
+    text-align: left;
+    color: #fff;
+    font-size: 16px;
+    margin: 0 0 5px 15px;
+}
+
+.sportsmagazine-summery-option {
+    margin: 2% 0px 10px;
+}
+
+
+    .sportsmagazine-summery-option > li {
+        float: none;
+        /*text-align: center;*/
+        text-align: left;
+        margin: 0 0 30px 0;
+    }
+
+.sportsmagazine-price-cartbox {
+    float: none;
+    margin: 0;
+}
+
+.fromnumber {
+    color: #ffdc11;
+    margin: 20px 0 20px 10px;
+    padding: 4px 10px 4px 10px;
+    background: rgba(251, 251, 251, 0.12156862745098039);
+    border-radius: 50px;
+    font-size:16px;
+}
+
+.betballstyle {
+    position: absolute;
+    color: #fff;
+    z-index: 400;
+    font-size: 20px;
+    top: 120px;
+    left: 55px;
+    font-weight:500;
+}
+
+.betanim {
+    position: absolute;
+    color: #ffdc11;
+    z-index: 400;
+    font-size: 24px;
+    top: 90px;
+    right: 15px;
+    opacity: 0;
+    animation: betanim_add 2.5s forwards;
+}
+
+.sportsmagazine-summery-option h5, .sportsmagazine-price-cartbox {
+    font-size: 18px;
+}
+
+
+
+@keyframes betanim_add {
+    0% {
+        opacity: 0;
+        top: 90px;
+    }
+
+    70% {
+        opacity: 1;
+        top: 80px;
+    }
+
+    100% {
+        opacity: 0;
+        top: 70px;
+    }
+}
+
+.fromnumber span {
+    color: #fff;
+    margin-right: 10px;
+}
+
+.dgon-box {
+    display: none;
+}
+
+    .dgon-box span {
+        background: #f00;
+        color: #fff;
+        font-size: 0.9em;
+        font-weight: bold;
+        position: absolute;
+        z-index: 99;
+        top:-1px;
+        right: 5px;
+        border-radius: 50px;
+        width: 20px;
+        height: 20px;
+    }
+
+.bet_dgon {
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+    width: 25%;
+    margin-top: 32px
+}
+table thead tr th {
+    border-top: 1px solid #e5b22a;
+    border-bottom: 1px solid #e5b22a;
+    border: 1px solid #e5b22a;
+}
+
+table > tbody > tr > td {
+    border: 1px solid #e5b22a;
+}
+
+
+.dgon_bonus {
+    display: none;
+    width: 300px;
+    height: 470px;
+    background: rgb(51, 51, 51);
+    position: absolute;
+    top: 30%;
+    left: 180px;
+    z-index: 500;
+    border: 1px solid #e8b754;
+}
+
+.bear_background {
+    position: relative;
+    width: 200px;
+    height: 250px;
+}
+
+    .bear_background:before {
+        content: '';
+        position: absolute;
+        background: url(/Content/extra-images/dgon/dgon_ball.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 198px;
+        height: 198px;
+        top: 58px;
+        right: 4px;
+    }
+
+.bear_head:hover .dgon_bonus {
+    display: block;
+}
+
+div[name=ddTopic] {
+    margin-top: 0px;
+    opacity: 0;
+    z-index: 99;
+    animation: ddtopictop 2.5s forwards;
+}
+
+.bet_from {
+    box-shadow:inset -0.1em 0 2em 0.5em rgba(189, 189, 189, 0.15), inset -0.1em 0 0.5em 0 rgba(0,0,0,0.8);
+    width: 100%;
+    height: 420px;
+    background-image: url(/Content/extra-images/gamebackground.png);
+    border: 5px ridge #8c8c8c;
+    border-radius: 35px;
+    font-size: 16px;
+    color: #e5b22a;
+    font-weight:500;
+}
+.bet_class {
+    width: 72%;
+    display: block;
+    margin-bottom: 15px;
+    padding: 10px 0 10px 0;
+    text-align: justify;
+    /* background: #0000008a; */
+    color: #fdfdfd;
+    /* border: 1px ridge #000; */
+    border-radius: 10px;
+    margin-left:5.5em;
+    text-indent:-5.5em;
+}
+
+#bet_combination {
+    width:100%;
+    max-width:400px;
+    margin:0 auto;
+
+}
+
+
+@keyframes ddtopictop {
+    0% {
+        opacity: 0;
+        margin-top: 0px;
+    }
+
+
+    100% {
+        opacity: 1;
+        margin-top: -70px;
+    }
+}
+
+
+
+@media screen and (min-width: 991px) and (max-width: 1200px) {
+    .dgon_from {
+        margin-left: 15%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 990px) {
+    .dgon_from {
+        margin-left: 5%;
+    }
+
+    .sportsmagazine-summery-option {
+        margin: 4% 0px 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .fromnumber div {
+        display: none;
+    }
+    #bettitle {
+        position: static;
+    }
+
+    #betman {
+        position: static;
+    }
+
+    #modal-width {
+        width:440px;
+    }
+    .dgon_from {
+        margin-left: 18%;
+        margin-right: 15%;
+    }
+    .bet_margin {
+        margin-left:10px;
+    }
+
+    .sportsmagazine-summery-option {
+        margin: 18% 0px 10px;
+    }
+
+
+    .gonthumb-transparent {
+        background-size: 100% 100%;
+    }
+
+    .dgon__portrait {
+        margin-right: 20px;
+        max-width: 65px;
+    }
+
+    .hover_dgon__portrait {
+        margin-right: 20px;
+        max-width: 65px;
+    }
+
+    .dgon-box span {
+        font-size: 10px;
+        right: 5px;
+        width: 15px;
+        height: 15px;
+    }
+
+    .dgon-text {
+        font-size: 12px;
+    }
+
+
+    .dgon_big__portrait {
+        margin-right: 25px;
+        max-width: 65px;
+    }
+
+
+
+    .dgon_number__portrait {
+        margin-right: 25px;
+        margin-top: 30%
+    }
+
+    .hover_dgon_number__portrait {
+        margin-right: 25px;
+        margin-top: 30%
+    }
+
+    .dgon_big {
+        width: 20px;
+        height: 20px;
+    }
+
+        .dgon_big span {
+            top: 10px;
+            left: 16px;
+            font-size: 14px;
+            /*vertical-align: middle;*/
+            color: #ffdc11
+        }
+
+        .dgon_big h7 {
+            top: 10px;
+            left: 5px;
+            font-size: 14px;
+            color: #ffdc11
+        }
+}
+
+@media (max-width: 682px) {
+    .fromnumber {
+        font-size: 12px;
+    }
+    
+    .dgon_from {
+        margin-left: 15%;
+        margin-right: 0;
+    }
+
+    .dgon__portrait {
+        margin-right: 20px;
+        /*margin-right: 0;*/
+        max-width: 50px;
+    }
+
+    .hover_dgon__portrait {
+        margin-right: 20px;
+        /*margin-right: 0;*/
+        max-width: 50px;
+    }
+
+    .dgon_big__portrait {
+        margin-right: 15px;
+        /*margin-right: 0;*/
+        max-width: 50px;
+    }
+
+    .dgon_number__portrait {
+        margin-right: 20px;
+        margin-top: 19%;
+    }
+
+    .hover_dgon_number__portrait {
+        margin-right: 20px;
+        margin-top: 19%;
+    }
+
+    .dgon_big {
+        width: 15px;
+        height: 15px;
+    }
+
+        .dgon_big span {
+            top: 10px;
+            left: 13px;
+            font-size: 12px;
+            color: #ffdc11
+        }
+
+        .dgon_big h7 {
+            top: 10px;
+            left: 5px;
+            font-size: 12px;
+            color: #ffdc11
+        }
+}
+
+@media (max-width: 480px) {
+    #modal-width {
+        width:85%
+    }
+    .bet_margin {
+        margin-left:0px;
+    }
+    #bet_combination {
+        max-width: 220px;
+    }
+    #bet_combination .Container-gon{
+        max-width:100px;
+
+
+    }
+
+    #bet_combination .Btn-inner{
+        width:80px;
+        font-size:12px;
+
+    }
+
+    .sportsmagazine-summery-option h5, .sportsmagazine-price-cartbox {
+        font-size: 16px;
+    }
+
+    .bet_from {
+        font-size: 12px;
+    }
+    .dgon_from {
+        margin-left: 5%;
+        margin-bottom:50%;
+    }
+
+    .dgon_bonus {
+        left: 0;
+    }
+
+    .led:before {
+        background-size: 100% 100%;
+        left: -2.4em;
+        width: 5em;
+        height: 5em;
+    }
+
+    .dgon__portrait {
+        margin-right: 22px;
+        max-width: 50px;
+    }
+
+    .hover_dgon__portrait {
+        margin-right: 22px;
+        max-width: 50px;
+    }
+
+    .bet_dgon {
+        margin-left: 20%;
+    }
+
+    #bettitle {
+        position: static;
+    }
+    #betman {
+        position: static;
+    }
+
+
+    .sportsmagazine-summery-option > li {
+        width: 100%
+    }
+
+    .sportsmagazine-summery-option {
+        margin: 18% 0 10px;
+    }
+
+    .hover_dgon_number__portrait {
+        margin-right: 21px;
+    }
+
+    .dgon_number__portrait {
+        margin-right: 21px;
+    }
+
+    .dgon_big__portrait {
+        margin-right: 21px;
+    }
+}
+
+@media (max-width: 413px) {
+
+    .hover_dgon__portrait {
+        margin-right: 15px;
+    }
+
+    .dgon__portrait {
+        margin-right: 15px;
+    }
+
+    .dgon_big__portrait {
+        margin-right: 15px;
+    }
+
+    .hover_dgon_number__portrait {
+        margin-right: 15px;
+    }
+
+    .dgon_number__portrait {
+        margin-right: 15px;
+    }
+}
+
+@media (max-width: 390px) {
+
+    .fromnumber {
+        margin: 20px 0 20px 0px;
+    }
+}
+
+@media (max-width: 370px) {
+    .dgon_from {
+        margin-left: 3%;
+    }
+
+    .dgon-box span {
+        right: 0px;
+    }
+
+    .fromnumber {
+        font-size: 12px;
+        margin: 10px 5px 10px 0;
+    }
+
+    .dgon__portrait {
+        margin-right: 10px;
+    }
+
+    .hover_dgon__portrait {
+        margin-right: 10px;
+    }
+
+    .dgon_big__portrait {
+        margin-right: 11px;
+    }
+
+    .dgon_number__portrait {
+        margin-right: 11px;
+    }
+
+    .hover_dgon_number__portrait {
+        margin-right: 11px;
+    }
+}
+
+
+
+@media (max-width: 350px) {
+    .dgon_from {
+        margin-left: 3%;
+    }
+
+    .dgon-box span {
+        right: 0px;
+    }
+
+    .fromnumber {
+        font-size: 12px;
+        margin: 10px 5px 10px 0;
+    }
+
+    .dgon__portrait {
+        margin-right: 5px;
+    }
+
+    .hover_dgon__portrait {
+        margin-right: 5px;
+    }
+
+    .dgon_big__portrait {
+        margin-right: 8px;
+    }
+
+    .dgon_number__portrait {
+        margin-right: 8px;
+    }
+
+    .hover_dgon_number__portrait {
+        margin-right: 8px;
+    }
+}

@@ -1,0 +1,222 @@
+﻿@model SITW.Models.ViewModel.BetsByUserID
+@{
+    ViewBag.Title = "預測紀錄";
+    var betlist = ViewData["DgonList"] as IList<SITDto.ViewModel.BetListDto>;
+}
+
+<style>
+    a {
+        color: #5293c6;
+    }
+
+    li {
+        color: #ffffff
+    }
+
+    #labelstyle {
+        font-size: 15px;
+        color: #e5b22a;
+    }
+
+    .depositcss a {
+        float: right;
+        border: 1px solid #5d5d5d;
+        background-color: #ff0000;
+        color: #fff;
+        padding: 0px 5px 0px 5px;
+        margin: 0px 50% 0px 0px;
+    }
+
+        .depositcss a:hover {
+            border: 1px solid #fff;
+        }
+    .table-striped > tbody > tr {
+        background-color: initial
+    }
+    .sportsmagazine-account-tabs .nav-tabs li
+    {
+        width:25%;
+    }
+
+    .sportsmagazine-account-tabs {
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6), 4px 4px 6px rgba(0, 0, 0, 0.4), 6px 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    @@media(max-width: 767px) {
+        #newsmargin {
+            margin-top: 0;
+        }
+    }
+    @@media (max-width: 480px) {
+        .sportsmagazine-account-tabs .nav-tabs li {
+            width: 100%;
+        }
+    }
+</style>
+
+
+<div class="alert alert-success" id="success-alert" style="text-align:center;font-size:14px">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <input type="hidden" id="message" name="message" value="@ViewBag.StatusMessage" />
+</div>
+
+
+
+<div class="sportsmagazine-main-content" id="rankmagin">
+    <div class="sportsmagazine-main-section sportsmagazine-account-full">
+        <div class="container">
+            <div class="row">
+                @if (Model.BetList.Count() != 0 || betlist.Count() != 0 || Model.NabobBetList.Count() != 0)
+                {
+                    <div class="col-md-12">
+                        <div class="sportsmagazine-account-tabs">
+                            <ul class="nav-tabs" role="tablist">
+                                @if (Model.BetList.Where(x => x.live != 1).Count() != 0)
+                                {
+                                    <li role="presentation" class="active"><a href="#account" aria-controls="account" role="tab" data-toggle="tab">精準&總彩池(競猜記錄)</a></li>
+                                }
+                                @if (betlist.Count() != 0)
+                                {
+                                    if (Model.BetList.Where(x => x.live != 1).Count() == 0)
+                                    {
+                                        <li role="presentation" class="active"><a href="#BetsByUserID" aria-controls="BetsByUserID" role="tab" data-toggle="tab">龍的傳人(競猜記錄)</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li role="presentation"><a href="#BetsByUserID" aria-controls="BetsByUserID" role="tab" data-toggle="tab">龍的傳人(競猜記錄)</a></li>
+                                    }
+
+
+                                }
+                                @if (Model.NabobBetList.Count() != 0)
+                                {
+                                    if (Model.BetList.Where(x => x.live != 1).Count() == 0)
+                                    {
+                                        <li role="presentation" class="active"><a href="#NabobBetsByUserID" aria-controls="NabobBetsByUserID" role="tab" data-toggle="tab">百倍大串燒(競猜記錄)</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li role="presentation"><a href="#NabobBetsByUserID" aria-controls="NabobBetsByUserID" role="tab" data-toggle="tab">百倍大串燒(競猜記錄)</a></li>
+                                    }
+
+
+
+                                }
+                                @if (Model.BetList.Where(x => x.live == 1).Count() != 0)
+                                {
+                                    if (Model.BetList.Where(x => x.live != 1).Count() == 0)
+                                    {
+                                        <li role="presentation" class="active"><a href="#Live" aria-controls="Live" role="tab" data-toggle="tab">直播競猜(競猜記錄)</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li role="presentation"><a href="#Live" aria-controls="Live" role="tab" data-toggle="tab">直播競猜(競猜記錄)</a></li>
+                                    }
+
+
+                                }
+
+                            </ul>
+                            <div class="tab-content">
+                                @if (Model.BetList.Where(x => x.live != 1).Count() != 0)
+                                {
+                                    <div role="tabpanel" class="tab-pane active" id="account">
+                                        @Html.Action("_BetsByUserID", new { BetList = Model.BetList.Where(x => x.live != 1).ToList() })
+                                    </div>
+                                }
+
+                                @if (Model.BetList.Where(x => x.live != 1).Count() == 0 && betlist.Count() != 0)
+                                {
+                                    <div role="tabpanel" class="tab-pane active" id="BetsByUserID">
+                                        <div class="sportsmagazine-account">
+
+                                            @Html.Action("_DgonBetsByUserID", new { BetList = ViewData["DgonList"] })
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div role="tabpanel" class="tab-pane" id="BetsByUserID">
+                                        <div class="sportsmagazine-account">
+
+                                            @Html.Action("_DgonBetsByUserID", new { BetList = ViewData["DgonList"] })
+                                        </div>
+                                    </div>
+
+                                }
+                                @if (Model.BetList.Where(x => x.live != 1).Count() == 0 && Model.NabobBetList.Count() != 0)
+                                {
+                                    <div role="tabpanel" class="tab-pane active" id="NabobBetsByUserID">
+                                        <div class="sportsmagazine-account">
+                                            @Html.Action("_NabobBetsByUserID", new { BetList = Model.NabobBetList })
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div role="tabpanel" class="tab-pane" id="NabobBetsByUserID">
+                                        <div class="sportsmagazine-account">
+                                            @Html.Action("_NabobBetsByUserID", new { BetList = Model.NabobBetList })
+                                        </div>
+                                    </div>
+
+                                }
+                                @if (Model.BetList.Where(x => x.live != 1).Count() == 0 && Model.BetList.Where(x => x.live == 1).Count() != 0)
+                                {
+                                    <div role="tabpanel" class="tab-pane active" id="Live">
+                                        <div class="sportsmagazine-account">
+                                            @Html.Action("_LiveBetsByUserID", new { BetList = Model.BetList.Where(x => x.live == 1).ToList() })
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div role="tabpanel" class="tab-pane" id="Live">
+                                        <div class="sportsmagazine-account">
+                                            @Html.Action("_LiveBetsByUserID", new { BetList = Model.BetList.Where(x => x.live == 1).ToList() })
+                                        </div>
+                                    </div>
+
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div id="tablegamenull">
+                        <table style="height:79vh;background-color: #002877;
+    background-image: url(/Content/extra-images/gamebackground.png?20180514);">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img style="width:500px"  src="https://storage.googleapis.com/funbet-180608.appspot.com/OtherIMG/not_bet_bear.png">
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.betResult').tooltip({
+                trigger: 'hover focus click'
+            });
+
+        });
+
+
+    </script>
+}

@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>熊i猜-掌握電競新樂趣</title>
+    @Styles.Render("~/Content/styles")
+
+    @RenderSection("css", required: false)
+
+
+    <link rel="stylesheet" href="~/Content/assets/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/Content/jquery.datetimepicker.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosanstc.css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/cwtexyen.css" />
+    <script src="/Scripts/jquery.js"></script>
+    <script src="/Scripts/jquery.datetimepicker.js"></script>
+
+    <script src="/Scripts/jquery.datetimepicker.full.min.js"></script>
+    <script src="https://cdn.bootcss.com/limonte-sweetalert2/7.33.1/sweetalert2.all.js" type="text/javascript"></script>
+    <script src="https://cdn.bootcss.com/limonte-sweetalert2/7.33.1/sweetalert2.js" type="text/javascript"></script>
+    @RenderSection("scripts", required: false)
+
+
+    <style>
+
+
+        #sidebar > ul > li > ul.sub {
+            display: block;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <section id="container">
+        <header class="header black-bg">
+            <div class="sidebar-toggle-box">
+                <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+            </div>
+            <a href="@Url.Action("News")" class="logo"><b>熊i猜管理</b></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu"></ul>
+                <!--  notification end -->
+            </div>
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                <div class="top-menu">
+
+                    <ul class="nav pull-right top-menu">
+                        <li>
+
+                            @Html.AntiForgeryToken()
+                            <a class="logout" href="javascript:document.getElementById('logoutForm').submit()">登出</a>
+
+
+                        </li>
+                    </ul>
+
+                </div>
+            }
+        </header>
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu" id="nav-accordion">
+
+                    <h5 class="centered">功能表單</h5>
+
+                    <li class="sub-menu">
+                        <a href="@Url.Action("News", "News")">
+                            <i class="fa fa-tasks"></i>
+                            <span>公告管理</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="@Url.Action("Mall", "WebMall")">
+                            <i class="fa fa-tasks"></i>
+                            <span>商城管理</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="@Url.Action("Index", "Preferential")">
+                            <i class="fa fa-tasks"></i>
+                            <span>優惠管理</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="@Url.Action("ChangeRecord", "WebMall")">
+                            <i class="fa fa-tasks"></i>
+                            <span>玩家兌獎記錄</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="@Url.Action("Index", "RankReward")">
+                            <i class="fa fa-tasks"></i>
+                            <span>排行獎勵管理</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="@Url.Action("Index", "Teams")">
+                            <i class="fa fa-tasks"></i>
+                            <span>隊伍管理</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a>
+                            <i class="fa fa-desktop"></i>
+                            <span>回首頁</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="@Url.Action("Index", "Home")">首頁</a></li>
+                            <li><a href="@Url.Action("Index", "game")">遊戲大廰</a></li>
+                            <li><a href="@Url.Action("News", "Home")">排行榜</a></li>
+                            <li><a href="@Url.Action("Index", "News")">最新消息</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        @RenderBody()
+
+        <footer class="site-footer">
+            <div class="text-center">
+                熊i猜競猜遊戲平台由 競猜數位Funbet 提供
+                <a href="#" class="go-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script>
+        $(function () {
+            //$('select.styled').customSelect();
+        });
+
+    </script>
+    <script src="/Content/vendors/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js"></script>
+    <script src="/Content/vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.js"></script>
+    <script src="/Content/vendors/ckeditor/ckeditor.js"></script>
+    <script src="/Content/vendors/ckeditor/adapters/jquery.js"></script>
+
+    <script type="text/javascript" src="/Content/vendors/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="/Content/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="~/Scripts/adminJs/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="~/Scripts/adminJs/jquery.scrollTo.min.js"></script>
+    <script src="~/Scripts/adminJs/jquery.nicescroll.js" type="text/javascript"></script>
+
+
+    <!--common script for all pages-->
+    <script src="~/Scripts/adminJs/common-scripts.js"></script>
+
+
+
+    <script>
+        $(function () {
+            // Bootstrap
+            $('#bootstrap-editor').wysihtml5();
+
+            // Ckeditor standard
+            $('textarea#ckeditor_standard').ckeditor({
+                width: '98%', height: '200px', toolbar: [
+                    { name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
+                    ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'],			// Defines toolbar group without name.
+                    { name: 'basicstyles', items: ['Bold', 'Italic'] }
+                ]
+            });
+            $('textarea#content').ckeditor({ width: '98%', height: '350px', background: '#333' });
+            $('textarea#ProductContent').ckeditor({ width: '45%', height: '150px', background: '#000' });
+        });
+
+        // Tiny MCE
+        tinymce.init({
+            selector: "#tinymce_basic",
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table contextmenu paste"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+
+        // Tiny MCE
+        tinymce.init({
+            selector: "#tinymce_full",
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table contextmenu directionality",
+                "emoticons template paste textcolor"
+            ],
+            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            toolbar2: "print preview media | forecolor backcolor emoticons",
+            image_advtab: true,
+            templates: [
+                { title: 'Test template 1', content: 'Test 1' },
+                { title: 'Test template 2', content: 'Test 2' }
+            ]
+        });
+
+        $(document).ready(function () {
+            jQuery('#time').datetimepicker();
+            jQuery('#endtime').datetimepicker();
+            jQuery('#starttime').datetimepicker();
+            jQuery('#createDate').datetimepicker();
+            jQuery("#sdate").datetimepicker();
+            jQuery("#edate").datetimepicker();
+            $(".sub").show();
+        });
+
+    </script>
+    <script>
+        jQuery(document).ready(function () {
+            //TaskList.initTaskWidget();
+        });
+
+        $(function () {
+            //$("#sortable").sortable();
+            // $("#sortable").disableSelection();
+        });
+
+    </script>
+
+
+    <script>
+        //custom select box
+
+        $(function () {
+            // $('select.styled').customSelect();
+        });
+
+    </script>
+
+
+</body>
+</html>

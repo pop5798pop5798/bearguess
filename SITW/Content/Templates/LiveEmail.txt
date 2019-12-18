@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>熊i猜兌獎通知信</title>
+
+
+</head>
+
+<body>
+<table align="center" style="width: 737px;height: 200px;border: 2px solid #3F51B5;">
+  <thead>
+    <tr>
+      <th colspan="2"><img src="http://funbet.com.tw/Content/templates/VerifyEmail/title.png" style="width:100%"  /></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+  <tr>
+    <td height="335" colspan="2" style="font-family: Microsoft JhengHei;"><p align="center" >
+	{0}
+	</p></td>
+  </tr>
+
+    
+	</tbody>
+<tfoot>
+    <tr>
+      <td colspan="2"><img src="https://storage.googleapis.com/funbet-180608.appspot.com/OtherIMG/footer.png"  /></td>
+    </tr>
+  </tfoot>	
+
+</table>
+
+</body>
+</html>

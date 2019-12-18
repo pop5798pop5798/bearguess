@@ -1,0 +1,455 @@
+﻿@model IEnumerable<SITW.Models.ViewModel.GamePostViewModel>
+@{
+    Layout = null;
+    int i = 0; 
+    int ti = 0;
+    int allt = 0;
+}
+
+<style>
+    .guess-all {
+        width: 100%;
+        background: #171b25;
+        border: 1px solid #39406f;
+        box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.5),inset 1px 1px 4px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .guess-bear {
+        background: url(https://storage.googleapis.com/funbet-180608.appspot.com/studyPlace/bear.png);
+        height: 500px;
+        background-size: contain;
+        width: 100%;
+        background-repeat: no-repeat;
+        margin-left: 100px;
+        float: left;
+    }
+
+    .guess-background {
+        background: url(https://storage.googleapis.com/funbet-180608.appspot.com/studyPlace/guess_background.png);
+        height: 500px;
+        background-size: contain;
+        width: 100%;
+        background-repeat: no-repeat;
+        margin-left: 28%;
+    }
+
+    .topic-guess {
+        display:none;
+        position: absolute;
+        left: 42%;
+        top: 35%;
+        opacity:1;
+        opacity:0;
+
+    }
+
+        .topic-guess .choice {
+            position: absolute;
+            position: relative;
+            width: 400px;
+            border: 1px solid #000;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            background: #fff;
+            cursor: pointer;
+            
+        }
+
+        .topic-guess #check {
+           
+            color: #000;
+            font-size: 30px;
+            position: absolute;
+            right: 20px;
+            top: 5px;
+            opacity: 0;
+        }
+
+    #guess-nextgo {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .guess_button {
+         width: 35%;
+        padding: 10px;
+        cursor: pointer;
+        border: 10px solid #a3ff15;
+        background: #9cd819;
+        color: #000;
+        border-radius: 5px;
+
+    }
+
+    .choice h5 {
+        margin: 0;
+        padding: 8px 10px;
+        color: #333;
+
+    }
+
+    .choice .clickc {
+
+        background: #bfdf54;
+
+    }
+    .gsbonus {
+        position: absolute;
+        right: -100px;
+        top: -120px;
+        background: url(https://storage.googleapis.com/funbet-180608.appspot.com/studyPlace/bonus_s.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 150px;
+        height: 140px;
+        display: flex;
+        justify-content: center;
+
+    }
+    .gstime {
+        color: #333;
+        font-size: 15px;
+        padding: 15px 25px;
+        font-weight: bold;
+
+    }
+    @@media (min-width: 990px) and (max-width: 1200px) 
+    {
+        .guess-bear {
+            margin-left:0;
+        }
+        .topic-guess {
+            left: 37%;
+
+        }
+         .guess-background {
+                margin-left: 20%;
+        }
+         
+    }
+    @@media (min-width: 768px) and (max-width: 990px) {
+        .guess-bear {
+            margin-left:0;
+        }
+        .guess-background {
+                margin-left: 20%;
+        }
+       
+        .topic-guess {
+            left: 37%;
+
+        }
+    }
+    @@media (max-width: 767px) {
+        .guess-bear {
+            display:none;
+        }
+
+        .guess-background {
+            
+            background-size: 100% 500px;
+            margin-left: 0;
+
+        }
+        .topic-guess {
+            top: 30%;
+            padding: 5% 20%;
+            position: relative;
+            left: 0;
+        }
+        .topic-guess .choice{
+            width: 300px;
+
+        }
+        .gsbonus {
+            width: 130px;
+            top: -110px;
+            right: 10%;
+        }
+        .gstime {
+            font-size: 12px;
+        }
+        .guess_button {
+            width:50%
+        }
+        .topic-guess h5{
+            font-size: 14px;
+        }
+        .topic-guess h4{
+            font-size: 16px;
+        }
+
+
+    }
+
+    @@media (max-width: 480px) {
+        .guess-background {
+            background: url(https://storage.googleapis.com/funbet-180608.appspot.com/studyPlace/guess_phone.png);
+            background-size: 100% 500px;
+
+        }
+        .topic-guess {
+            top: 22%;
+            padding: 5% 20%;
+        }
+        .topic-guess .choice{
+            width: 230px;
+
+        }
+        .gsbonus {
+            width: 120px;
+            top: -75px;
+            right: 10px;
+        }
+        .gstime {
+            font-size: 12px;
+            padding: 15px 20px;
+        }
+        .guess_button {
+            width:50%
+        }
+        .topic-guess #check {
+            right: 0px;
+            top: 10px;
+        }
+    
+    }
+
+
+</style>
+
+@if (Model.Count() != 0)
+{
+    <div class="col-md-12">
+        <div class="guess-all">
+            <div class="guess-bear"></div>
+
+            <div class="guess-background">
+               
+                @foreach (var item in Model)
+                {
+
+                    foreach (var t in item.game.topicList)
+                    {
+
+                        <div class="topic-guess">
+                            <input id="ttopic" type="hidden" value="@ti">
+                            <div class="gsbonus">
+                            <span class="gstime" >  時間 ： @item.game.edate</span>
+
+                            </div>
+
+                            <form name="betForm" action="/bet/Create" method="post">
+                                <div>
+                                    <h5>
+                                        @foreach (var play in ViewData["playlist"] as IEnumerable<SITW.Models.cfgPlayGame>)
+                                        {
+                                            if(play.sn == item.gamepost.PlayGameSn)
+                                            {
+                                                <span>@play.cName ：</span>
+                                            }
+                                        }
+                                        @item.game.title
+                                    </h5>
+                                    <h4 style="color:#ffe500">@t.title </h4>
+                                    @{
+                                        i = 0;
+                                    }
+                                    @foreach (var c in t.choiceList)
+                                    {
+                                        <div class="choice">
+                                            <h5>
+                                                @c.choiceStr
+
+                                            </h5>
+                                            <span id="check">
+                                                <span style="font-size:14px">猜測正確 @(c.Odds * 100) 魚骨幣</span> 
+
+                                            </span>
+                                            <input id="money" name="betList[@i].money" type="hidden" value="0">
+                                            <input name="betList[@i].choiceSn" type="hidden" value="@c.sn">
+                                            @{i++;}
+
+                                        </div>
+
+
+
+                                    }
+
+                                    <div id="guess-nextgo">
+                                        <input id="guess-answer" class="guess_button" style="animation-iteration-count:1;" type="button" value="點擊確認">
+                                        <input id="guess-next" class="guess_button" style="animation-iteration-count:1;margin-left:20px;" type="button" value="略過下一題">
+                                    </div>
+
+
+
+
+
+                                </div>
+                            </form>
+
+                        </div>
+                        {ti++;}
+
+                    }
+                }
+
+
+            </div>
+        </div>
+    </div>
+
+}
+
+<script>
+    var count = 0;
+    var array;
+    var r = 0;
+    var tci = 0;
+
+
+    //var r = getRandomArray(0, count, count)[0];
+    $(document).ready(function () {
+        @foreach(var ic in Model)
+         {
+             allt += ic.game.topicList.Count();
+         }
+        count = @allt;
+
+        array = getRandomArray(0, count-1, count);
+        console.log(array);
+        r = array[tci];
+        
+        $('#ttopic[value="'+r+'"]').parents('.topic-guess').css('display', 'block');
+        $('#ttopic[value="'+r+'"]').parents('.topic-guess').css('opacity', '1');
+
+          $('#topic h5').on('click', function () {
+
+                $(this).parents('topic').find('#check').css('opacity', 1);
+
+            });
+           
+
+    });
+    $(document).on('click', '#guess-answer', function () {
+        var t = $(this).parents('form[name=betForm]').find('.clickc').text();
+        if (t != '') {
+            Swal.fire({
+                title: '確認訊息',
+                html: '題目：' + $(this).parents('form[name=betForm]').find('h4').text() +'<br>選擇的選項：' + t,
+                type: 'info',
+                confirmButtonText: '-100魚骨幣!',
+                focusConfirm: false,
+                showCancelButton: true,
+
+            }).then((d) => {
+                $('.choice h5').removeClass('clickc');
+                $('.choice #check').css('opacity', 0);
+                if (d.value) {
+                    $.post("@Url.Action("GuessCreate", "bet")", $(this).parents('form[name=betForm]').serialize(), function (data) {
+                        if (!data.isTrue) {
+                            Swal.fire({
+                                title: data.Title,
+                                text: data.ErrorMsg,
+                                type: 'error',
+                                showCancelButton: true,
+                                confirmButtonText: '前往登入!'
+                            }).then((conf) => {
+                                if (conf.value) {
+                                    window.location.href = '@Url.Action("Login", "Account")';
+                                }
+                            });
+
+                        } else {
+                            Swal.fire({
+                                                    title: '成功!',
+                                                    html: '我們已接收到你的答案',
+                                                    type: 'success',
+                                                    confirmButtonText: '確定!'
+                                                });
+                        }
+                        
+                    });
+                }
+            });
+
+            
+
+        } else {
+             Swal.fire({
+                                                    title: '錯誤!',
+                                                    html: '請選擇選項哦!!',
+                                                    type: 'error'
+                                                });
+        }
+                
+ 
+
+      });
+
+    $(document).on('click', '#guess-next', function () {
+        if(tci == parseInt(count-1))
+            tci = 0;
+        else
+            tci += 1;
+
+            
+           // $('#ttopic[value="' + r + '"]').parents('.topic-guess').css();
+             $('.choice h5').removeClass('clickc');
+            $('#ttopic[value="' + r + '"]').parents('.topic-guess').fadeOut('normal', function(){
+                $(this).parents('.topic-guess').css('display', 'none');
+                r = array[tci];
+                console.log(r);
+                //$('#ttopic[value="' + r + '"]').parents('.topic-guess').fadeIn('normal');
+                $('#ttopic[value="' + r + '"]').parents('.topic-guess').css('opacity',1);
+                $('#ttopic[value="'+r+'"]').parents('.topic-guess').css('display', 'block');
+            });
+            
+            
+            
+        
+        
+            
+            
+ 
+
+         });
+            
+            $(document).on('click', '.choice', function () {
+                $('.choice h5').removeClass('clickc');
+                $(this).find('h5').addClass('clickc');
+                $('input[name$=".money"]').val('0');
+                $(this).find('#money').val('100');
+                $('.choice #check').css('opacity',0);
+                $(this).find('#check').css('opacity',1);
+    
+            });
+
+            function getRandomArray(minNum, maxNum, n) {    //隨機產生不重覆的n個數字
+                var rdmArray = [n];     //儲存產生的陣列
+
+                for(var i=0; i<n; i++) {
+                    var rdm = 0;        //暫存的亂數
+
+                    do {
+                        var exist = false;          //此亂數是否已存在
+                        rdm = getRandom(minNum, maxNum);    //取得亂數
+            
+                        //檢查亂數是否存在於陣列中，若存在則繼續回圈
+                        if(rdmArray.indexOf(rdm) != -1) exist = true;
+            
+                    } while (exist);    //產生沒出現過的亂數時離開迴圈
+        
+                    rdmArray[i] = rdm;
+                }
+                return rdmArray;
+    }
+    function getRandom(minNum, maxNum) { //取得 minNum(最小值) ~ maxNum(最大值) 之間的亂數
+        return Math.floor( Math.random() * (maxNum - minNum + 1) ) + minNum;
+    }
+
+    </script>
+    
+

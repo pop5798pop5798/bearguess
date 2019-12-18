@@ -1,0 +1,256 @@
+﻿@model IEnumerable<SITW.Models.ViewModel.GamePostViewModel>
+
+
+@{
+    ViewBag.Title = "遊戲大廳| 熊i猜";
+    string date = DateTime.Now.ToString("MMddmm");
+    var poolall = ViewData["poolall"] as string[];
+
+}
+
+
+@*@Html.Action("_GameIndex","game")*@
+<script type="application/ld+json">
+    {
+    "@@context": "http://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [{
+    "@@type": "ListItem",
+    "position": 1,
+    "item": {
+    "@@id": "http://funbet.com.tw/",
+    "name": "首頁",
+    "image": "http://funbet.com.tw/Content/images/logo-1.png"
+    }
+    },{
+    "@@type": "ListItem",
+    "position": 2,
+    "item": {
+    "@@id": "http://funbet.com.tw/game",
+    "name": 直播大廳"
+    }
+    }]
+    }
+</script>
+<style>
+    .sportsmagazine-blog > ul > li {
+        margin-bottom: 20px;
+    }
+    #livetable {
+        width: 100%;
+        float: left;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6), 4px 4px 6px rgba(0, 0, 0, 0.4), 6px 6px 12px rgba(0, 0, 0, 0.4);
+    }
+    .sportsmagazine-blog-grid figure {
+            border: 2px #594646 ridge;
+    }
+
+
+    @@media(max-width:767px) {
+        .sportsmagazine-main-content {
+            margin: 100px 0;
+        }
+    }
+
+     @@media(max-width:480px) {
+        #search-input {
+            width:130px;
+        }
+    }
+</style>
+
+
+
+<div class="sportsmagazine-main-content">
+
+    <!--// Main Section \\-->
+    <div class="sportsmagazine-main-section sportsmagazine-blogmodren-full">
+        <div class="container">
+            <div class="row">
+                @Html.Action("_Live","Live")
+
+                    <hr>
+                    @if (Model.Count() != 0)
+                    {
+                        <div class="col-md-12">
+                            <div class="search-form" style="/*! float:right */padding: 20px;display: flex;align-items: center;justify-content: center;">
+                                <input id="search-input" style="border:1px solid #e5b22a;background-color:rgb(0, 0, 0);vertical-align:top;" type="text" placeholder="搜尋直播"><button style="border:1px solid #e4b12a;background-color:#000;margin:0px 10px 0px 10px;vertical-align:top;"><i style="padding:3px 5px 3px 5px" class="fa fa-search" aria-hidden="true"></i></button>
+                                <style id="m-search"></style>
+                            </div>
+
+                            <div class="sportsmagazine-blog sportsmagazine-blog-grid">
+                                <ul class="row">
+                                    @foreach (var item in Model)
+                                    {
+                                        <li class="col-md-4" id="livetopic" data-index="@item.gamesearch">
+                                            <div id="livetable">
+                                                <figure>
+                                                    @if (item.vedio_url != "")
+                                                    {
+                                                        <iframe allowfullscreen="1" src="@item.vedio_url" width="560" height="210" frameborder="0"></iframe>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <div style="background:#000000;height:210px">
+                                                            <span>暫無直播</span>
+                                                            <canvas id="noise-3666" class="noise" width="1920" height="966"></canvas>
+                                                        </div>
+
+
+                                                    }
+                                                    <figcaption>
+                                                        <a href="@Url.Action("Details", "game", new { id = item.gamepost.sn })" class="sportsmagazine-link-btn"></a>
+                                                    </figcaption>
+                                                </figure>
+                                                <section style="height:40px">
+                                                    <h2 style="font-size:14px;"><a href="@Url.Action("Details", "game", new { id = item.gamepost.sn })" title="@item.game.title">@item.shorttitle</a></h2>
+
+                                                </section>
+                                                <div class="sportsmagazine-blog-grid-options">
+                                                    <a href="@Url.Action("Details", "game", new { id = item.gamepost.sn })" class="sportsmagazine-blog-grid-thumb">
+                                                        <i class="fa fa-microphone" aria-hidden="true" style="color: #fff;font-size: 16px;margin-right: 5px;border: 2px dashed #bbb;padding: 0px 3px;"></i>
+                                                        @item.gamepost.UserLive<br>
+                                                        @item.PlayGame.shortName
+                                                    </a>
+                                                    <ul>
+
+                                                        <li>
+                                                            <i class="fa fa-eye"></i>
+                                                            @if (item.gamepost.LiveCount == null)
+                                                            {
+                                                                <span>0</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                @item.gamepost.LiveCount
+                                                            }
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+
+
+
+
+                                </ul>
+                            </div>
+                            <!--// Pagination \\-->
+                            @*<div class="sportsmagazine-pagination">
+                    <ul class="page-numbers">
+                        <li><a class="previous page-numbers" href="404.html"><span aria-label="Next"><i class="fa fa-angle-left"></i></span></a></li>
+                        <li><span class="page-numbers current">1</span></li>
+                        <li><a class="page-numbers" href="404.html">2</a></li>
+                        <li><a class="page-numbers" href="404.html">3</a></li>
+                        <li><a class="page-numbers" href="404.html">4</a></li>
+                        <li><a class="next page-numbers" href="404.html"><span aria-label="Next"><i class="fa fa-angle-right"></i></span></a></li>
+                    </ul>
+                </div>*@
+                            <!--// Pagination \\-->
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="tablegamenull">
+                            <table style="height:79vh;background-color: #002877;
+    background-image: url(/Content/extra-images/gamebackground.png?20180514);">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img style="width:500px" src="https://storage.googleapis.com/funbet-180608.appspot.com/OtherIMG/LiveBear.png" />
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    }
+
+
+                </div>
+            </div>
+    </div>
+    <!--// Main Section \\-->
+
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var mSearch = $("#m-search");
+            $("#search-input").on('change paste keyup', function () {
+                /*$("li #item_gamesearch").each(function (index, obj) {
+
+                $(obj).val()
+
+
+            });*/
+
+                 
+                $("#search-input").bind("change paste keyup", function () {
+                    var value = $(this).val();
+                    if (!value) {
+                        mSearch.html("");
+                        return;
+                    }
+                    mSearch.html('#livetopic:not([data-index*="' + value.toLowerCase() + '"]) {display: none;}');
+                });
+
+
+
+
+            });
+
+
+            
+        });
+
+
+
+
+
+
+    </script>
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

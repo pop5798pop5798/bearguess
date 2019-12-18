@@ -1,0 +1,48 @@
+﻿@model SITW.Models.ViewModel.GamePostViewModel
+@{
+    Layout = null;
+    int i = ViewBag.index ?? 0;
+    int ti = ViewBag.topicIndex ?? 0;
+}
+
+
+
+
+
+<div name="choiceDiv" class="form-horizontal">
+
+    @Html.HiddenFor(model => model.game.topicList[ti].choiceList[i].hashSn)
+    @Html.HiddenFor(model => model.game.topicList[ti].choiceList[i].valid)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <h4>請新增選項 @(i + 1)</h4>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(model => model.game.topicList[ti].choiceList[i].choiceStr, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.game.topicList[ti].choiceList[i].choiceStr, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.game.topicList[ti].choiceList[i].choiceStr, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.game.topicList[ti].choiceList[i].comment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.game.topicList[ti].choiceList[i].comment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.game.topicList[ti].choiceList[i].comment, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group" name="Oddsgroup">
+        @Html.LabelFor(model => model.game.topicList[ti].choiceList[i].Odds, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.game.topicList[ti].choiceList[i].Odds, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.game.topicList[ti].choiceList[i].Odds, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @for (int bi = 0; bi < Model.game.topicList[0].choiceList[0].choiceString.Count(); bi++)
+        {
+            Html.RenderAction("_choiceStrEdit", "gameDP", new { model = Model.game, index = bi });
+        }
+
+</div>

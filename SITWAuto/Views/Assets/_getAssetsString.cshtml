@@ -1,0 +1,61 @@
+﻿@model List<SITW.Models.ViewModel.AssetsViewModel>
+@{
+    Layout = null;
+}
+
+<style>
+    span a {
+        float: right;
+        border: 1px solid #000;
+        background-color: #ff0000;
+        color: #fff;
+        padding: 0px 5px 0px 5px;
+        margin: 0px 10px 0px 0px;
+    }
+
+        span a:hover {
+            border: 1px solid #fff;
+        }
+
+    #myadd i {
+        padding: 5px 10px;
+        color: #27282a;
+        cursor: pointer;
+        text-shadow: 1px 1px 0 #ebdec2, -1px -1px 0 #ebdec2, 1px -1px 0 #ebdec2, -1px 1px 0 #ebdec2, 1px 1px 0 #ebdec2;
+    }
+
+        #myadd i:hover {
+            padding: 5px 10px;
+            color: #27282a;
+            cursor: pointer;
+            text-shadow: 1px 1px 0 #ffdc11, -1px -1px 0 #ffdc11, 1px -1px 0 #ffdc11, -1px 1px 0 #ffdc11, 1px 1px 0 #ffdc11;
+        }
+</style>
+
+
+@foreach (var avm in Model)
+{
+    if (avm.unitSn == 1)
+    {
+        <h5>@avm.unitName ： @avm.Asset <img style="width:22px;margin-top:-1px;" title="@avm.unitName" src="~/Content/@avm.iconURL" /><span id="myadd" data-toggle="modal" data-target="#bearModal"><i title="儲值" class="fa fa-cart-plus" aria-hidden="true"></i></span> </h5>
+    }
+    if (Model.Count == 2)
+    {
+        if (avm.unitSn == 2)
+        {
+            <h5>
+                @avm.unitName ： @avm.Asset <img style="width:22px;margin-top:-1px;" title="@avm.unitName" src="~/Content/@avm.iconURL" />
+            </h5>
+        }
+    }
+    else
+    {
+        <h5>
+            鮭魚幣 ： 0 <img style="width:22px;margin-top:-1px;" title="鮭魚幣" src="~/Content/extra-images/fish_bone2.png" />
+        </h5>
+
+    }
+
+}
+
+

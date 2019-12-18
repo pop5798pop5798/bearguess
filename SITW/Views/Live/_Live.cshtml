@@ -1,0 +1,81 @@
+﻿@model IEnumerable<SITW.Models.ViewModel.GamePostViewModel>
+
+
+@{
+    Layout = null;
+
+}
+
+    <div class="col-md-12">
+        <div class="sportsmagazine-blog sportsmagazine-blog-grid">
+            <ul class="row">
+                @foreach (var item in Model)
+                {
+                    <li class="col-md-4" id="livetopic" data-index="@item.shorttitle">
+                        <div id="livetable">
+                            <figure style="background: #000;">
+
+                                <iframe allowfullscreen="1" src="@item.vedio_url" width="560" height="210" frameborder="0"></iframe>
+
+
+
+                            </figure>
+                            <section style="height:40px">
+                                <h2 style="font-size:14px;">
+                                    <a href="@item.href" title="@item.shorttitle">
+                                        @item.shorttitle
+                                    </a>
+                                </h2>
+
+                            </section>
+                            <div class="sportsmagazine-blog-grid-options">
+                                <a href="https://www.twitch.tv/faker/" class="sportsmagazine-blog-grid-thumb">
+
+                                    @item.PlayGame.shortName
+                                </a>
+                            
+                            </div>
+                        </div>
+                    </li>
+                }
+                
+               
+
+
+
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

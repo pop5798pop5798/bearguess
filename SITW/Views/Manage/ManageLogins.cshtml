@@ -1,0 +1,101 @@
+﻿@model SITW.Models.ManageLoginsViewModel
+@using Microsoft.Owin.Security
+@{
+    ViewBag.Title = "管理您的外部登入";
+    Layout = null;
+}
+
+
+
+
+                                @{
+                                    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+                                    if (loginProviders.Count() == 0)
+                                    {
+                                        <div>
+                                            <p>
+                                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=313242">this article</a>
+                                                for details on setting up this ASP.NET application to support logging in via external services.
+                                            </p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        if (Model.CurrentLogins.Count > 0)
+                                        {
+                                          
+                                                    foreach (var account in Model.CurrentLogins)
+                                                    {
+<div style="width:100%">
+    @switch (account.LoginProvider)
+    {
+        case "Facebook":
+
+            <span style="color:#03A9F4;float:left;margin-right:10px;">@account.LoginProvider</span>
+
+
+            break;
+        case "Google":
+
+            <span style="color:#F44336;float:left;margin-right:10px;">@account.LoginProvider</span>
+
+
+            break;
+    }
+
+
+    @if (ViewBag.ShowRemoveButton)
+    {
+        using (Html.BeginForm("RemoveLogin", "Manage"))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.Hidden("loginProvider", account.LoginProvider)
+            @Html.Hidden("providerKey", account.ProviderKey)
+            <button type="submit" class="btn btn-default" title="移除您帳戶的這個 @account.LoginProvider 登入">移除綁定</button>
+
+        }
+    }
+    else
+    {
+        @: &nbsp;
+    }
+</div>   
+                                                        
+                                                    }
+                                               
+                                        }
+                                        if (Model.OtherLogins.Count > 0)
+                                        {
+                                            using (Html.BeginForm("LinkLogin", "Manage"))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                <ul class="sportsmagazine-login-social" style="width:100%">
+                                                    <li style="width:100%;padding:0">
+                                                        @foreach (AuthenticationDescription p in Model.OtherLogins)
+                                                        {
+
+                                                            switch (p.AuthenticationType)
+                                                            {
+                                                                case "Facebook":
+
+                                                                    <button style="width: 120px;" type="submit" class="color-one OAuthLogin" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="使用 @p.Caption 帳戶登入"><i class="fa fa-facebook"></i>@p.AuthenticationType</button>
+
+
+                                                                    break;
+                                                                case "Google":
+
+                                                                    <button style="width:120px;margin-bottom: 10px;" type="submit" class="color-three" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="使用 @p.Caption 帳戶登入"><i class="fa fa-google"></i>@p.AuthenticationType</button>
+
+
+                                                                    break;
+                                                            }
+
+                                                        }
+                                                    </li>
+                                                </ul>
+                                            }
+                                        }
+                                    }
+                                }
+                           

@@ -1,0 +1,111 @@
+﻿@model SITW.Models.ViewModel.ProductApiModel
+@{
+    Layout = null;
+}
+<style>
+    .sportsmagazine-shop-list-text {
+        padding: 22px 0px 47px 30px;
+    }
+    .loginmodal .modal-dialog {
+        width: fit-content;
+        width: -moz-fit-content;
+    }
+
+</style>
+
+
+
+<div style="float:left;">
+    <div class="col-md-12">
+        <div class="sportsmagazine-shop sportsmagazine-shop-list">
+            <ul class="row">
+                <li class="col-md-12" style="border:5px #8c8c8c ridge;background: #020304;">
+                    <figure>
+                        <a href="shop-detail.html"><img src="/Content/extra-images/shop-list-img2.jpg" alt=""></a>
+
+                    </figure>
+                    <div class="sportsmagazine-shop-list-text">
+                        <h4><a href="shop-detail.html">@Model.product.ProductName</a></h4>
+                        <span class="sportsmagazine-price-cartbox">
+                            @* <del>$39.99</del>*@
+                            $@Model.product.Price @Model.unit.showStr
+                        </span>
+                        <p>@Model.product.ProductContent </p>
+                        <ul class="sportsmagazine-summery-option">
+
+                            <li>
+                                <label>目前鮭魚幣：</label>
+                                @ViewBag.gold
+
+                            </li>
+
+                        </ul>
+                        @if (ViewBag.change != 0)
+                        {
+                            <button class="cart-checkout-btn" name="changepay">兌換</button>
+                        }
+                        else
+                        {
+                            <button class="cart-checkout-btn" style="color:#333;cursor:unset;">無法兌換</button>
+                        }
+                        <button class="cart-checkout-btn" id="changeclose">返回</button>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+<script>
+    function change_P() {
+          Swal.fire({
+                    title: '確認資訊',
+                    html: '兌換商品：@Model.product.ProductName<br>' +
+                        '兌換金額：@Model.product.Price @Model.unit.showStr<br>',
+                    type: 'info',
+                    confirmButtonText: '確定兌換!',
+                    showCancelButton: true
+                }).then((conf) => {
+                    if (conf.value) {
+                      
+                        var pid = parseInt(@Model.product.id);
+                         $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("MallChange", "WebMall")',
+                        data: { id: pid},
+                             success: function (data) {
+                                 $("#MallModal").modal('toggle');
+                                if (data == 1) {
+                                    Swal.fire({
+                                        title: '完成!',
+                                        text: '兌換成功',
+                                        type: 'success',
+                                        confirmButtonText: '完成!'
+                                    });
+                                    
+
+                                } else {
+                                    Swal.fire({
+                                        title: '兌換失敗!',
+                                        text: '請重新操作',
+                                        type: 'error',
+                                        confirmButtonText: '確定!'
+                                    });
+                                }
+                                                            
+
+                        }
+
+                    });
+                    }
+                   
+
+                });
+
+    }
+
+
+
+    </script>

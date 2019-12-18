@@ -1,0 +1,285 @@
+﻿
+@{
+    Layout = null;
+}
+<style>
+
+    textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+        background-color: rgba(0, 0, 0, 0);
+        color: rgb(0, 0, 0);
+    }
+
+    
+
+    </style>
+
+
+<div role="tabpanel" class="tab-pane active" id="account">
+    <br>
+    <div class="sportsmagazine-account">
+        <div class="col-md-12">
+            <div class="sportsmagazine-cart-payment-method">
+                <h5>轉帳中心</h5>
+                <div class="panel-group sportsmagazine-cart-accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">魚骨幣轉帳</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <p>魚骨幣轉帳功能，使用此功能可以進行魚骨幣交易。每次交易需達100,000魚骨幣，並且扣除10%手續費</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                @if (ViewBag.Safety != null)
+                {
+                    <a href="#" class="cart-checkout-btn" id="transform">開始轉帳</a>
+                }
+                else
+                {
+                    <a href="#" class="cart-checkout-btn" id="safety">安全碼設置</a>
+
+                }
+                <div id="transformlist">
+
+                    </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#transform").click(function () {
+            Transform();
+        });
+        $("#safety").click(function () {
+            Safety();
+        });
+        $("#transformlist").load("@Url.Action("_TransformRecords", "Manage")");
+
+    });
+    function Safety() {
+        Swal.mixin({
+            confirmButtonText: '下一步 &rarr;',
+            showCancelButton: true,
+            progressSteps: ['1', '2','3']
+        }).queue([
+            {
+                title: '設置轉帳安全碼',
+                type: 'question',
+                input: 'password',
+                text: '請輸入英數字',
+                confirmButtonText: '確定',
+                showCancelButton: true
+            }, {
+                title: '再輸入一次',
+                type: 'question',
+                input: 'password',
+                text: '安全碼請再輸一次',
+                confirmButtonText: '再次確認',
+                showCancelButton: true
+            },
+            {
+                title: '確認設置',
+                type: 'question',
+                confirmButtonText: '確認設置',
+                showCancelButton: true
+            }
+            ]).then((result) => {
+
+                if (result.value && result.value[0] == result.value[1]) {
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Safety", "Manage")',
+                        data: { pd: result.value },
+                        dataType: "json",
+                        success: function (data) {
+                            if (data) {
+                                Swal.fire({
+                                    title: '完成!',
+                                    text: '設置成功',
+                                    confirmButtonText: '完成!'
+                                });
+                                $("#safety").html('開始轉帳');
+                                $("#safety").attr('id', 'transform');
+                                $("#transform").click(function () {
+                                    Transform();
+                                });
+
+
+                            }
+
+
+                        }
+
+                    });
+                } else {
+                    Swal.fire({
+                        title: '安全碼請重新設置!',
+                        text: '兩次輸入的安全碼不同',
+                        type: 'error',
+                        confirmButtonText: '確定!'
+                    });
+
+
+                }
+        });
+
+        
+    }
+
+
+    function Transform() {
+        Swal.mixin({
+            confirmButtonText: '下一步 &rarr;',
+            showCancelButton: true,
+            progressSteps: ['1', '2', '3']
+        }).queue([
+            {
+                title: '轉入帳號Email',
+                text: '請輸入轉入帳號的玩家Email',
+                input: 'email',
+                inputPlaceholder: '輸入Email',
+                inputValidator: (value) => {
+                    var emailRule = /^\w+((-\w+)|(\.\w+))*\@@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                    if (!value) {
+                        return "轉入帳號為空!!";
+                    } else if (value.search(emailRule) == -1) {
+                        return '請確認轉入帳號的Email格式是否正確!';
+                    }
+
+                }
+            },
+            {
+                title: '步驟 2',
+                text: '金額',
+                input: 'number',
+                inputPlaceholder: '轉入金額',
+                inputAttributes: {
+                    min: 100000,
+                    step: 100000
+                },
+                inputValue: 100000,
+                inputValidator: (value) => {
+                    var numberRule = /^\d{6,}$/;
+                    if (!value) {
+                        return "轉入金額為空!!";
+                    } else if (value.search(numberRule) == -1) {
+                        return '金額錯誤，請確認最低轉出額是否100,000以上!';
+                    }
+
+                }
+            },
+            {
+                title: '安全碼',
+                text: '請輸入轉出安全碼',
+                input: 'password',
+                inputPlaceholder: '安全碼',
+                inputValidator: (value) => {
+                    if (!value) {
+                        return "轉入金額為空!!";
+                    }
+                }
+            }
+        ]).then((result) => {
+            if (result.value) {
+                Swal.fire({
+                    title: '確認資訊',
+                    html: '轉帳Email：' + result.value[0] + '<br>' +
+                        '轉出金額：' + result.value[1] + '<br>' +
+                        '手續費：' + result.value[1] * 10 / 100 + '<br>' +
+                        '轉出金額(扣除10%後)：' + result.value[1] * 90 / 100,
+                    type: 'info',
+                    confirmButtonText: '確定轉出!',
+                    showCancelButton: true
+                }).then((conf) => {
+                    if (conf.value) {
+                         $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("TransformAsync", "Manage")',
+                        data: { email: result.value[0], money: result.value[1], safety: result.value[2] },
+                        dataType: "json",
+                        success: function (data) {
+                                if (data == 1) {
+                                    Swal.fire({
+                                        title: '完成!',
+                                        text: '轉帳成功',
+                                        type: 'success',
+                                        confirmButtonText: '完成!'
+                                    });
+                                     $("#transformlist").load("@Url.Action("_TransformRecords", "Manage")");
+
+                                } else {
+                                    Swal.fire({
+                                        title: '轉帳失敗!',
+                                        text: '請重新操作',
+                                        type: 'error',
+                                        confirmButtonText: '確定!'
+                                    });
+                                }
+                                                            
+
+                        }
+
+                    });
+                    }
+                   
+
+                });
+
+
+
+               
+            }
+        });
+
+
+
+    }
+   
+   
+    /*var cloud_email = $('.cloud_email').text();
+    var user_number = $('.user_number').text();
+    swal.setDefaults({
+        confirmButtonText: '下一个 &rarr;',
+        showCancelButton: true,
+        animation: false
+    });
+
+    var steps = [
+        {
+            title: '步驟 1',
+            text: '請輸入轉入帳號的玩家Email',
+            input: 'email',
+            inputValue: cloud_email
+        }, {
+            title: '步驟 2',
+            text: '請輸入轉入金額(最低轉帳金額10萬)',
+            input: 'number',
+            inputValue: user_number
+        },
+        '问题 3'
+    ];
+
+    swal.queue(steps).then(function (email, name) {
+        swal({
+            type: 'success',
+            html: 'Email successfully sent to: ' + name + ': ' + email
+        });
+    }).finally(function () {
+        swal.resetDefaults();
+    });*/
+
+
+    </script>

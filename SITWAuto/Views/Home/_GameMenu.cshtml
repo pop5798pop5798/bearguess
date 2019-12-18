@@ -1,0 +1,173 @@
+﻿@{
+    Layout = null;
+}
+<style>
+    h6 a {
+        color: #e4b12a;
+    }
+    .sportsmagazine-account ul li {
+        margin: 20px 0px 21px;
+    }
+
+    #gamemenu a {
+        color: #FF9800;
+    }
+        #gamemenu a:hover {
+            color: #FFC107;
+        }
+
+    .sportsmagazine-account {
+        background-color: #002877;
+        background-image: url(/Content/extra-images/gamebackground.png?20180514);
+        margin-top: 1px;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.27), 4px 4px 6px rgba(0, 0, 0, 0.21), 6px 6px 12px rgba(0, 0, 0, 0);
+        border: 1px solid #39406f;
+    }
+        .sportsmagazine-account ul {
+            margin: 0px auto;
+            text-align: center;
+            width: 100%;
+        }
+</style>
+
+<div class="widget widget_team_ranking">
+    <div class="sportsmagazine-fancy-title2">
+        <h2>
+            <i class="fa fa-gamepad" style="margin:0px 10px 0px 0px;
+text-shadow:1px 1px 0 #e4b12a, -1px -1px 0 #e4b12a, 1px -1px 0 #e4b12a, -1px 1px 0 #e4b12a, 1px 1px 0 #e4b12a;color:#181c26" aria-hidden="true"></i> 小遊戲選單
+        </h2>
+
+    </div>
+    @if (Request.IsAuthenticated)
+    {
+        <div role="tabpanel" class="tab-pane active" id="gamemenu">
+            <br>
+            <div class="sportsmagazine-account">
+
+                <ul>
+
+                    <li>
+                        <a target="_blank" href="/AllGame/Fruitgame/">
+                            <div>
+                                <img src="~/Content/extra-images/SlotMachine.jpg">
+                            </div>
+                            <span>水果機</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a target="_blank" href="~/AllGame/Rat/">
+                            <div>
+                                <img src="~/Content/extra-images/rat.png">
+                            </div>
+                            <span>打老鼠  @ViewBag.Rat</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a target="_blank" href="/AllGame/brick-out/">
+                            <div>
+                                <img src="~/Content/extra-images/brickout.jpg">
+                            </div>
+                            <span>敲磚塊  @ViewBag.brick</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="/AllGame/Lotto/">
+                            <div>
+                                <img src="~/Content/extra-images/cartbox-1.png" style="width:200px">
+                            </div>
+                            <span>樂透</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a target="_blank" href="@Url.Action("AkGame","Html5")">
+                            <div>
+                                <img src="~/Content/extra-images/cartbox-1.png" style="width:200px">
+                            </div>
+                            <span>預測A~K</span>
+                        </a>
+
+                    </li>
+                    <li>
+
+
+                    </li>
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+
+    }
+    else
+    {
+        <div role="tabpanel" class="tab-pane active" id="gamemenu">
+            <br>
+            <div class="sportsmagazine-account">
+
+                <ul>
+
+                    <li>
+                        <a  href="@Url.Action("Login","account")">
+                            <div>
+                                <img src="~/Content/extra-images/SlotMachine.jpg">
+                            </div>
+                            <span>水果機</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a  href="@Url.Action("Login","account")">
+                            <div>
+                                <img src="~/Content/extra-images/rat.png">
+                            </div>
+                            <span>打老鼠</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a  href="@Url.Action("Login","account")">
+                            <div>
+                                <img src="~/Content/extra-images/brickout.jpg">
+                            </div>
+                            <span>敲磚塊</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a  href="@Url.Action("Login","account")">
+                            <div>
+                                <img src="~/Content/extra-images/Lotto.jpg" style="width:200px">
+                            </div>
+                            <span>樂透</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a  href="@Url.Action("Login","account")">
+                            <div>
+                                <img src="~/Content/extra-images/A-K.jpg" style="width:200px">
+                            </div>
+                            <span>預測A~K</span>
+                        </a>
+
+                    </li>
+                    <li>
+
+
+                    </li>
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+    }
+</div>

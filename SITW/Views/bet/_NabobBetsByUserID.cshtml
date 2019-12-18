@@ -1,0 +1,199 @@
+﻿@model SITW.Models.ViewModel.BetsByUserID
+@{ 
+    Layout = null;
+    ViewBag.Title = "預測紀錄";
+}
+<style>
+    .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+        border-bottom: 1px solid #2f334c;
+    }
+    table > thead > tr > th, table > tbody > tr > th, table > tfoot > tr > th, table > thead > tr > td, table > tbody > tr > td, table > tfoot > tr > td {
+        border: 0px;
+    }
+
+
+</style>
+
+
+
+<div class="sportsmagazine-wishlist" id="newsmargin" style="margin-top:30px">
+    @*   <h4>競猜歷史</h4>*@
+    <div class="sportsmagazine-wishlist-graph">
+
+        @if (Model.NabobBetList != null && Model.NabobBetList.Count > 0)
+        {
+
+
+            <div id="no-more-tables">
+                <table class="col-md-13 table-bordered table-striped table-condensed cf">
+                    <thead class="cf" style="border-bottom:1px solid #2f334c">                       
+                        <tr >
+
+                            <th>主題</th>
+
+                            <th class="numeric">金額</th>
+                            <th class="numeric">結果</th>
+                            <th class="numeric"></th>
+                            <th>時間</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model.NabobBetList)
+                    {
+                        <tbody style="color:#e5b22a;font-weight:100">
+                            <tr>
+
+                                <td data-title="主題">@Html.DisplayFor(modelItem => item.game)</td>
+                                <td data-title="金額" class="numeric">@Html.DisplayFor(modelItem => item.money)</td>
+                                <td data-title="結果" class="numeric">
+                                    @{
+                                        int istrue = 0;
+                                        int unknow = 0;
+                                    }
+                                    @foreach (var topic in item.topic)
+                                    {
+                                        if (topic.isTrueValue == "true")
+                                        {
+                                            istrue += 1;
+                                        }
+                                        else if (topic.isTrueValue == "unknow")
+                                        {
+                                            unknow += 1;
+                                        }
+
+                                    }
+                                    @if (item.topic.Count == istrue)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.realmoney)
+                                    }
+                                    else if (item.topic.Count == unknow)
+                                    {
+                                        if (item.gameStatus == 5)
+                                        {
+                                            <span style="color:#63b4e5"> 無效並返還 </span>
+                                        }
+
+                                        else
+                                        {
+                                            <span>未知</span>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <span style="color:#f92552"> @Html.DisplayFor(modelItem => item.realmoney)</span>
+                                    }
+
+
+                                </td>
+                                <td data-title="" class="numeric">
+                                    <a href="#" data-toggle="modal" data-target="#@item.sn"> 詊細內容</a>
+
+                                </td>
+                                <td data-title="時間" class="numeric">
+                                    @Html.DisplayFor(modelItem => item.betDatetime)
+
+                                </td>
+
+                            </tr>
+
+                            @*<td  data-title="時間" class="numeric">@Html.DisplayFor(modelItem => item.betDatetime)</td>*@
+
+                        </tbody>
+                    }
+                </table>
+            </div>
+
+            foreach (var itemmodal in Model.NabobBetList)
+            {
+                <!-- BetModal -->
+                <div class="loginmodal modal fade" id="@itemmodal.sn" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <a style="line-height:0;z-index:999;" href="#" data-dismiss="modal" class="sportsmagazine-login-close sportsmagazine-color">X</a>
+                        <div class="sportsmagazine-login-box">
+                            <div id="no-more-tables">
+                                <table class="col-md-13 table-bordered table-striped table-condensed cf">
+                                    <thead class="cf" style="border-bottom:1px solid #2f334c">
+                                        <tr style=" height: 50px;">
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr style="color: #ebdec2;background-color:#002877;background-image: url(/Content/extra-images/gamebackground.png);">
+
+                                            <th>題目</th>
+                                            <th class="numeric">競猜項目</th>
+                                            <th class="numeric">幣別</th>
+                                            <th class="numeric">結果</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody style="color:#e5b22a;font-weight:100">
+
+
+
+
+                                        @foreach (var topic in itemmodal.topic)
+                                        {
+                                            <tr>
+
+
+
+
+
+                                                <td style="border-left:1px solid #2f334c;" data-title="題目">@Html.DisplayFor(modelItem => topic.topic)</td>
+                                                <td data-title="選擇項目" class="numeric">
+                                                    @Html.DisplayFor(modelItem => topic.choice)
+                                                </td>
+                                                <td data-title="幣別" class="numeric">@Html.DisplayFor(modelItem => topic.unit)</td>
+                                                <td data-title="結果" style="border-right:1px solid #2f334c;" class="numeric">
+                                                    @if (topic.isTrueValue == "false")
+                                                    {
+                                                        <span>錯誤</span>
+                                                    }
+                                                    else if (topic.isTrueValue == "true")
+                                                    {
+                                                        <span>正確</span>
+                                                    }
+                                                    else if (topic.isTrueValue == "invalid")
+                                                    {
+                                                        <span>無效</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>未定</span>
+                                                    }
+
+
+                                                </td>
+
+
+                                            </tr>
+
+                                        }
+                                        @*<td  data-title="時間" class="numeric">@Html.DisplayFor(modelItem => item.betDatetime)</td>*@
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                }
+
+
+
+
+
+
+
+            }
+
+        </div>
+    </div>
+

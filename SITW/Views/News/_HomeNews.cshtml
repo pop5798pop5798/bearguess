@@ -1,0 +1,197 @@
+﻿@model IEnumerable<SITW.Models.ViewModel.NewsViewModel>
+
+@{
+    Layout = null;
+}
+<style>
+    .sportsmagazine-account-tabs .nav-tabs > li {
+        padding: 0;
+    }
+
+    .sportsmagazine-account-tabs .nav-tabs {
+        padding: 0 10px;
+    }
+
+    .widget_popular_news ul, .widget_popular_news ul li {
+        box-shadow: initial;
+    }
+
+    .sportsmagazine-account-tabs {
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.27), 4px 4px 6px rgba(0, 0, 0, 0.21), 6px 6px 12px rgba(0, 0, 0, 0);
+    }
+
+    @@media (max-width: 480px) {
+        .sportsmagazine-account-tabs .nav-tabs li {
+            width: 33%;
+        }
+    }
+</style>
+
+
+
+<head>
+    <meta property="og:url" content="@Url.Action("Index", "Home",null, Request.Url.Scheme)">
+
+</head>
+
+<!--// Widget Trending News \\-->
+<div class="widget widget_popular_news">
+    <div class="sportsmagazine-fancy-title2">
+        <h2>
+            <i class="fa fa-paper-plane-o" style="margin:0px 10px 0px 0px;
+text-shadow:1px 1px 0 #e4b12a, -1px -1px 0 #e4b12a, 1px -1px 0 #e4b12a, -1px 1px 0 #e4b12a, 1px 1px 0 #e4b12a;color:#181c26" aria-hidden="true"></i> 最新資訊
+        </h2>
+        <h6 style="margin:-40px 40px 0px 0px;float:right;">
+            @*Html.ActionLink("more", "News", "Home")*@
+            <a href="@Url.Action("Index","News")"><i class="fa fa-plus-square-o fa-lg"></i></a>
+        </h6>
+
+    </div>
+    <div class="sportsmagazine-account-tabs">
+        <ul class="nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#NewsAll" aria-controls="NewsAll" role="tab" data-toggle="tab">全部</a></li>
+            <li role="presentation"><a href="#News01" aria-controls="News01" role="tab" data-toggle="tab">公告</a></li>
+            <li role="presentation"><a href="#News02" aria-controls="News02" role="tab" data-toggle="tab">新聞</a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="NewsAll">
+                <ul style="border:1px solid #2f334c">
+                    @foreach (var item in Model)
+                    {
+                        if (item.p_class == 1)
+                        {
+                            <li class="widget-theleague" style="border-top:1px solid #2f334c;">
+                                <span><img src="@item.image"></span>
+                                <div class="popular_news_text">
+                                    <small>活動</small>
+                                    <a href="@Url.Action("Details",new { id = item.Id })">@item.title</a>
+                                    <a href="@Url.Action("Details",new { id = item.Id })"><div id="jshtml">@Html.DisplayFor(model => item.news_content)</div></a>
+                                    <time>@item.real_time</time>
+                                </div>
+                            </li>
+                        }
+                        else if (item.p_class == 2)
+                        {
+
+                            <li class="widget-injuries" style="border-top:1px solid #2f334c;">
+                                <span><img src="@item.image"></span>
+                                <div class="popular_news_text">
+                                    <small>停權</small>
+                                    <a href="@Url.Action("Details",new { id = item.Id })">@item.title</a>
+                                    <a href="@Url.Action("Details",new { id = item.Id })"><div id="jshtml">@Html.DisplayFor(model => item.news_content)</div></a>
+                                    <time>@item.real_time</time>
+                                </div>
+                            </li>
+                        }
+                        else if (item.p_class == 3)
+                        {
+
+
+                            <li style="border-top:1px solid #2f334c;">
+                                <span><img src="@item.image"></span>
+                                <div class="popular_news_text">
+                                    <small>公告</small>
+                                    <a href="@Url.Action("Details",new { id = item.Id })">@item.title</a>
+                                    <a href="@Url.Action("Details",new { id = item.Id })"><div id="jshtml">@Html.DisplayFor(model => item.news_content)</div></a>
+                                    <time>@item.real_time</time>
+                                </div>
+                            </li>
+                        }
+                        else if (item.p_class == 4)
+                        {
+                            <li class="widget-injuries" style="border-top:1px solid #2f334c;">
+                                <span><img src="@item.image"></span>
+                                <div class="popular_news_text">
+                                    <small>新聞</small>
+                                    <a href="@Url.Action("Details",new { id = item.Id })">@item.title</a>
+                                    <a href="@Url.Action("Details",new { id = item.Id })"><div id="jshtml">@Html.DisplayFor(model => item.news_content)</div></a>
+                                    <time>@item.real_time</time>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="News01">
+                <ul style="border:1px solid #2f334c">
+                    @foreach (var item in Model)
+                    {
+                        if (item.p_class == 1)
+                        {
+                            <li class="widget-theleague" style="border-top:1px solid #2f334c;">
+                                <span><img src="@item.image"></span>
+                                <div class="popular_news_text">
+                                    <small>活動</small>
+                                    <a href="@Url.Action("Details",new { id = item.Id })">@item.title</a>
+                                    <a href="@Url.Action("Details",new { id = item.Id })"><div id="jshtml">@Html.DisplayFor(model => item.news_content)</div></a>
+                                    <time>@item.real_time</time>
+                                </div>
+                            </li>
+                        }
+                        else if (item.p_class == 2)
+                        {
+
+                            <li class="widget-injuries" style="border-top:1px solid #2f334c;">
+                                <span><img src="@item.image"></span>
+                                <div class="popular_news_text">
+                                    <small>停權</small>
+                                    <a href="@Url.Action("Details",new { id = item.Id })">@item.title</a>
+                                    <a href="@Url.Action("Details",new { id = item.Id })"><div id="jshtml">@Html.DisplayFor(model => item.news_content)</div></a>
+                                    <time>@item.real_time</time>
+                                </div>
+                            </li>
+                        }
+                        else if (item.p_class == 3)
+                        {
+
+
+                            <li style="border-top:1px solid #2f334c;">
+                                <span><img src="@item.image"></span>
+                                <div class="popular_news_text">
+                                    <small>公告</small>
+                                    <a href="@Url.Action("Details",new { id = item.Id })">@item.title</a>
+                                    <a href="@Url.Action("Details",new { id = item.Id })"><div id="jshtml">@Html.DisplayFor(model => item.news_content)</div></a>
+                                    <time>@item.real_time</time>
+                                </div>
+                            </li>
+                        }
+
+                    }
+                </ul>
+
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="News02">
+                <ul style="border:1px solid #2f334c">
+                    @foreach (var item in Model)
+                    {
+                        if (item.p_class == 4)
+                        {
+                            <li class="widget-injuries" style="border-top:1px solid #2f334c;">
+                                <span><img src="@item.image"></span>
+                                <div class="popular_news_text">
+                                    <small>新聞</small>
+                                    <a href="@Url.Action("Details",new { id = item.Id })">@item.title</a>
+                                    <a href="@Url.Action("Details",new { id = item.Id })"><div id="jshtml">@Html.DisplayFor(model => item.news_content)</div></a>
+                                    <time>@item.real_time</time>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+
+</div>
+
+

@@ -1,0 +1,355 @@
+﻿@model SITW.Models.ViewModel.ProductApiModel
+@{
+    Layout = null;
+}
+
+<style>
+    @@media (min-width: 768px) and (max-width: 990px) {
+
+        #bearModal .modal-dialog {
+            width: 800px;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        #bearModal .sportsmagazine-shop-list-text {
+            font-size: 12px;
+            padding: 0px 0px 10px 10px;
+        }
+
+        #bearModal figure {
+            width: 50%;
+        }
+
+        .sportsmagazine-login-box {
+            padding: 0px 0px 0px 15px;
+        }
+    }
+    @@media (max-width: 480px) {
+        #bearModal .sportsmagazine-shop-list-text {
+            font-size: 11px;
+        }
+     }
+
+
+    .inv {
+        margin:10px 0 10px 0;
+        width:80%;
+    }
+    #page_invoice {
+        margin-bottom: 20px;
+        display: none;
+    }
+    #allval, #page_only, #page_company, #CarrierID, #Emailinv {
+        display: none;
+    }
+    .form-control {
+        display: unset;
+    }
+
+    .swal2-container {
+        z-index: 999999;
+    }
+    #col-invoice {
+        padding: 0;
+    }
+   
+</style>
+@*<link href="~/Content/invoice_button.css" rel="stylesheet">*@
+
+
+<div style="float:left;border:5px  #8c8c8c ridge;min-height:370px;background: #020304;">
+    <div class="col-md-12">
+        <div class="sportsmagazine-shop sportsmagazine-shop-list">
+            <ul class="row">
+                <li class="col-md-12">
+                    <figure>
+                        <a href="#"><img src="~/Content/extra-images/bear-money-293_341.jpg" alt=""></a>
+
+                    </figure>
+                    <div class="sportsmagazine-shop-list-text">
+                        <h4 id="Pname">@Model.product.ProductName</h4>
+                        <span class="sportsmagazine-price-cartbox" >
+                            @* <del>$39.99</del>*@
+                            $@Model.product.Price @Model.unit.showStr
+                        </span>
+                        <div class="col-md-12" id="col-invoice">
+                            @*<button type="button" id="i_class" class="btn btn-warning btn-md active">捐贈發票</button>
+                            <button type="button" id="i_class" class="btn btn-warning btn-md">個人電子發票</button>
+                            <button type="button" id="i_class" class="btn btn-warning btn-md">三聯式電子發票</button>*@
+
+                            <div id="invoiceModels" class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-warning btn-md active" for="invoice1">
+                                    <input type="radio" name="invoiceModel"  id="invoice" value="1" autocomplete="off" checked> 捐贈發票
+                                </label>
+                                <label class="btn btn-warning btn-md" for="betModel2">
+                                    <input type="radio"  name="invoiceModel"  value="2" autocomplete="off"> 個人電子發票
+                                </label>
+                                <label class="btn btn-warning btn-md" for="betModel3">
+                                    <input type="radio"  name="invoiceModel"  value="3" autocomplete="off"> 三聯式電子發票
+                                </label>
+
+                            </div>
+                            <from id="invoice">
+                                <div id="page_invoice">
+
+                                    <div class="inv">
+                                        <input type="radio" name="donation" value="1" checked="checked">受捐贈機關或團體
+                                    </div>
+                                    <div class="inv">
+                                        <select class="form-control" name="LoveKey">
+                                            <option value="55135">中華民國紅十字會總會 (代碼：55135)</option>
+                                            <option value="10666"> 財團法人癌症關懷基金會 (代碼：10666) </option>
+                                            <option value="668">社團法人臺東縣向日葵關懷協會 (代碼：668) </option>
+                                            <option value="520505">中華動物希望協會 (代碼：520505)</option>
+                                            <option value="4312">社團法人中華親善動物保護協會 (代碼：4312)</option>
+                                            <option value="52374">中華扶智生命教育協會 (代碼：52374)</option>
+                                        </select>
+                                    </div>
+                                    <div class="inv">
+                                        <input type="radio" name="donation" value="2">其他受捐贈機關或團體
+                                    </div>
+                                    <div class="inv">
+                                        <input style="width:100%" name="LoveKey2" type="text" value="" placeholder="受捐贈機關或團體">
+                                    </div>
+                                    <a href="~/Content/Pdf/xca.pdf" target="_blank">受捐贈機關或團體捐贈碼查詢</a>
+
+                                </div>
+
+
+
+                                <div id="page_only">
+
+                                    <div class="inv">
+                                        電子發票載具類別
+                                    </div>
+                                    <div class="inv">
+                                        <select class="form-control" name="CarrierType">
+                                            <option value="1">不使用</option>
+                                            <option value="3J0002">手機條碼載具</option>
+                                            <option value="CQ0001">自然人憑證條碼載具</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="inv" id="CarrierID">
+                                        <input style="width:100%" name="CarrierID" type="text" value="" placeholder="">
+                                    </div>
+
+                                </div>
+                                <div id="Emailinv">
+                                    <div class="inv">
+                                        購買人電子郵件
+                                    </div>
+                                    <div class="inv">
+                                        <input style="width:100%" name="Email" type="text" value="@ViewData["Email"]" placeholder="請輸入電子郵件">
+                                    </div>
+
+                                </div>
+
+                                <div id="allval">
+
+                                   
+                                    <div class="inv" id="mailname">
+                                        收件人姓名
+                                    </div>
+                                    <div class="inv">
+                                        <input style="width:100%" name="Name" type="text" value="" placeholder="請輸入全名">
+                                    </div>
+                                    <div class="inv">
+                                        中獎將主動寄送紙本發票至以下填寫地址
+                                    </div>
+                                    <div class="inv">
+
+                                        <select id="CityDDL" name="City" style="max-width:49%" class="form-control"></select>
+                                        <select id="CountyDDL" name="County" style="max-width:49%" class="form-control"></select>
+
+                                    </div>
+                                    <div class="inv">
+                                        <input style="width:100%" name="Address" type="text" value="" placeholder="詳細地址">
+                                    </div>
+
+
+
+                                </div>
+
+
+                                <div id="page_company">
+                                    <div class="inv">
+                                        統一編號
+                                    </div>
+                                    <div class="inv">
+                                        <input style="width:100%" name="Buyer_id" type="text" value="" placeholder="統一編號">
+                                    </div>
+
+                                </div>
+                                <input type='hidden' name='MerchantOrder' value='@ViewBag.MerchantOrderNo'>
+                            </from>
+
+                            <div style="float:left;width:100%">
+                                @* 喬睿金流 <div id="googlepay" style="width:50%"></div>*@
+                                <button style="float:left" class="cart-checkout-btn" id="gomain">取消</button>
+                                @*test https://ccore.newebpay.com/MPG/mpg_gateway  <form name='newebpay' method='post' action='https://core.spgateway.com/MPG/mpg_gateway' target="_blank"> *@
+                            <form name='newebpay' method='post' action='https://core.spgateway.com/MPG/mpg_gateway' target="_blank">
+                                <input type='hidden' name='TradeInfo' value='@ViewData["TradeInfo"]'>
+                                <input type='hidden' name='TradeSha' value='@ViewData["TradeSha"]'>
+                                <input type='hidden' name='RespondType' value='JSON'>
+                                <input type='hidden' name='Version' value='1.5'>
+                                <input type='hidden' name='TimeStamp' value='@ViewBag.TimeStamp'>
+                                <input type='hidden' name='MerchantOrderNo' value='@ViewBag.MerchantOrderNo'>
+                                <input type='hidden' name='MerchantID' value='@ViewBag.MerchantID'>
+                                <input type='hidden' name='Amt' value='@Model.product.Price'>
+                                <input type='hidden' name='ItemDesc' value='@Model.product.ProductName'>
+                                <input type='hidden' name='EmailModify' value='1'>
+                                <input type='hidden' name='Email' value='@ViewData["Email"]'>
+
+                                <input type='hidden' name='WEBATM' value='@ViewBag.WEBATM'>
+                                <input type='hidden' name='VACC' value='@ViewBag.VACC'>
+                                <input type='hidden' name='CVS' value='@ViewBag.CVS'>
+                                <input type='hidden' name='BARCODE' value='@ViewBag.BARCODE'>
+
+
+                                <input type='hidden' name='LoginType' value='0'>
+                                <input type='hidden' name='TradeLimit' value='180'>
+                                <button type='button' class="cart-checkout-btn" id="endsumit">結帳去</button>
+                            </form>
+
+                            </div>
+                        </div>
+
+                        </div>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<script src="~/Scripts/TaiwanZipCode.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var ActionUrls =
+        {
+            GetCityDropDownlist: '@Url.Action("GetCityDropDownlist", "WebMall", new { Area = "" })',
+            GetCountyDropDownlist: '@Url.Action("GetCountyDropDownlist", "WebMall", new { Area = "" })'
+        };
+        TaiwanZipCode.Initialize(ActionUrls);
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        var options = {
+            CityID: '#CityDDL',
+            CountyID: '#CountyDDL'
+        };
+        TaiwanZipCode.Settings(options);
+        var options = {
+            CityID: '#CCityDDL',
+            CountyID: '#CCountyDDL'
+        };
+        TaiwanZipCode.Settings(options);
+    });
+</script>
+<script src="~/Scripts/invoice-js.js"></script>
+<script>
+        TPDirect.setupSDK(13269, 'app_IuNqgANRFkfWv6x4C6u4Wr2pJPO4cQoJVBlpdv1laUHbsPlgMHQ1zlRHH01j', 'sandbox');
+
+        var googlePaySetting = {
+            googleMerchantId: "Come from google portal",
+            tappayGoogleMerchantId: "Come from tappay portal",
+            allowedCardAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+            merchantName: "Funbet Test!",
+            emailRequired: true, // optional
+            shippingAddressRequired: true, // optional,
+            billingAddressRequired: true, // optional
+            billingAddressFormat: "MIN", // FULL, MIN
+
+            allowPrepaidCards: true,
+            allowedCountryCodes: ['TW'],
+
+            phoneNumberRequired: true // optional
+        };
+        TPDirect.googlePay.setupGooglePay(googlePaySetting);
+
+
+
+        var paymentRequest = {
+            allowedNetworks: ["AMEX", "JCB", "MASTERCARD", "VISA"],
+            price: "@Model.product.Price", // optional
+            currency: "TWD" // optional
+        };
+
+
+        TPDirect.googlePay.setupPaymentRequest(paymentRequest, function (err, result) {
+
+            if (result.canUseGooglePay) {
+                TPDirect.googlePay.setupGooglePayButton({
+                    el: "#googlepay",
+                    color: "white",
+                    type: "long",
+                    getPrimeCallback: function (err, prime) {
+                       // console.log('paymentRequestApi.getPrime result', prime);
+                       // console.log('err:', TPDirect);
+                        handlePayByPrime(prime);
+                    }
+
+                });
+            }
+        });
+
+
+
+
+
+        function handlePayByPrime(result) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("paymentRequest", "WebMall")',
+                data: { pm: parseInt(@Model.product.id), prime: result },
+                dataType: "json",
+                success: function (data) {
+                    var json = $.parseJSON(data);
+                    $("#bearModal").modal('toggle');
+                    if (json.status == 0) {
+                        swal("付款成功",
+                            "請確認是否收到魚骨幣",
+                            "success");
+                    } else {
+
+                        swal("付款失敗",
+                            "請重新操作",
+                            "error");
+
+                    }
+
+
+                }
+
+            });
+
+
+
+    }
+
+    //自訂預設值
+    /*swal.setDefaults({
+        confirmButtonText: "確定",
+        cancelButtonText: "取消"
+    });*/
+    //swal.resetDefaults();//清空自訂預設值
+
+    $(document).ready(function () {
+                  
+            wait_invoice("@Url.Action("Wait", "Invoice")");
+
+        
+        });
+
+
+</script>
+

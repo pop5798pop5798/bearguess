@@ -1,0 +1,232 @@
+﻿@model SITW.Models.ViewModel.ProductApiModel
+@{
+    Layout = null;
+}
+<style>
+    .sportsmagazine-shop-list-text {
+        padding: 22px 0px 47px 30px;
+    }
+
+    .swal2-input {
+        border: 1px solid #000;
+        background: #fff;
+    }
+
+    @@media(max-width:768px)
+    {
+        .cover {
+            height:100%;
+        }
+   
+    }
+
+    /*.loginmodal .modal-dialog {
+        width: fit-content;
+        width: -moz-fit-content;
+    }*/
+
+</style>
+
+
+
+<div style="float:left;">
+    <div class="col-md-12">
+        <div class="sportsmagazine-shop sportsmagazine-shop-list">
+            <ul class="row">
+                <li class="col-md-12" id="modal-mall" style="border:5px #8c8c8c ridge;background: #020304;padding: 10px 10px;">
+                    <figure style="padding:25px 0">
+
+                      
+                            @if (Model.product.image != null)
+                            {
+                                <div class="cover">
+                                <img src="@Model.product.image" alt="">
+                                    </div>
+                            }
+                            else
+                            {
+
+                                <img src="/Content/extra-images/shop-list-img2.jpg" alt="">
+                            }
+
+
+                     
+
+                    </figure>
+                    <div class="sportsmagazine-shop-list-text">
+                        <h4>@Model.product.ProductName</h4>
+                        <span class="sportsmagazine-price-cartbox">
+                            @if (ViewBag.offer !=100)
+                            {
+                                  <del>$@Model.product.Price</del>
+                                 <span>$@(Model.product.Price * ViewBag.offer / 100) @Model.unit.showStr</span>
+                            }
+                            else
+                            {
+                                <span>$@Model.product.Price @Model.unit.showStr</span>
+
+                            }
+                            
+                        </span>
+                        <p><div id="jshtml">@Html.HiddenFor(model => model.product.ProductContent)</div> </p>
+                        <ul class="sportsmagazine-summery-option">
+
+                            <li>
+                                <label>目前鮭魚積分：</label>
+                                @ViewBag.gold
+
+                            </li>
+
+                        </ul>
+                        @if (ViewBag.change != 0)
+                        {
+                            <button class="cart-checkout-btn" name="changepay">兌換</button>
+                        }
+                        else
+                        {
+                            <button class="cart-checkout-btn" style="color:#333;cursor:unset;">無法兌換</button>
+                        }
+                        <button class="cart-checkout-btn" id="changeclose">返回</button>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+<script>
+    
+
+
+    function change_P() {
+        $(document).on('click', '#changepage', function () {
+            window.open('@Url.Action("ChangeAbout","Home")', '兌獎規範',config='height=450,width=450,toolbar=no');
+
+
+        });
+
+
+
+        var price = @Model.product.Price;
+
+        price *=  @ViewBag.offer / 100;
+
+        var name = '';
+        var phone = '';
+        var address = '';
+
+
+        Swal.fire({
+            title: '確認資訊',
+            html: '兌換商品：@Model.product.ProductName<br>' +
+                '兌換金額：' + price + '@Model.unit.showStr<br>',
+            type: 'info',
+            input: 'checkbox',
+            inputPlaceholder:
+                '我已閱讀並同意 <a  href="#" id="changepage">兌獎規範之會員條款</a>及<a target="_blank" href="@Url.Action("PrivacyPolicy","Home")">隱私權政策</a>',
+            confirmButtonText: '確定兌換!',
+            focusConfirm: false,
+            showCancelButton: true,
+            inputValidator: (result) => {
+                return !result && '請閱讀並同意兌獎規範之條款內容及隱私權條款內容。'
+
+            }
+        }).then((conf) => {
+            if (conf.value) {
+                Swal.fire({
+                    title: '填寫寄送資料',
+                    type: "info",
+                    html:
+                        '<input id="swal-input1"  class="swal2-input" placeholder="輸入收件人">' +
+                        '<input id="swal-input2"  class="swal2-input" placeholder="輸入連絡電話">' +
+                        '<input id="swal-input3"  class="swal2-input" placeholder="輸入寄送地址">',
+                    confirmButtonText: '確定!',
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    preConfirm: function (result) {
+                        return new Promise(function (resolve, reject) {
+
+                            if ($("#swal-input1").val() === "" || $("#swal-input2").val() === "" || $("#swal-input3").val() === "") {
+                                swal.showValidationMessage(
+                                    "請正確填寫欄位"
+                                )
+                            } else {
+                                name = $("#swal-input1").val();
+                                phone = $("#swal-input2").val();
+                                address = $("#swal-input3").val();
+                                swal.resetValidationMessage();
+
+                            }
+                            resolve([$('#swal-input1').val(), $('#swal-input2').val(), $('#swal-input3').val()])
+
+                        })
+                        //alert($('#swal-input1').val());
+                    }
+                }).then((d) =>
+                 {
+                            if (d.value) {
+                                Swal.fire({
+                                    title: '確認資訊',
+                                    html: '兌換商品：@Model.product.ProductName<br>獎項收件人：' + name + '<br>' +
+                                        '連絡電話：' + phone + '<br>' +
+                                        '寄送地址：' + address + '<br>',
+                                    type: 'info',
+                                    confirmButtonText: '確定送出!',
+                                    focusConfirm: false,
+                                    showCancelButton: true,
+     
+                                }).then((d) => {
+                                    if (d.value) {
+                                            var pid = parseInt(@Model.product.id);
+                                            $.ajax({
+                                                type: "POST",
+                                                url: '@Url.Action("MallChange", "WebMall")',
+                                                data: { id: pid, money: null, name: name, phone: phone, address: address }
+
+                                            });
+                                            var p = @Model.product.Price;
+
+                                            if (p / 1.2 / 30000 * 30 < 1000) {
+                                                Swal.fire({
+                                                    title: '兌換完成!',
+                                                    html: '我們已收到您的兌獎申請，並寄發兌獎通知至綁定Email中，還請前往查閱，感謝您的熱情參與!',
+                                                    type: 'success',
+                                                    confirmButtonText: '完成!'
+                                                });
+                                            } else if (999 < p / 1.2 / 30000 * 30 < 20000) {
+                                                Swal.fire({
+                                                    title: '兌換完成!',
+                                                    html: '我們已收到您的兌獎申請，並寄發兌獎通知至綁定Email中，<span style="color:red;">通知內附有重要資訊與需回傳資料，還請儘快前往查閱以便完成兌獎</span>，感謝您的熱情參與!',
+                                                    type: 'success',
+                                                    confirmButtonText: '完成!'
+                                                });
+                                            }
+                                            else if (p / 1.2 / 30000 * 30 > 19999) {
+                                                Swal.fire({
+                                                    title: '兌換完成!',
+                                                    html: '我們已收到您的兌獎申請，並寄發兌獎通知至綁定Email中，<span style="color:red;">通知內附有重要資訊與需回傳資料，還請儘快前往查閱以便完成兌獎</span>，感謝您的熱情參與!',
+                                                    type: 'success',
+                                                    confirmButtonText: '完成!'
+                                                });
+                                            }
+                                        }
+
+                                });
+
+
+                            }
+
+               });
+            }
+        })
+
+
+
+
+    }
+
+
+
+</script>

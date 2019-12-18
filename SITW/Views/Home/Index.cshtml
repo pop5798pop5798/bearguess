@@ -1,0 +1,348 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "熊i猜-掌握電競新樂趣";
+    ViewBag.Description = "熊i猜-電競免費競猜平台 ! 裡頭提供了各式各樣的電競賽事讓玩家開心遊玩競猜，現在就趕快揪好友上排行拿獎品，掌握電競新樂趣就要熊i猜";
+    string date = DateTime.Now.ToString("MMddmmss");
+}
+
+<script type="application/ld+json">
+    {
+    "@@context": "http://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [{
+    "@@type": "ListItem",
+    "position": 1,
+    "item": {
+    "@@id": "http://funbet.com.tw/",
+    "name": "首頁",
+    "image": "http://funbet.com.tw/Content/images/logo-1.png"
+    }
+    }]
+    }
+</script>
+
+<style>
+    #atvicePage {
+        position: relative;
+        top: 5000px;
+    }
+</style>
+
+
+
+@if (ViewBag.StatusMessage != null)
+{
+    <script type="text/javascript">
+
+        Swal.fire("申請成功",
+            "@ViewBag.StatusMessage",
+            "success");
+        //自訂預設值
+        swal.setDefaults({
+            confirmButtonText: "確定",
+            cancelButtonText: "取消"
+        });
+    </script>
+}
+
+
+<link href="/Content/css/responsive-home.css?@date" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/viewerjs/dist/viewer.css">
+<script src="https://unpkg.com/viewerjs/dist/viewer.js"></script>
+<script src="~/Scripts/jquery-viewer/jquery-viewer.js"></script>
+
+@*<div id="atvicePage">
+        @Html.Action("Guess", "Html5", new { id = 1 })
+    </div>*@
+
+@Html.Action("_Banner", "Home")
+
+
+
+
+<div class="sportsmagazine-main-content">
+
+    <!--// Main Section \\-->
+    <div class="sportsmagazine-main-section">
+        <div class="container">
+            <div class="row">
+                <div id="guess" style="margin-top: 25px;">
+        </div>
+
+
+
+                @*<div id="pugame" class="col-md-12">
+
+        </div>*@
+                <div class="col-md-8">
+
+                    <div id="homenews">
+                        @Html.Action("_HomeNews", "News")
+                    </div>
+                </div>
+
+
+
+                <aside class="col-md-4">
+                    <div class="widget widget_team_ranking" style="margin-bottom:0;">
+                        <div class="sportsmagazine-fancy-title2">
+                            <h2>
+                                <i class="fa fa-link" style="margin:0px 10px 0px 0px;
+text-shadow:1px 1px 0 #e4b12a, -1px -1px 0 #e4b12a, 1px -1px 0 #e4b12a, -1px 1px 0 #e4b12a, 1px 1px 0 #e4b12a;color:#181c26" aria-hidden="true"></i> 聯賽官網外部連結
+                            </h2>
+
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane active" id="gamemenu">
+                            <br>
+                            <div class="sportsmagazine-account">
+
+                                <ul>
+
+                                    <li>
+                                        <a target="_blank" href="https://2019.lms.garena.tw/">
+                                            <div>
+                                                <img style="height:42px" src="~/Content/Rank/LMS.jpg">
+                                            </div>
+                                            <span>LMS職業聯賽</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="https://www.lolesports.com/en_US/">
+                                            <div>
+                                                <img style="height:42px" src="~/Content/Rank/LCS.png">
+                                            </div>
+                                            <span>LCS職業聯賽</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="https://eu.lolesports.com/en">
+                                            <div>
+                                                <img style="height:42px" src="~/Content/Rank/LEC.jpg">
+                                            </div>
+                                            <span>LEC職業聯賽</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="https://eu.lolesports.com/en/league/lck">
+                                            <div>
+                                                <img style="height:42px" src="~/Content/Rank/LCK.png">
+                                            </div>
+                                            <span>LCK職業聯賽</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="https://lpl.qq.com/es/lpl/2019/">
+                                            <div>
+                                                <img style="height:42px" src="~/Content/Rank/LPL.png">
+                                            </div>
+                                            <span>LPL職業聯賽</span>
+                                        </a>
+                                    </li>
+
+
+                                    <li>
+
+
+                                    </li>
+                                    <li>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </aside>
+
+                <aside class="col-md-4">
+
+
+                    <!--// Widget TeamRanking \\-->
+                    @Html.Action("_GameMenu", "Home")
+                    <!--// Widget TeamRanking \\-->
+
+                </aside>
+                <!--// SideBaar \\-->
+
+            </div>
+        </div>
+    </div>
+    <!--// Main Section \\-->
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            if (localStorage.getItem('active') == '1') {
+
+                setTimeout(function () { $('#atvicePage').remove(); }, 1000);
+            }else{
+                    $('#atvicePage').animate({ top: '0' });
+            }
+                $('#homenews img').viewer();
+                 $('#homenews img').css('cursor','zoom-in');
+
+
+
+
+
+            $('#guess').load('@Url.Action("GuessGame", "Game")');
+
+
+
+
+
+                //$("#gamepage").css("color", "#e4b12a");
+                $("#missionpage").click(function () {
+                    $("#missionpage").css("color", "#e4b12a");
+                    $("#gamepage").css("color", "#ebdec2");
+                    $("#betpage").css("color", "#ebdec2");
+                });
+
+                $("#betpage").click(function () {
+                    $("#missionpage").css("color", "#ebdec2");
+                    $("#gamepage").css("color", "#ebdec2");
+                    $("#betpage").css("color", "#e4b12a");
+
+                });
+
+                $.get("@Url.Action("_popularGame", "game")", function (data) {
+                  var message = $("#pugame");
+                  message.html(data);
+                  var obj = $('div[name="widgetnext"] time').text();
+                  if (!obj) {
+                      $('#titleshow').css('display', 'none');
+                  }
+
+                $('#indexhome').addClass("active");
+                $("[name=sportsmagazine-countdown]").each(
+                    function (i, obj) {
+                        var d = new Date($(obj).siblings("[name=gametime]").val());
+                        if (d.toString() != "Invalid Date") {
+                            $(obj).countdown({
+                                until: d,
+                                compact: true,
+                                layout: ' <b>{dn} 天 {hnn} 小時 {mnn} 分 {snn} 秒</b> {desc}'
+                            });
+                        }
+                        else
+                        {
+                            $(obj).parents(".widget_match_countdown").hide();
+                        }
+                    });
+
+
+                $('.sportsmagazine-fixture-slider').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 5000,
+                    infinite: true,
+                    dots: false,
+                    prevArrow: "<span class='slick-arrow-left'><i class='fa fa-angle-left'></i></span>",
+                    nextArrow: "<span class='slick-arrow-right'><i class='fa fa-angle-right'></i></span>",
+                });
+
+
+                });
+               @* $.get("@Url.Action("_HomeNews", "News")", function (data) {
+                    var message = $("#homenews");
+                    message.html(data);
+
+                    $("li #jshtml").each(
+                        function (index) {
+                            var content = $(this).text();
+                             content = content.replace(/<\/?[^>]*>/g, ''); //去除HTML tag
+                             content = content.replace(/[ | ]*\n/g, '\n'); //去除行尾空白
+                             content = content.replace(/&nbsp;/ig, '');
+                             content = content.substr(0, 60)
+
+                             $(this).html(content + '... (繼續閱讀)');
+
+
+                    });
+
+                });*@
+
+
+                $(".right-banner a").attr("href", "@Url.Action("Register", "Account")");
+
+
+
+        });
+    </script>
+
+
+
+    @*---------------下雪JS-------------------------
+        <script src="/Scripts/snow-plugin.js"></script>
+            <script>
+                $(function () {
+                    $(".snow-canvas").snow();
+                });
+            </script>
+            --------------------------------------END*@
+
+    @*---------------------------button移動-----------
+        <script>
+            $(document).ready(function () {
+                $(".right-banner").hover(function () {
+                    $(".right-banner").animate({ top: '15%' });
+                }, function () {
+                    $(".right-banner").animate({ top: '10%' });
+                });
+            });
+
+
+        </script>
+         ---------------------------------------------END*@
+
+
+    @*------------------------------動態背景-----------------------
+        <script src='/Scripts/stopExecutionOnTimeout.js?t=1'></script>
+            <script>
+                            $(document).ready(function () {
+                                var stars = 800;
+                                var $stars = $('.stars');
+                                var r = 800;
+                                for (var i = 0; i < stars; i++) {
+                                    if (window.CP.shouldStopExecution(1)) {
+                                        break;
+                                    }
+                                    var $star = $('<div/>').addClass('star');
+                                    $stars.append($star);
+                                }
+                                window.CP.exitedLoop(1);
+                                $('.star').each(function () {
+                                    var cur = $(this);
+                                    var s = 0.2 + Math.random() * 1;
+                                    var curR = r + Math.random() * 300;
+                                    cur.css({
+                                        transformOrigin: '0 0 ' + curR + 'px',
+                                        transform: ' translate3d(0,0,-' + curR + 'px) rotateY(' + Math.random() * 360 + 'deg) rotateX(' + Math.random() * -50 + 'deg) scale(' + s + ',' + s + ')'
+                                    });
+                                });
+                            });
+
+            </script>
+            ----------------------------------------------------END*@
+
+    @*------------------------------閃耀-----------------------
+        <script type="text/javascript" src="/Scripts/Sparkle/stars.js"></script>*@
+
+
+
+
+}

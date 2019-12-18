@@ -1,0 +1,747 @@
+﻿@model SITW.Models.ViewModel.GamePostViewModel
+
+@{
+
+    /**/
+
+    ViewBag.Title = "Create";
+    int index = Model.game.topicList.Count;
+    int bounsindex = Model.game.bonusList.Count;
+
+}
+
+
+
+@using SITW.Helper
+<style>
+    .btn-block {
+        position: absolute;
+        height: 35px;
+        right: 15px;
+        width: 30%;
+        top: -30px;
+    }
+
+    div[name=bonus-add] {
+        display: none;
+    }
+
+    div[name='bonus-add'] {
+        display: none;
+    }
+    #kill {
+        display:none;
+    }
+
+</style>
+
+<div class="container">
+    <div class="row">
+
+        <h2>新增</h2>
+
+
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "gameForm" }))
+        {
+            @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>賽局</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.gamepost.PlayGameSn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.PlayGameSelect("gamepost.PlayGameSn", Model.gamepost.PlayGameSn)
+                @Html.ValidationMessageFor(model => model.gamepost.PlayGameSn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div id="pugame"></div>
+
+        @for (var ti = 0; ti < 2; ti++)
+        {
+            @Html.HiddenFor(model => model.TeamList[ti].name) @Html.HiddenFor(model => model.TeamList[ti].shortName) @Html.HiddenFor(model => model.TeamList[ti].imageURL) @Html.HiddenFor(model => model.TeamList[ti].valid) @Html.HiddenFor(model => model.TeamList[ti].leagueSn)
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.game.sdate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.game.sdate, new { htmlAttributes = new { @class = "form-control form_datetime", @autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.game.sdate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.game.edate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.game.edate, new { htmlAttributes = new { @class = "form-control form_datetime", @autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.game.edate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.game.title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.game.title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.game.title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.game.comment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.game.comment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.game.comment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <input id="gameboValue" type="hidden" value="">
+        <input id="detailed_stats" type="hidden" value="">
+        @Html.HiddenFor(model => model.gamepost.AutoSn)
+        <div class="form-group">
+            @Html.LabelFor(model => model.game.gamedate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.game.gamedate, new { htmlAttributes = new { @class = "form-control form_datetime", @autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.game.gamedate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @* 遊戲地點 <div class="form-group">
+            @Html.LabelFor(model => model.game.gameplace, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.game.gameplace, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.game.gameplace, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.game.betModel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                <div id="betModels" class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary" for="betModel1">
+                        <input type="radio" name="game.betModel" id="betModel1" value="1" autocomplete="off"> 賠率模式
+                    </label>
+                    <label class="btn btn-primary" for="betModel2">
+                        <input type="radio" name="game.betModel" id="betModel2" value="2" autocomplete="off"> 總彩池模式
+                    </label>
+                    <label class="btn btn-primary" for="betModel5">
+                        <input type="radio" name="game.betModel" id="betModel5" value="5" autocomplete="off"> 龍的傳人
+                    </label>
+                    <label class="btn btn-primary" for="betModel6">
+                        <input type="radio" name="game.betModel" id="betModel6" value="6" autocomplete="off"> 百倍大串燒
+                    </label>
+                    <label class="btn btn-primary" for="betModel10">
+                        <input type="radio" name="game.betModel" id="betModel10" value="10" autocomplete="off"> 簡單猜猜
+                    </label>
+                </div>
+                @Html.ValidationMessageFor(model => model.game.betModel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="rakegroup">
+            @Html.LabelFor(model => model.game.rake, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.game.rake, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.game.rake, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="fixedsetting">
+            <label class="control-label col-md-2">預設值</label>
+            <div class="col-md-2">
+                <a class="btn btn-default" href="" target=_blank>
+                    預設值設定
+                </a>
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                題目
+            </div>
+            <input type="hidden" id="seetingCount" value="@Model.settingList.topicsettingList.Count">
+            <div class="col-md-7">
+                <!-- topics! -->
+
+
+
+                <div id="kill">
+                    此局總擊殺數大小
+                    <div class="form-group">
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.c_choice1, new { @class = "form-control", @Value = "小於15.5" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(model => model.c_choice2, new { @class = "form-control", @Value = "大於15.5" })
+                        </div>
+                    </div>
+                </div>
+                <div id="topic-group">
+
+                </div>
+                <input type="hidden" id="walkm" name="walkm" value="0">
+
+
+
+
+                @Ajax.ActionLink(linkText: "增加題目", actionName: "_topicCreate", controllerName: "game", routeValues: new { index = index, walk = 0 }, ajaxOptions: new AjaxOptions
+               {
+                   InsertionMode = InsertionMode.InsertAfter,
+                   UpdateTargetId = "topic-group",
+                   OnSuccess = "indexIterate(" + 0 + ")"
+               },
+                    htmlAttributes: new { id = "addTopic", @class = "btn btn-default" })
+
+
+                @Ajax.ActionLink(linkText: "增加走地題目", actionName: "_topicCreate", controllerName: "game", routeValues: new { index = index, walk = 1 }, ajaxOptions: new AjaxOptions
+           {
+               InsertionMode = InsertionMode.InsertAfter,
+               UpdateTargetId = "topic-group",
+               OnSuccess = "indexIterate(" + 1 + ")"
+           },
+                 htmlAttributes: new { id = "addWTopic", @class = "btn btn-default" })
+
+                @Html.ValidationMessageFor(model => model.game.topicList, "", new { @class = "text-danger", id = "addChick" })
+
+
+
+
+
+
+            </div>
+        </div>
+
+        <div class="form-group" id="rakegroup">
+            <label class="control-label col-md-2" for="vedio_vediourl">直播網址連結</label>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.vedio.vediourl, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.vedio.vediourl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <a href="https://www.twitch.tv/" target="_blank" style="position:relative;left:25%">twitch連結</a>
+            <a href="https://www.youtube.com/" target="_blank" style="position:relative;left:30%">youtube連結</a>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+        }
+
+
+        <div id="dota2dialog" title="DOTA2資料" style="display:none">
+            讀取中.....
+        </div>
+        <div id="loldialog" title="LOL資料" style="display:none">
+            讀取中.....
+        </div>
+        <div id="csgodialog" title="CSGO資料" style="display:none">
+            讀取中.....
+        </div>
+
+
+        <div>
+            @Html.ActionLink("返回", "Index")
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="~/Scripts/GameCreaet_Page.js?v=20181021"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.abgne_float_ad').hide();
+
+           /*  $.get("Url.Action("gameSelect", "game")", { playgame: 0 }, function (data) {
+       var message = $("#pugame");
+        message.html(data);
+        $("#gamepost_TeamASn,#gamepost_TeamBSn").change(function () {
+
+            syncTeamTopic();
+        });
+            });*/
+
+            $(document).on('click', '#search', function () {
+
+                $.get("@Url.Action("CSGOUpcoming", "GameAPI")", { id: $(this).parents('td').find('#leaueId').val() }, function (data) {
+                    $("#csgodialog").html(data);
+                }).fail(function () {
+                    $("#csgodialog").html("讀取失敗，目前無數據資料");
+                });
+
+            });
+            
+            $(document).on('click', '#backseries', function () {
+
+                $.get("@Url.Action("CSGOSeriesUpcoming", "GameAPI")", function (data) {
+                    $("#csgodialog").html(data);
+                 }).fail(function () {
+                     $("#csgodialog").html("讀取失敗，目前無數據資料");
+                 });
+
+            });
+
+
+    $("#gamepost_PlayGameSn").change(function () {
+        var s = $("#gamepost_PlayGameSn").val();
+        if ($("#gamepost_PlayGameSn").val() != 0) {
+            $.get("@Url.Action("gameSelect", "game")", { playgame: s }, function (data) {
+                var message = $("#pugame");
+                message.html(data);
+                $("#gamepost_TeamASn,#gamepost_TeamBSn").change(function () { syncTeamChoice(); });
+
+                $("#gamepost_TeamASn,#gamepost_TeamBSn").change(function () {
+
+                    syncTeamTopic();
+                });
+            });
+
+
+
+
+        }
+
+
+            });
+           /* $(document).on("click", "#setting", function () {
+                $.get("Url.Action("Index", "Setting")", function (data) {
+                $("#settingdialog").html(data);
+            });
+                $("#settingdialog").dialog({ position: { my: 'right top', at: 'right top', of: window }, width: "40%", maxHeight: 800 });
+                $("#settingdialog").dialog("open");
+
+            });*/
+
+
+
+
+            $.get("@Url.Action("Dota2DetailsV2", "GameAPI")", function (data) {
+                $("#dota2dialog").html(data);
+            }).fail(function () {
+                $("#dota2dialog").html("讀取失敗，目前無數據資料");
+            });
+
+             $.get("@Url.Action("CSGOSeriesUpcoming", "GameAPI")", function (data) {
+                $("#csgodialog").html(data);
+             }).fail(function () {
+                 $("#csgodialog").html("讀取失敗，目前無數據資料");
+             });
+
+            $.get("@Url.Action("LOLUpcoming", "GameAPI")", function (data) {
+                $("#loldialog").html(data);
+            }).fail(function () {
+                $("#loldialog").html("讀取失敗，目前無數據資料");
+            });
+
+            /*$('#game_sdate').datetimepicker();
+            $('#game_edate').datetimepicker();
+            $('#game_gamedate').datetimepicker();*/
+
+
+        });
+
+
+
+        function indexIterate(m) {
+    if (m == 1) {
+        $("input[name='game.topicList[0].comment']").val("預測正確的選項，愈早預測獎金越高");
+
+    }
+
+
+
+
+
+    var newHref = $("#addTopic").attr("href");
+    currentIndex = $("div[name=topicDiv]").length;
+    timeindex = currentIndex;
+    var newerHref = newHref.replace(/(?:index=)[0-9]+/i, "index=" + currentIndex);
+
+    $("#addTopic").attr("href", newerHref);
+    /* $(".form_datetime").datetimepicker(
+         {
+             sideBySide: true,
+             format: 'YYYY/M/D HH:mm'
+         }
+     );*/
+
+    //$(".form_datetime").datetimepicker();
+
+    var bM = $("input[name$=betModel]:checked").val();
+    $("#topname").hide();
+    if (currentIndex == 1 && bM == 1 && $("#gamepost_PlayGameSn").val() != 2) { 
+                
+            $("#addChoice" + 0).attr("href", "/game/_choiceCreate?index=" + 0 + "&topicIndex=" + 0 + "&allnumber=" + 2);
+            $("#addChoice" + 0).click();
+            $("#gamepost_TeamASn,#gamepost_TeamBSn").change(function () { syncTeamChoice(); });
+
+       
+
+
+    }
+    else if (bM == 1 && $("#gamepost_PlayGameSn").val() == 2)
+    {
+         var ti = currentIndex - 1;
+             var sList;
+            sList = JSON.stringify(@Html.Raw(Json.Encode(Model.settingList.topicsettingList.Where(x=>x.gametype == 2 && x.Model ==3))));
+            sList = eval("(" + sList + ")");
+            console.log('app:' + sList.length);
+            if (ti < sList.length) {
+               
+                $("input[name='game.topicList[" + ti + "].autotype']").val(sList[ti].autotype)
+                if ($("#detailed_stats").val() == 0) {
+                    //全地圖奇偶
+                     if (sList[ti].autotype == 2) {
+                        $("input[name='game.topicList[" + ti + "].valid").parents("div[name=topicDiv]").css("display", "none");
+                        $("input[name='game.topicList[" + ti + "].valid").val(0);
+                    }
+                    //第一地圖奇偶
+                     if (sList[ti].autotype == 6 ) {
+                        $("input[name='game.topicList[" + ti + "].valid").parents("div[name=topicDiv]").css("display", "none");
+                        $("input[name='game.topicList[" + ti + "].valid").val(0);
+                    }
+
+                    //第二地圖奇偶
+                    if (sList[ti].autotype == 7) {
+                        $("input[name='game.topicList[" + ti + "].valid").parents("div[name=topicDiv]").css("display", "none");
+                        $("input[name='game.topicList[" + ti + "].valid").val(0);
+                    }
+
+                } else {
+                    //全地圖奇偶
+                    if (sList[ti].autotype == 2 && parseInt($("#gameboValue").val()) < 3) {
+                        $("input[name='game.topicList[" + ti + "].valid").parents("div[name=topicDiv]").css("display", "none");
+                        $("input[name='game.topicList[" + ti + "].valid").val(0);
+                    }
+                    //第一地圖勝利
+                     if (sList[ti].autotype == 3 && parseInt($("#gameboValue").val()) == 1) {
+                        $("input[name='game.topicList[" + ti + "].valid").parents("div[name=topicDiv]").css("display", "none");
+                        $("input[name='game.topicList[" + ti + "].valid").val(0);
+                    }
+                    //第一地圖奇偶
+                     /*if (sList[ti].autotype == 6 && parseInt($("#gameboValue").val()) == 1) {
+                        $("input[name='game.topicList[" + ti + "].valid").parents("div[name=topicDiv]").css("display", "none");
+                        $("input[name='game.topicList[" + ti + "].valid").val(0);
+                    }*/
+                    //第二地圖勝利
+                    if (sList[ti].autotype == 4 && parseInt($("#gameboValue").val()) < 2) {
+                        $("input[name='game.topicList[" + ti + "].valid").parents("div[name=topicDiv]").css("display", "none");
+                        $("input[name='game.topicList[" + ti + "].valid").val(0);
+                    }
+                    //第二地圖奇偶
+                    if (sList[ti].autotype == 7 && parseInt($("#gameboValue").val()) < 2) {
+                        $("input[name='game.topicList[" + ti + "].valid").parents("div[name=topicDiv]").css("display", "none");
+                        $("input[name='game.topicList[" + ti + "].valid").val(0);
+                    }
+                }
+
+                
+                
+
+                if (sList[ti].autotype == 5) {
+                    if (parseInt($("#gameboValue").val()) < 3) {
+                        $("input[name='game.topicList[" + ti + "].valid").parents("div[name=topicDiv]").css("display", "none");
+                        $("input[name='game.topicList[" + ti + "].valid").val(0);
+                    }
+                        
+                        
+
+                    $("input[name='game.topicList[" + ti + "].title']").val(sList[ti].topicsName.replace("x.5", $("#gameboValue").val() - 0.5));
+                    $("input[name='game.topicList[" + ti + "].etitle']").val(sList[ti].enName.replace("x.5", $("#gameboValue").val() - 0.5));
+                    $("#game_topicList_" + ti + "__numberType").val(parseInt($("#gameboValue").val()) - 0.5);
+                   
+
+                } else {
+                     $("input[name='game.topicList[" + ti + "].title']").val(sList[ti].topicsName)
+                    $("input[name='game.topicList[" + ti + "].etitle']").val(sList[ti].enName)
+
+                }
+
+                var tbool = sList[ti].choiceType;
+
+
+                if (tbool) {
+                    $("#addChoice" + ti).attr("href", "/game/_choiceCreate?index=0&topicIndex=" + ti + "&allnumber=" + sList[ti].choicsettingList.length);
+                    $("#addChoice" + ti).click();
+
+                } else {
+                    if(parseInt($("#gameboValue").val()) == 2 && ti == 0)
+                    {
+                        $("#addChoice" + ti).attr("href", "/game/_choiceCreate?index=0&topicIndex=" + ti + "&allnumber=" + 3);
+                    }else{
+                        $("#addChoice" + ti).attr("href", "/game/_choiceCreate?index=0&topicIndex=" + ti + "&allnumber=" + 2);
+                    }
+                    
+                    $("#addChoice" + ti).click();
+
+
+
+
+                }
+
+                $("#addChoice" + ti).attr("href", "/game/_choiceCreate?index=" + currentIndex + "&topicIndex=" + ti + "&allnumber=" + 1);
+
+
+                if (currentIndex < sList.length) {
+                    console.log('good');
+                    $("#addTopic").click();
+                }
+                
+
+
+            }
+
+    }
+    else if (currentIndex == 1 && bM == 2) {
+        $("#addChoice" + 0).attr("href", "/game/_choiceCreate?index=" + 0 + "&topicIndex=" + 0 + "&allnumber=" + 2);
+        $("#addChoice" + 0).click();
+        $("#gamepost_TeamASn,#gamepost_TeamBSn").change(function () { syncTeamChoice(); });
+
+
+
+
+    } else if (currentIndex == 1 && bM == 7) {
+        $("#addChoice" + 0).attr("href", "/game/_choiceCreate?index=" + 0 + "&topicIndex=" + 0 + "&allnumber=" + 2);
+        $("#addChoice" + 0).click();
+        $("#gamepost_TeamASn,#gamepost_TeamBSn").change(function () { syncTeamChoice(); });
+
+
+
+    } else if (bM == 5) {
+        $("#addChoice" + 0).attr("href", "/game/_choiceCreate?index=" + 0 + "&topicIndex=" + 0 + "&allnumber=" + 1);
+
+
+        $("#addChoice" + 0).click();
+        $("#game_topicList_0__title").val("勝隊擊殺小龍的屬性及數量及大龍數量(巴龍、遠古龍)");
+        $("div[name=choiceListGroup]").hide();
+        $("#addTopic").hide();
+        $("#setting").css("display", "inline-block");
+
+    } else if (bM == 10) {
+        var ti = currentIndex - 1;
+        var sList;
+        if ($("#gamepost_PlayGameSn").val() == 1)
+            sList = JSON.stringify(@Html.Raw(Json.Encode(Model.settingList.topicsettingList.Where(x=>x.gametype == 1 && x.Model == 2))));
+        else if($("#gamepost_PlayGameSn").val() == 2)
+            sList = JSON.stringify(@Html.Raw(Json.Encode(Model.settingList.topicsettingList.Where(x=>x.gametype == 2 && x.Model == 2))));
+        else if($("#gamepost_PlayGameSn").val() == 4)
+            sList = JSON.stringify(@Html.Raw(Json.Encode(Model.settingList.topicsettingList.Where(x=>x.gametype == 4 && x.Model == 2))));
+
+        sList = eval("(" + sList + ")");
+        console.log('app:' + sList.length);
+        if (ti < sList.length) {
+            $("input[name='game.topicList[" + ti + "].title']").val(sList[ti].topicsName)
+
+            var tbool = sList[ti].choiceType;
+
+
+            if (tbool) {
+                $("#addChoice" + ti).attr("href", "/game/_choiceCreate?index=0&topicIndex=" + ti + "&allnumber=" + sList[ti].choicsettingList.length);
+                $("#addChoice" + ti).click();
+
+            } else {
+                $("#addChoice" + ti).attr("href", "/game/_choiceCreate?index=0&topicIndex=" + ti + "&allnumber=" + 2);
+                $("#addChoice" + ti).click();
+
+
+
+
+            }
+
+            $("#addChoice" + ti).attr("href", "/game/_choiceCreate?index=" + currentIndex + "&topicIndex=" + ti + "&allnumber=" + 1);
+
+
+            if (currentIndex < sList.length) {
+                console.log('good');
+                $("#addTopic").click();
+            }
+                
+
+
+        }
+    }
+
+    // var model = $('#walkm').val();
+    if (model == 1 && $("#gamepost_PlayGameSn").val() != 2) {
+        $("#addChoice" + 1).attr("href", "/game/_choiceCreate?index=" + 0 + "&topicIndex=" + 1 + "&allnumber=" + 2);
+        $("#addChoice" + 1).click();
+        syncTeamChoice();
+        model = 0;
+        // $('#walkm').val(0);
+
+    }
+
+
+    $("#game_topicList_" + (currentIndex - 1) + "__sdate").val($("#game_sdate").val());
+    $("#game_topicList_" + (currentIndex - 1) + "__edate").val($("#game_edate").val());
+
+    var cuindex = currentIndex - 1;
+
+    choiceCreate(cuindex, 0);
+    if (m == 1) {
+        $("#addTopic").click();
+        $("#walkm").val(1);
+        model = 1;
+        topicC = 1;
+        // $("#walkm").val(1);
+        //$("#addChoice" + 1).attr("href", "/game/_choiceCreate?index=" + 1 + "&topicIndex=" + 1 + "&allnumber=" + 2);
+        //$("#addChoice" + 1).click();
+    }
+
+        }
+
+        function indexIterateChoice(i, walk) {
+    var newHref = $("#addChoice" + i).attr("href");
+    var choiceIndex = newHref.match('(?:index=)([0-9]+)')[1];
+    choiceIndex = $("input[name^='game.topicList[" + i + "].choiceList'][name$='hashSn']").length - 1;
+    var newerHref = newHref.replace(/(?:index=)[0-9]+/i, "index=" + ++choiceIndex);
+    $("#addChoice" + i).attr("href", newerHref);
+   
+    var bM = $("input[name$=betModel]:checked").val();
+    if (walk != 0)
+        bM = "7";
+
+
+    changeUnit();
+    choiceCreate(i, choiceIndex);
+    if (i == 0 && bM != 5) {
+        syncTeamChoice();
+        //$("div[name=topicDiv]").eq(i).find("[name=delChoice],[name=delTopic]").hide();
+        // $("#addChoice" + i).hide();
+    } else {
+        //syncChoice();
+    }
+    if (topicC == 1) {
+        $("input[name='game.topicList[1].choiceList[0].choiceStr']").val($("#gamepost_TeamASn option:selected").text());
+        $("input[name='game.topicList[1].choiceList[1].choiceStr']").val($("#gamepost_TeamBSn option:selected").text());
+    }
+
+    for (var j = 0; j < 30; j++) {
+        $('#game_topicList_' + i + '__choiceList_' + j + '__Odds').on('change', function () {
+            if ($(this).val() >= 10) {
+                myoddscheck($(this).val(), $(this));
+            }
+
+        });
+
+        $('#game_topicList_' + i + '__choiceList_' + j + '__bearSn').val(String(i) + String(j));
+
+
+            }
+      switch (bM) {
+        case "1":
+            $("div[id$=Odds-"+ i +"]").show();
+            //$("#Odds-"+ i).show();
+            $("#addTopic").show();
+            $("#addWTopic").hide();
+            $('#kill').css('display', 'none');
+              if ($("#gamepost_PlayGameSn").val() == 2) {
+                   var sList = JSON.stringify(@Html.Raw(Json.Encode(Model.settingList.topicsettingList.Where(x=>x.Model == 3))));
+                    sList = eval("(" + sList + ")");
+                  console.log(sList);
+                  
+                  
+                   var tbool = sList[i].choiceType;
+                    if (tbool) {
+                        for (var j = 0; j < sList[i].choicsettingList.length; j++) {
+
+                            $("#game_topicList_" + i + "__choiceList_" + j + "__choiceStr").val(sList[i].choicsettingList[j].choiceName);
+                             $("#game_topicList_" + i + "__choiceList_" + j + "__eChoiceStr").val(sList[i].choicsettingList[j].eName);
+                            $("#game_topicList_" + i + "__choiceList_" + j + "__cNumberType").val(sList[i].choicsettingList[j].cNumberType);
+
+                        }
+                    } else {
+
+                        $("input[name='game.topicList[" + i + "].choiceList[0].choiceStr']").val($("#gamepost_TeamASn option:selected").text());
+                        $("input[name='game.topicList[" + i + "].choiceList[1].choiceStr']").val($("#gamepost_TeamBSn option:selected").text());
+
+                        $("input[name='game.topicList[" + i + "].choiceList[0].eChoiceStr']").val($("#gamepost_TeamASn option:selected").text());
+                        $("input[name='game.topicList[" + i + "].choiceList[1].eChoiceStr']").val($("#gamepost_TeamBSn option:selected").text());
+                        if(parseInt($("#gameboValue").val()) == 2)
+                        {
+                             $("#game_topicList_" + i + "__choiceList_2__choiceStr").val("平局");
+                             $("#game_topicList_" + i + "__choiceList_2__eChoiceStr").val("Draw");
+                            $("#game_topicList_" + i + "__choiceList_2__cNumberType").val(3);
+                        }
+
+
+                    }
+              }
+
+
+            break;
+        case "2":
+            $("div[id$=Odds-" + i + "]").hide();
+            //$("#Odds-" + i).hide();
+            $("#addTopic").show();
+            $("#addWTopic").hide();
+            $('#kill').css('display', 'none');
+            break;
+        case "7":
+            $("div[id$=Odds-" + i + "]").hide();
+            //$("#Odds-" + i).hide();
+            $("#addTopic").show();
+            $("#addWTopic").hide();
+            $('#kill').css('display', 'none');
+            break;
+        case "5":
+            $("div[id$=Odds-" + i + "]").hide();
+            //$("#Odds-"+ i).hide();
+            $("div[name=choiceListGroup]").hide();
+            $("#addTopic").hide();
+            $("#addWTopic").hide();
+            $('#kill').css('display', 'none');
+            break;
+        case "10":
+            $("div[id$=Odds-" + i + "]").show();
+            //$("#Odds-"+ i).show();
+            $("#addTopic").show();
+            $("#addWTopic").hide();
+              $('#kill').css('display', 'none');
+              var sList = JSON.stringify(@Html.Raw(Json.Encode(Model.settingList.topicsettingList.Where(x=>x.Model == 2))));
+                    sList = eval("(" + sList + ")");
+                    console.log(sList);
+            var tbool = sList[i].choiceType;
+            if (tbool) {
+                for (var j = 0; j < sList[i].choicsettingList.length; j++) {
+
+                    $("#game_topicList_" + i + "__choiceList_" + j + "__choiceStr").val(sList[i].choicsettingList[j].choiceName);
+
+                }
+            } else {
+
+                $("input[name='game.topicList[" + i + "].choiceList[0].choiceStr']").val($("#gamepost_TeamASn option:selected").text());
+                $("input[name='game.topicList[" + i + "].choiceList[1].choiceStr']").val($("#gamepost_TeamBSn option:selected").text());
+
+
+
+            }
+
+
+            break;
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+    </script>
+}

@@ -1,0 +1,11 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="js-odoo"></div>
+<input type="hidden" id="a" value="@ViewBag.a">
+
+<script>
+        odoo.default({ el: '.js-odoo', value: '@ViewBag.Assets' });
+</script>

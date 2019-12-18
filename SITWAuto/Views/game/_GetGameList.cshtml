@@ -1,0 +1,308 @@
+﻿@model IEnumerable<SITW.Models.ViewModel.GamePostViewModel>
+@{
+    Layout = null;
+}
+<style>
+    .main-content {
+        height: 210px;
+        background: #1b1b1b;
+    }
+
+    .noise {
+        z-index: 100;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #fff;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        opacity: .1;
+    }
+
+  
+
+    .pc_view_red {
+        color: red;
+    }
+     .pc_view:hover, .pc_view_red:hover {
+            color: #fff;
+     }
+
+
+</style>
+
+
+<input type="hidden" id="pgamesn" name="pgamesn" value="@ViewBag.pgamesn" />
+<div class="sportsmagazine-fancy-title2">
+    <h2>@ViewBag.pgame
+        <div class="search-form" style="float:right">
+            <input id="search-input" style="border:1px solid #e5b22a;background-color:rgba(255, 255, 255, 0.00);vertical-align:top;" type="text" placeholder="搜尋隊伍或聯賽" /><button style="border:1px solid #e4b12a;background-color:#000;margin:0px 10px 0px 10px;vertical-align:top;"><i style="padding:3px 5px 3px 5px" class="fa fa-search" aria-hidden="true"></i></button>
+            <style id="m-search"></style>
+        </div>
+    
+    </h2>
+</div>
+<div class="sportsmagazine-wishlist" style="float:left;box-shadow:2px 2px 2px rgba(0, 0, 0, 0.6), 4px 4px 6px rgba(0, 0, 0, 0.4), 6px 6px 12px rgba(0, 0, 0, 0.4)">
+
+    <div class="sportsmagazine-wishlist-graph" style="height:79vh;border:1px solid #2f334c">
+        @foreach (var item in Model)
+        {
+            <input type="hidden" id="tableview" name="tableview" value="@item.TeamA.imageURL" />
+            if (item.game.betModel != 5)
+            {
+                <div class="gamebody" data-index="@item.gamesearch">
+                    @if (item.endguess == 0 && item.game.topicList.FirstOrDefault().walk != 1)
+                    {
+                        <div style="position:absolute;z-index:500;transform:rotate(-20deg);"><img src="https://storage.googleapis.com/funbet-180608.appspot.com/OtherIMG/guess_stop.png" /></div>
+                    }
+                    else if (item.endguess == 2 && item.game.topicList.FirstOrDefault().walk != 1)
+                    {
+                        <div style="position:absolute;z-index:500;transform:rotate(-20deg);"><img src="https://storage.googleapis.com/funbet-180608.appspot.com/OtherIMG/game_Soon.png" /></div>
+                    }
+
+                    <table class="tablegame">
+
+
+                        <thead>
+                            <tr>
+                                <th colspan="6">
+                                    <div style="float:left;width:100%;">
+                                        @{
+                                            DateTime gedate = (DateTime)item.game.edate;
+                                        }
+                                        <span style="float:left;width: 10%;">@gedate.ToString("MM/dd HH:mm")</span>
+                                        <img src="@item.PlayGame.gamelogo">@ViewBag.PlayGame @Html.DisplayFor(modelItem => item.game.title)
+
+                                        @if (item.vedio_url == "")
+                                        {
+                                            <span class="pc_view" style="float:right;margin:0 10px 0 10px"><i class="fa fa-television" aria-hidden="true"></i></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="pc_view_red" style="float:right;margin:0 10px 0 10px"><i class="fa fa-television" aria-hidden="true"></i></span>
+                                        }
+                                        <div id="movie_iframe">
+
+                                            @if (item.vedio_url == "")
+                                            {
+                                                <div class="sportsmagazine-featured-slider">
+                                                    <div class="sportsmagazine-featured-slider-layer">
+                                                        <div class="main-content">
+                                                            @if (item.TeamA != null || item.TeamB != null)
+                                                            {
+                                                                <h1 style="text-align:center;font-size:18px;line-height:70px">暫無比賽直播</h1>
+                                                            }
+                                                            <h2 style="color:#e5b22a;text-align:center;line-height:100px;text-shadow:0 0 0.2em #333">VS</h2>
+                                                            @if (item.TeamA != null)
+                                                            {
+                                                                <img src="@item.TeamA.imageURL" style="max-width:60px;position:absolute;top:30%;left:15%" alt="">
+                                                            }
+
+                                                            @if (item.TeamB != null)
+                                                            {
+                                                                <img src="@item.TeamB.imageURL" style="max-width:60px;position:absolute;right:15%;top:30%;" alt="">
+                                                            }
+                                                            <canvas id="noise-@item.game.sn" class="noise"></canvas>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            }
+                                            else
+                                            {
+                                                <input type="hidden" id="vedioval" value="@item.vedio_url" />
+                                                <iframe width="560" height="315" allowfullscreen="1" src="" frameborder="0"></iframe>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </th>
+
+                            </tr>
+                            <tr>
+                                <th colspan="3">
+                                   
+                                    <input type="hidden" name="betmodel" value="@item.game.topicList.FirstOrDefault().walk">
+                                    @if (item.game.topicList.FirstOrDefault().walk != 1)
+                                    {
+
+                                        @Html.Hidden("gametime", (item.game.gamedate.HasValue ? item.game.gamedate.Value.ToString("yyyy-MM-dd HH:mm") : ""))
+                                        <div name="sportsmagazine-countdown"> </div>
+
+                                    }
+                                    else
+                                    {
+                                        @Html.Hidden("gametime", (item.game.gamedate.HasValue ? item.game.gamedate.Value.ToString("yyyy-MM-dd HH:mm") : ""))
+                                        <div id="timestyle" name="sportsmagazine-countdown"> </div>
+                                        /* <div style="color: rgb(255, 87, 34);border: 2px solid;padding: 0px 0px 0px 0px;width: 30%;">LIVE</div>*/
+
+                                    }
+                                </th>
+                                <th colspan="3"><span>
+                                          <a id="morespan" href="@Url.Action(item.game.betDetails, "game", new { id = item.gamepost.sn })">即刻競猜</a>
+                                     </span></th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="gametd1">
+                                    <figure id="figureid">
+                                        @if (item.TeamA != null)
+                                        {
+                                            <img src="@item.TeamA.imageURL" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img src="/Content/extra-images/upload-photo.png?id=20171208" alt="">
+                                        }
+                                    </figure>
+                                </td>
+                                <td><h6>@item.TeamA.shortName</h6></td>
+                                <td id="gametd2" rowspan="2">@item.game.comment</td>
+                                <td rowspan="2">
+                                    @if (item.game.topicList.FirstOrDefault().walk != 1)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.game.betModelString)
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.game.betModelString) <span>-走地</span>
+                                    }
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <figure id="figureid">
+                                        @if (item.TeamB != null)
+                                        {
+                                            <img src="@item.TeamB.imageURL" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img src="/Content/extra-images/upload-photo.png?id=20171208" alt="">
+                                        }
+                                    </figure>
+                                </td>
+                                <td><h6>@item.TeamB.shortName</h6></td>
+
+
+                            </tr>
+                        </tbody>
+
+
+                    </table>
+
+
+
+                </div>
+            }
+            else
+            {
+                <div class="gamebody" data-index="@item.gamesearch">
+                    @* <div style="position:absolute;z-index:500;transform:rotate(-20deg);max-width:70px;"><img src="~/Content/extra-images/dgon/dgon_font.png" /></div>*@
+
+                    <table class="tablegame" style="background:linear-gradient(to right, #00274c 0%, rgba(51, 122, 183, 0.25) 50%, #337ab700 100%);border:1px solid rgb(0, 137, 255)">
+
+
+                        <thead>
+                            <tr>
+                                <th colspan="6" style="border-color:rgb(0, 137, 255);">
+                                    <div style="float:left;width:100%;color:#ebdec2;">
+                                        @{
+                                            DateTime gedate = (DateTime)item.game.edate;
+                                        }
+                                        <span style="float:left;width: 10%;">@gedate.ToString("MM/dd HH:mm")</span>
+                                        <img style="max-width:25px" src="~/Content/extra-images/dgon/dgonlogo.png">@ViewBag.PlayGame @Html.DisplayFor(modelItem => item.game.title)
+                                        <div class="wrapper">
+                                            <span style="font-size:14px">目前獎池：</span>
+                                            <div class="letters">
+                                                @for (int pi = 0; pi < item.arrStringB.Length; pi++)
+                                                {
+                                                    <span class="letter" style="font-size:16px;width:20px; margin:5px 0px 5px 0px">@item.arrStringB[pi]</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </th>
+
+
+                            </tr>
+                            <tr>
+                                <th colspan="5" style="width:60%">
+                                    @Html.Hidden("gametime", (item.game.gamedate.HasValue ? item.game.gamedate.Value.ToString("yyyy-MM-dd HH:mm") : ""))
+                                    <div name="sportsmagazine-countdown"> </div>
+                                </th>
+                                <th colspan="2"><span><a id="morespan" style="color:#e4dec2;background:rgba(0, 137, 255, 0.16862745098039217);border:3px #005cab ridge;" href="@Url.Action(item.game.betDetails, "game", new { id = item.gamepost.sn })">即刻競猜</a></span></th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="gametd1" style="width:14%">
+                                    <figure id="figureid">
+                                        @if (item.TeamA != null)
+                                        {
+                                            <img src="@item.TeamA.imageURL" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img src="/Content/extra-images/upload-photo.png?id=20171208" alt="">
+                                        }
+                                    </figure>
+                                </td>
+                                <td style="width:21%"><h6>@item.TeamA.shortName</h6></td>
+                                <td id="gametd2" colspan="3" rowspan="2">@item.game.comment</td>
+                                <td style="border-right:1px solid rgb(0, 137, 255)" colspan="1" rowspan="2">@item.game.betModelString</td>
+
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <figure id="figureid">
+                                        @if (item.TeamB != null)
+                                        {
+                                            <img src="@item.TeamB.imageURL" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img src="/Content/extra-images/upload-photo.png?id=20171208" alt="">
+                                        }
+                                    </figure>
+                                </td>
+                                <td><h6>@item.TeamB.shortName</h6></td>
+
+
+                            </tr>
+                        </tbody>
+
+
+                    </table>
+
+
+
+                </div>
+
+
+            }
+        }
+        <div id="tablegamenull">
+            <table style="height:79vh;">
+                <tbody>
+                    <tr>
+                        <td>
+                            <img src="https://storage.googleapis.com/funbet-180608.appspot.com/OtherIMG/bearrank.png" />
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
